@@ -17,6 +17,11 @@ in
         default = false;
       };
 
+      preemtKernel.enable = mkOption {
+        type = types.bool;
+        default = true;
+      };
+
       alsaSeq.enable = mkOption {
         type = types.bool;
         default = true;
@@ -33,6 +38,21 @@ in
   config = mkIf (config.sound.enable && cfg.enable) {
 
     boot = {
+
+      kernelPackages = let
+        preemtKernel = pkgs.linuxPackagesFor (pkgs.linux.override {
+          extraConfig = ''
+            PREEMPT_RT_FULL? y
+            PREEMPT y
+            IOSCHED_DEADLINE y
+            DEFAULT_DEADLINE y
+            DEFAULT_IOSCHED "deadline"
+            HPET_TIMER y
+            CPU_FREQ n
+            TREE_RCU_TRACE n
+          '';
+        }) pkgs.linuxPackages;
+      in mkIf cfg.preemtKernel.enable preemtKernel;
       kernel.sysctl = { "vm.swappiness" = 10; };
       kernelModules =
         if cfg.alsaSeq.enable then
