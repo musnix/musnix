@@ -51,7 +51,7 @@ in
     boot = {
 
       kernelPackages = let
-        preemtKernel = pkgs.linuxPackagesFor (pkgs.linux.override {
+        preemptKernel = pkgs.linuxPackagesFor (pkgs.linux.override {
           extraConfig = ''
             PREEMPT_RT_FULL? y
             PREEMPT y
