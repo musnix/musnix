@@ -20,16 +20,27 @@ in
       preemtKernel.enable = mkOption {
         type = types.bool;
         default = true;
-      };
+        description = ''
+          Whether to optimize for a realtime kernel whenever possible.
+
+          The main reason for allowing it to switch it off is for VM tests,
+          which will fail spectacularily whenever we override any kernel
+          options.'';
+        };
 
       alsaSeq.enable = mkOption {
         type = types.bool;
         default = true;
-      };
+        description = "Whether to use midi kernel modules."
+          ;
+        };
+
+     };
 
       ffado.enable = mkOption {
         type = types.bool;
         default = false;
+        description = "Whether to use Free FireWire Audio Drivers"
       };
 
     };
