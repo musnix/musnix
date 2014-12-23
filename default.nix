@@ -6,17 +6,18 @@ let
 
   cfg = config.musnix;
 
-  preemptKernel = pkgs.linuxPackagesFor (pkgs.linux.override {
-    extraConfig = ''
-      PREEMPT_RT_FULL? y
-      PREEMPT y
-      IOSCHED_DEADLINE y
-      DEFAULT_DEADLINE y
-      DEFAULT_IOSCHED "deadline"
-      HPET_TIMER y
-      CPU_FREQ n
-      TREE_RCU_TRACE n
-    '';
+  preemptKernel =
+    pkgs.linuxPackagesFor (pkgs.linux.override {
+      extraConfig = ''
+        PREEMPT_RT_FULL? y
+        PREEMPT y
+        IOSCHED_DEADLINE y
+        DEFAULT_DEADLINE y
+        DEFAULT_IOSCHED "deadline"
+        HPET_TIMER y
+        CPU_FREQ n
+        TREE_RCU_TRACE n
+      '';
     }) pkgs.linuxPackages;
 
 in
