@@ -4,12 +4,11 @@ musnix
 (Highly experimental) meta-module for realtime audio in NixOS.
 
 ### Usage:
-Add the following to your ```configuration.nix```:
-
+1. Add the following to your ```configuration.nix```:
 ```
   imports = 
     [ <existing imports>
-      ./musnix
+      /path/to/musnix
     ];
     
   musnix.enable = true;
