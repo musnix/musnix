@@ -37,7 +37,7 @@ in
       ffado.enable = mkOption {
         type = types.bool;
         default = false;
-        description = "Whether to use Free FireWire Audio Drivers"
+        description = "Whether to use Free FireWire Audio Drivers";
       };
 
     };
