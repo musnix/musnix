@@ -25,8 +25,9 @@ in
 
           The main reason for allowing it to switch it off is for VM tests,
           which will fail spectacularily whenever we override any kernel
-          options.'';
-        };
+          options.
+        '';
+      };
 
       alsaSeq.enable = mkOption {
         type = types.bool;
