@@ -6,6 +6,19 @@ let
 
   cfg = config.musnix;
 
+  preemptKernel = pkgs.linuxPackagesFor (pkgs.linux.override {
+    extraConfig = ''
+      PREEMPT_RT_FULL? y
+      PREEMPT y
+      IOSCHED_DEADLINE y
+      DEFAULT_DEADLINE y
+      DEFAULT_IOSCHED "deadline"
+      HPET_TIMER y
+      CPU_FREQ n
+      TREE_RCU_TRACE n
+    '';
+    }) pkgs.linuxPackages;
+
 in
 
 {
@@ -51,22 +64,7 @@ in
   config = mkIf (config.sound.enable && cfg.enable) {
 
     boot = {
-
-      kernelPackages = let
-        preemptKernel = pkgs.linuxPackagesFor (pkgs.linux.override {
-          extraConfig = ''
-            PREEMPT_RT_FULL? y
-            PREEMPT y
-            IOSCHED_DEADLINE y
-            DEFAULT_DEADLINE y
-            DEFAULT_IOSCHED "deadline"
-            HPET_TIMER y
-            CPU_FREQ n
-            TREE_RCU_TRACE n
-          '';
-        }) pkgs.linuxPackages;
-        in mkIf cfg.kernel.preempt.enable preemptKernel;
-
+      kernelPackages = mkIf cfg.kernel.preempt.enable preemptKernel;
       kernel.sysctl = { "vm.swappiness" = 10; };
       kernelModules =
         if cfg.alsaSeq.enable then
@@ -100,11 +98,11 @@ in
         if cfg.ffado.enable then
           [ pkgs.ffado ]
         else [ ];
-
       extraRules = ''
         KERNEL=="rtc0", GROUP="audio"
         KERNEL=="hpet", GROUP="audio"
       '';
+
     };
 
     users.extraGroups= { audio = { }; };
