@@ -17,7 +17,7 @@ in
         default = false;
       };
 
-      preemtKernel.enable = mkOption {
+      kernel.preempt.enable = mkOption {
         type = types.bool;
         default = true;
         description = ''
@@ -63,7 +63,8 @@ in
             TREE_RCU_TRACE n
           '';
         }) pkgs.linuxPackages;
-      in mkIf cfg.preemtKernel.enable preemtKernel;
+        in mkIf cfg.kernel.preempt.enable preemptKernel;
+
       kernel.sysctl = { "vm.swappiness" = 10; };
       kernelModules =
         if cfg.alsaSeq.enable then
