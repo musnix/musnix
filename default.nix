@@ -31,11 +31,8 @@ in
       alsaSeq.enable = mkOption {
         type = types.bool;
         default = true;
-        description = "Whether to use midi kernel modules."
-          ;
-        };
-
-     };
+        description = "Whether to use midi kernel modules.";
+      };
 
       ffado.enable = mkOption {
         type = types.bool;
