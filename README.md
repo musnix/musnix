@@ -1,7 +1,7 @@
 musnix
 ======
 
-(Highly) experimental meta-module for realtime audio in NixOS.
+(Highly experimental) meta-module for realtime audio in NixOS.
 
 ### Usage:
 Add the following to your ```configuration.nix```:
@@ -12,7 +12,7 @@ Add the following to your ```configuration.nix```:
       ./musnix
     ];
     
-  musix.enable = true;
+  musnix.enable = true;
 ```
 
 ### Options:
