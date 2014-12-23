@@ -4,13 +4,13 @@ with lib;
 
 let
 
-  cfg = config.mixnix;
+  cfg = config.musnix;
 
 in
 
 {
   options = {
-    mixnix = {
+    musnix = {
 
       enable = mkOption {
         type = types.bool;
