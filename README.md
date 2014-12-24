@@ -19,8 +19,9 @@ musnix
 ``musnix.enable``
 * Default value: ``false``
     
-``musnix.kernel.preempt.enable``
-* Default value: ``true``
+`musnix.kernel.preempt.enable`
+* Default value: `false`
+* **WARNING:** Enabling this option will rebuild your kernel.
     
 ``musnix.ffado.enable``
 * Default value: ``false``

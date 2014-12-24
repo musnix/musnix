@@ -33,8 +33,10 @@ in
 
       kernel.preempt.enable = mkOption {
         type = types.bool;
-        default = true;
+        default = false;
         description = ''
+          WARNING: Enabling this option will rebuild your kernel.
+
           If enabled, optimize for a realtime kernel.
 
           The main reason for allowing it to switch it off is for VM tests,
