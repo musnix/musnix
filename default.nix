@@ -24,6 +24,7 @@ in
 
 {
   options = {
+
     musnix = {
 
       enable = mkOption {
@@ -31,17 +32,16 @@ in
         default = false;
       };
 
-      kernel.preempt.enable = mkOption {
+      kernel.optimize = mkOption {
         type = types.bool;
         default = false;
         description = ''
           WARNING: Enabling this option will rebuild your kernel.
 
-          If enabled, optimize for a realtime kernel.
-
-          The main reason for allowing it to switch it off is for VM tests,
-          which will fail spectacularily whenever we override any kernel
-          options.
+          If enabled, this option will configure the kernel to be
+          preemptible, to use the deadline I/O scheduler, to use the
+          High Precision Event Timer (HPET), and to disable CPU
+          Frequency Scaling.
         '';
       };
 
@@ -67,7 +67,6 @@ in
   config = mkIf (config.sound.enable && cfg.enable) {
 
     boot = {
-      kernelPackages = mkIf cfg.kernel.preempt.enable preemptKernel;
       kernel.sysctl = { "vm.swappiness" = 10; };
       kernelModules =
         if cfg.alsaSeq.enable then
@@ -75,6 +74,7 @@ in
             "snd-rawmidi"
           ]
         else [ ];
+      kernelPackages = mkIf cfg.kernel.optimize preemptKernel;
       kernelParams = [ "threadirq" ];
       postBootCommands = ''
         echo 2048 > /sys/class/rtc/rtc0/max_user_freq
@@ -105,7 +105,6 @@ in
         KERNEL=="rtc0", GROUP="audio"
         KERNEL=="hpet", GROUP="audio"
       '';
-
     };
 
     users.extraGroups= { audio = { }; };

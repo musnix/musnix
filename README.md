@@ -19,7 +19,7 @@ musnix
 ``musnix.enable``
 * Default value: ``false``
     
-`musnix.kernel.preempt.enable`
+`musnix.kernel.optimize`
 * Default value: `false`
 * **WARNING:** Enabling this option will rebuild your kernel.
     
