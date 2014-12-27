@@ -64,8 +64,8 @@ in
 
       soundcard_pci_id = mkOption {
         type = types.str;
-        default = ' ';
-        example = '$00:1b.0';
+        default = "";
+        example = "$00:1b.0";
         description = ''
           The pci ID of the soundcard. Will be used to set the pci latency timer.
           If it is not set, the pci latency will be left alone.
@@ -83,6 +83,7 @@ in
         '';
       };
 
+    };
   };
 
   config = mkIf (config.sound.enable && cfg.enable) {
@@ -98,7 +99,7 @@ in
       kernelPackages = mkIf cfg.kernel.optimize preemptKernel;
       kernelParams = [ "threadirq" ];
       postBootCommands =
-        if (cfg.soundcard_pci_id  == ' ') then ''
+        if (cfg.soundcard_pci_id  == "") then ''
         echo 2048 > /sys/class/rtc/rtc0/max_user_freq
         echo 2048 > /proc/sys/dev/hpet/max-user-freq
         '' else ''
@@ -106,7 +107,7 @@ in
         echo 2048 > /proc/sys/dev/hpet/max-user-freq
         setpci -v -d *:* latency_timer=b0
         setpci -v -s ${cfg.soundcard_pci_id} latency_timer=ff
-        ''
+        '';
     };
 
     environment.systemPackages = with pkgs;
@@ -137,14 +138,12 @@ in
     users.extraGroups= { audio = { }; };
 
 
-  shellInit =  mkIf cfg.setPluginPaths.enable ''
+  environment.shellInit =  mkIf cfg.setPluginPaths.enable ''
     export VST_PATH=/nix/var/nix/profiles/default/lib/vst:/var/run/current-system/sw/lib/vst:~/.vst
     export LXVST_PATH=/nix/var/nix/profiles/default/lib/lxvst:/var/run/current-system/sw/lib/lxvst:~/.lxvst
     export LADSPA_PATH=/nix/var/nix/profiles/default/lib/ladspa:/var/run/current-system/sw/lib/ladspa:~/.ladspa
     export LV2_PATH=/nix/var/nix/profiles/default/lib/lv2:/var/run/current-system/sw/lib/lv2:~/.lv2
     export DSSI_PATH=/nix/var/nix/profiles/default/lib/dssi:/var/run/current-system/sw/lib/dssi:~/.dssi
   '';
-
-
   };
 }
