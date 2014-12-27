@@ -60,6 +60,7 @@ in
         description = ''
           If enabled, use the Free FireWire Audio Drivers (FFADO).
         '';
+      };
 
       soundcard_pci_id = mkOption {
         type = types.str;
@@ -72,8 +73,6 @@ in
           lspci | grep -i audio
         '';
       };
-
-    };
   };
 
   config = mkIf (config.sound.enable && cfg.enable) {
