@@ -73,6 +73,16 @@ in
           lspci | grep -i audio
         '';
       };
+
+      setPluginPaths.enable = mkOption {
+        type = types.bool;
+        default = true;
+        description = ''
+          If enabled, set the paths for the following audio plugin types:
+          VST, LXVST, LADSPA, LV2, DSSI.
+        '';
+      };
+
   };
 
   config = mkIf (config.sound.enable && cfg.enable) {
@@ -125,6 +135,16 @@ in
     };
 
     users.extraGroups= { audio = { }; };
+
+
+  shellInit =  mkIf cfg.setPluginPaths.enable ''
+    export VST_PATH=/nix/var/nix/profiles/default/lib/vst:/var/run/current-system/sw/lib/vst:~/.vst
+    export LXVST_PATH=/nix/var/nix/profiles/default/lib/lxvst:/var/run/current-system/sw/lib/lxvst:~/.lxvst
+    export LADSPA_PATH=/nix/var/nix/profiles/default/lib/ladspa:/var/run/current-system/sw/lib/ladspa:~/.ladspa
+    export LV2_PATH=/nix/var/nix/profiles/default/lib/lv2:/var/run/current-system/sw/lib/lv2:~/.lv2
+    export DSSI_PATH=/nix/var/nix/profiles/default/lib/dssi:/var/run/current-system/sw/lib/dssi:~/.dssi
+  '';
+
 
   };
 }
