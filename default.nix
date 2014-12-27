@@ -62,7 +62,7 @@ in
         '';
       };
 
-      soundcard_pci_id = mkOption {
+      soundcardPciId = mkOption {
         type = types.str;
         default = "";
         example = "$00:1b.0";
@@ -98,16 +98,13 @@ in
         else [ ];
       kernelPackages = mkIf cfg.kernel.optimize preemptKernel;
       kernelParams = [ "threadirq" ];
-      postBootCommands =
-        if (cfg.soundcard_pci_id  == "") then ''
+      postBootCommands = ''
         echo 2048 > /sys/class/rtc/rtc0/max_user_freq
         echo 2048 > /proc/sys/dev/hpet/max-user-freq
-        '' else ''
-        echo 2048 > /sys/class/rtc/rtc0/max_user_freq
-        echo 2048 > /proc/sys/dev/hpet/max-user-freq
+        '' + (if (cfg.soundcardPciId  == "") then ''''  else ''
         setpci -v -d *:* latency_timer=b0
-        setpci -v -s ${cfg.soundcard_pci_id} latency_timer=ff
-        '';
+        setpci -v -s ${cfg.soundcardPciId} latency_timer=ff
+        '');
     };
 
     environment.systemPackages = with pkgs;
