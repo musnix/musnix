@@ -16,17 +16,17 @@ Add the following to your `configuration.nix`:
 ### Options:
 
 `musnix.enable`
-* Default value: `false`
+* **Default value:** `false`
     
 `musnix.kernel.optimize`
-* Default value: `false`
 * **WARNING:** Enabling this option will rebuild your kernel.
-* Description: If enabled, this option will configure the kernel to be preemptible, to use the deadline I/O scheduler, to use the High Precision Event Timer (HPET), and to disable CPU frequency scaling.
+* **Description:** If enabled, this option will configure the kernel to be preemptible, to use the deadline I/O scheduler, to use the High Precision Event Timer (HPET), and to disable CPU frequency scaling.
+* **Default value:** `false`
 
 `musnix.ffado.enable`
-* Default value: `false`
-* Description: If enabled, use the Free FireWire Audio Drivers (FFADO).
+* **Description:** If enabled, use the Free FireWire Audio Drivers (FFADO).
+* **Default value:** `false`
 
 `musnix.alsaSeq.enable`
-* Default value: `true`
-* Description: If enabled, load ALSA Sequencer kernel modules.  Currently, this only loads the `snd-seq` and `snd-rawmidi` modules.
+* **Description:** If enabled, load ALSA Sequencer kernel modules.  Currently, this only loads the `snd-seq` and `snd-rawmidi` modules.
+* **Default value:** `true`
