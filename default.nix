@@ -41,7 +41,7 @@ in
           If enabled, this option will configure the kernel to be
           preemptible, to use the deadline I/O scheduler, to use the
           High Precision Event Timer (HPET), and to disable CPU
-          Frequency Scaling.
+          frequency scaling.
         '';
       };
 
@@ -49,7 +49,8 @@ in
         type = types.bool;
         default = true;
         description = ''
-          If enabled, load ALSA Sequencer kernel modules.
+          If enabled, load ALSA Sequencer kernel modules.  Currently,
+          this only loads the `snd-seq` and `snd-rawmidi` modules.
         '';
       };
 
@@ -57,7 +58,7 @@ in
         type = types.bool;
         default = false;
         description = ''
-          If enabled, use Free FireWire Audio Drivers.
+          If enabled, use the Free FireWire Audio Drivers (FFADO).
         '';
       };
 
