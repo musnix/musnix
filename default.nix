@@ -60,6 +60,17 @@ in
         description = ''
           If enabled, use the Free FireWire Audio Drivers (FFADO).
         '';
+
+      soundcard_pci_id = mkOption {
+        type = types.str;
+        default = ' ';
+        example = '$00:1b.0';
+        description = ''
+          The pci ID of the soundcard. Will be used to set the pci latency timer.
+          If it is not set, the pci latency will be left alone.
+          It can be obtained like so:
+          lspci | grep -i audio
+        '';
       };
 
     };
@@ -77,10 +88,16 @@ in
         else [ ];
       kernelPackages = mkIf cfg.kernel.optimize preemptKernel;
       kernelParams = [ "threadirq" ];
-      postBootCommands = ''
+      postBootCommands =
+        if (cfg.soundcard_pci_id  == ' ') then ''
         echo 2048 > /sys/class/rtc/rtc0/max_user_freq
         echo 2048 > /proc/sys/dev/hpet/max-user-freq
-      '';
+        '' else ''
+        echo 2048 > /sys/class/rtc/rtc0/max_user_freq
+        echo 2048 > /proc/sys/dev/hpet/max-user-freq
+        setpci -v -d *:* latency_timer=b0
+        setpci -v -s ${cfg.soundcard_pci_id} latency_timer=ff
+        ''
     };
 
     environment.systemPackages = with pkgs;
