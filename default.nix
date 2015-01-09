@@ -6,19 +6,37 @@ let
 
   cfg = config.musnix;
 
-  preemptKernel =
-    pkgs.linuxPackagesFor (pkgs.linux.override {
-      extraConfig = ''
-        PREEMPT_RT_FULL? y
-        PREEMPT y
-        IOSCHED_DEADLINE y
-        DEFAULT_DEADLINE y
-        DEFAULT_IOSCHED "deadline"
-        HPET_TIMER y
-        CPU_FREQ n
-        TREE_RCU_TRACE n
-      '';
-    }) pkgs.linuxPackages;
+  kernelConfigOptimize = ''
+    IOSCHED_DEADLINE y
+    DEFAULT_DEADLINE y
+    DEFAULT_IOSCHED "deadline"
+    HPET_TIMER y
+    CPU_FREQ n
+    TREE_RCU_TRACE n
+  '';
+
+  kernelConfigRealtime = ''
+    PREEMPT_RT_FULL y
+    PREEMPT y
+  '';
+
+  kernelSources = rec {
+    version = "3.14.25";
+    src = pkgs.fetchurl {
+      url = "mirror://kernel/linux/kernel/v3.x/linux-${version}.tar.xz";
+      sha256 = "422aef95cfb89d7a13fe4ce5d12424124598914b1c09e323fae5c958b98ffc1f";
+    };
+  };
+
+  realtimePatch = rec {
+    version = "rt22";
+    kversion = "3.14.25";
+    name = "rt-${kversion}-${version}";
+    patch = pkgs.fetchurl {
+      url = "https://www.kernel.org/pub/linux/kernel/projects/rt/3.14/patch-${kversion}-${version}.patch.xz";
+      sha256 = "0423a2c2ed35b5df5983b517bf2a1a7495e67803a309479b8af613dd2a47da53";
+    };
+  };
 
 in
 
@@ -30,6 +48,9 @@ in
       enable = mkOption {
         type = types.bool;
         default = false;
+        description = ''
+          Enable musnix, a meta-module for realtime audio.
+        '';
       };
 
       kernel.optimize = mkOption {
@@ -39,9 +60,20 @@ in
           WARNING: Enabling this option will rebuild your kernel.
 
           If enabled, this option will configure the kernel to be
-          preemptible, to use the deadline I/O scheduler, to use the
-          High Precision Event Timer (HPET), and to disable CPU
-          frequency scaling.
+          preemptible, use the deadline I/O scheduler and High
+          Precision Event Timer (HPET), and disable CPU frequency
+          scaling.
+        '';
+      };
+
+      kernel.realtime = mkOption {
+        type = types.bool;
+        default = false;
+        description = ''
+          WARNING: Enabling this option will rebuild your kernel.
+
+          If enabled, this option will apply the realtime patch set
+          to the kernel.
         '';
       };
 
@@ -50,7 +82,7 @@ in
         default = true;
         description = ''
           If enabled, load ALSA Sequencer kernel modules.  Currently,
-          this only loads the `snd-seq` and `snd-rawmidi` modules.
+          this only loads the `snd_seq` and `snd_rawmidi` modules.
         '';
       };
 
@@ -67,10 +99,11 @@ in
         default = "";
         example = "$00:1b.0";
         description = ''
-          The pci ID of the soundcard. Will be used to set the pci latency timer.
-          If it is not set, the pci latency will be left alone.
-          It can be obtained like so:
-          lspci | grep -i audio
+          The PCI ID of the primary soundcard. Used to set the PCI
+          latency timer.
+
+          To find the PCI ID of your soundcard:
+              lspci | grep -i audio
         '';
       };
 
@@ -81,14 +114,31 @@ in
 
     boot = {
       kernel.sysctl = { "vm.swappiness" = 10; };
+
       kernelModules =
         if cfg.alsaSeq.enable then
           [ "snd-seq"
             "snd-rawmidi"
           ]
         else [ ];
-      kernelPackages = mkIf cfg.kernel.optimize preemptKernel;
+
+      kernelPackages = let
+        rtKernel =
+          pkgs.recurseIntoAttrs (pkgs.linuxPackagesFor (pkgs.linux_3_14.override {
+            argsOverride = kernelSources;
+            kernelPatches = [ realtimePatch ];
+            extraConfig = kernelConfigRealtime + optionalString cfg.kernel.optimize kernelConfigOptimize;
+          }) pkgs.linuxPackages_3_14);
+        stdKernel =
+          pkgs.recurseIntoAttrs (pkgs.linuxPackagesFor (
+            if cfg.kernel.optimize then
+              (pkgs.linux.override { extraConfig = "PREEMPT y" + kernelConfigOptimize; })
+            else pkgs.linux
+          ) pkgs.linuxPackages);
+        in if cfg.kernel.realtime then rtKernel else stdKernel;
+
       kernelParams = [ "threadirq" ];
+
       postBootCommands = ''
         echo 2048 > /sys/class/rtc/rtc0/max_user_freq
         echo 2048 > /proc/sys/dev/hpet/max-user-freq
@@ -117,6 +167,7 @@ in
         if cfg.ffado.enable then
           [ pkgs.ffado ]
         else [ ];
+
       extraRules = ''
         KERNEL=="rtc0", GROUP="audio"
         KERNEL=="hpet", GROUP="audio"
