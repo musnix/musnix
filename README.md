@@ -40,9 +40,10 @@ Add the following to your `configuration.nix`:
 
 `musnix.soundcardPciId`
 * **Description:** The PCI ID of the primary soundcard. Used to set the PCI latency timer.
-To find the PCI ID of your soundcard:
-```
-lspci | grep -i audio
-```
+
+  To find the PCI ID of your soundcard:
+  ```
+  lspci | grep -i audio
+  ```
 * **Default value:** `""`
 * **Example value:** `"$00:1b.0"`
