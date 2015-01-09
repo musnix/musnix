@@ -42,9 +42,7 @@ in
 
 {
   options = {
-
     musnix = {
-
       enable = mkOption {
         type = types.bool;
         default = false;
@@ -106,12 +104,10 @@ in
               lspci | grep -i audio
         '';
       };
-
     };
   };
 
   config = mkIf (config.sound.enable && cfg.enable) {
-
     boot = {
       kernel.sysctl = { "vm.swappiness" = 10; };
 
@@ -135,7 +131,7 @@ in
               (pkgs.linux.override { extraConfig = "PREEMPT y" + kernelConfigOptimize; })
             else pkgs.linux
           ) pkgs.linuxPackages);
-        in if cfg.kernel.realtime then rtKernel else stdKernel;
+      in if cfg.kernel.realtime then rtKernel else stdKernel;
 
       kernelParams = [ "threadirq" ];
 
@@ -175,6 +171,5 @@ in
     };
 
     users.extraGroups= { audio = { }; };
-
   };
 }
