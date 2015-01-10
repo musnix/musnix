@@ -16,7 +16,6 @@ Add the following to your `configuration.nix`:
 ### Options:
 
 `musnix.enable`
-* **Default value:** `false`
 * **Description:** Enable musnix, a meta-module for realtime audio.
 * **Default value:** `false`
 
