@@ -112,11 +112,11 @@ in
       kernel.sysctl = { "vm.swappiness" = 10; };
 
       kernelModules =
-        if cfg.alsaSeq.enable then
-          [ "snd-seq"
-            "snd-rawmidi"
-          ]
-        else [ ];
+        if cfg.alsaSeq.enable
+          then [ "snd-seq"
+                 "snd-rawmidi"
+               ]
+          else [];
 
       kernelPackages = let
         rtKernel =
@@ -144,10 +144,10 @@ in
       '';
     };
 
-    environment.systemPackages = with pkgs;
-      if cfg.ffado.enable then
-        [ pkgs.ffado ]
-      else [ ];
+    environment.systemPackages =
+      if cfg.ffado.enable
+        then [ pkgs.ffado ]
+        else [];
 
     powerManagement.cpuFreqGovernor = "performance";
 
@@ -160,9 +160,9 @@ in
 
     services.udev = {
       packages =
-        if cfg.ffado.enable then
-          [ pkgs.ffado ]
-        else [ ];
+        if cfg.ffado.enable
+          then [ pkgs.ffado ]
+          else [];
 
       extraRules = ''
         KERNEL=="rtc0", GROUP="audio"
@@ -170,6 +170,6 @@ in
       '';
     };
 
-    users.extraGroups= { audio = { }; };
+    users.extraGroups= { audio = {}; };
   };
 }
