@@ -118,20 +118,25 @@ in
                ]
           else [];
 
-      kernelPackages = let
-        rtKernel =
-          pkgs.recurseIntoAttrs (pkgs.linuxPackagesFor (pkgs.linux_3_14.override {
-            argsOverride = kernelSources;
-            kernelPatches = [ realtimePatch ];
-            extraConfig = kernelConfigRealtime + optionalString cfg.kernel.optimize kernelConfigOptimize;
-          }) pkgs.linuxPackages_3_14);
-        stdKernel =
-          pkgs.recurseIntoAttrs (pkgs.linuxPackagesFor (
-            if cfg.kernel.optimize then
-              (pkgs.linux.override { extraConfig = "PREEMPT y" + kernelConfigOptimize; })
-            else pkgs.linux
-          ) pkgs.linuxPackages);
-      in if cfg.kernel.realtime then rtKernel else stdKernel;
+      kernelPackages =
+        let
+          rtKernel =
+            pkgs.linux_3_14.override {
+              argsOverride = kernelSources;
+              kernelPatches = [ realtimePatch ];
+              extraConfig = kernelConfigRealtime
+                            + optionalString cfg.kernel.optimize kernelConfigOptimize;
+            };
+          stdKernel =
+            if cfg.kernel.optimize
+              then pkgs.linux.override {
+                extraConfig = "PREEMPT y"
+                              + kernelConfigOptimize;
+              }
+              else pkgs.linux;
+        in if cfg.kernel.realtime
+          then pkgs.recurseIntoAttrs (pkgs.linuxPackagesFor rtKernel pkgs.linuxPackages_3_14)
+          else pkgs.recurseIntoAttrs (pkgs.linuxPackagesFor stdKernel pkgs.linuxPackages);
 
       kernelParams = [ "threadirq" ];
 
