@@ -130,7 +130,7 @@ in
           stdKernel =
             if cfg.kernel.optimize
               then pkgs.linux.override {
-                extraConfig = "PREEMPT y"
+                extraConfig = "PREEMPT y\n"
                               + kernelConfigOptimize;
               }
               else pkgs.linux;
