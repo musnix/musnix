@@ -6,6 +6,11 @@ let
 
   cfg = config.musnix;
 
+  kernelConfigLatencyTOP = ''
+    LATENCYTOP y
+    SCHEDSTATS y
+  '';
+
   kernelConfigOptimize = ''
     IOSCHED_DEADLINE y
     DEFAULT_DEADLINE y
@@ -48,6 +53,18 @@ in
         default = false;
         description = ''
           Enable musnix, a meta-module for realtime audio.
+        '';
+      };
+
+      kernel.latencytop = mkOption {
+        type = types.bool;
+        default = false;
+        description = ''
+          WARNING: Enabling this option will rebuild your kernel.
+
+          If enabled, this option will configure the kernel to use a
+          latency tracking infrastructure that is used by the
+          "latencytop" userspace tool.
         '';
       };
 
@@ -125,15 +142,19 @@ in
               argsOverride = kernelSources;
               kernelPatches = [ realtimePatch ];
               extraConfig = kernelConfigRealtime
-                            + optionalString cfg.kernel.optimize kernelConfigOptimize;
+                            + optionalString cfg.kernel.optimize kernelConfigOptimize
+                            + optionalString cfg.kernel.latencytop kernelConfigLatencyTOP;
             };
           stdKernel =
             if cfg.kernel.optimize
               then pkgs.linux.override {
                 extraConfig = "PREEMPT y\n"
-                              + kernelConfigOptimize;
+                              + kernelConfigOptimize
+                              + optionalString cfg.kernel.latencytop kernelConfigLatencyTOP;
               }
-              else pkgs.linux;
+              else if cfg.kernel.latencytop
+                then pkgs.linux.override { extraConfig = kernelConfigLatencyTOP; }
+                else pkgs.linux;
         in if cfg.kernel.realtime
           then pkgs.recurseIntoAttrs (pkgs.linuxPackagesFor rtKernel pkgs.linuxPackages_3_14)
           else pkgs.recurseIntoAttrs (pkgs.linuxPackagesFor stdKernel pkgs.linuxPackages);

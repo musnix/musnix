@@ -29,6 +29,11 @@ Add the following to your `configuration.nix`:
 * **Description:** If enabled, this option will apply the realtime patch set to the kernel.
 * **Default value:** `false`
 
+`musnix.kernel.latencytop`
+* **WARNING:** Enabling this option will rebuild your kernel.
+* **Description:** If enabled, this option will configure the kernel to use a latency tracking infrastructure that is used by the "latencytop" userspace tool.
+* **Default value:** `false`
+
 `musnix.ffado.enable`
 * **Description:** If enabled, use the Free FireWire Audio Drivers (FFADO).
 * **Default value:** `false`
