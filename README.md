@@ -21,7 +21,7 @@ Add the following to your `configuration.nix`:
 
 `musnix.kernel.optimize`
 * **WARNING:** Enabling this option will rebuild your kernel.
-* **Description:** If enabled, this option will configure the kernel to be preemptible, use the deadline I/O scheduler and High Precision Event Timer (HPET), and disable CPU frequency scaling.
+* **Description:** If enabled, this option will configure the kernel to be preemptible, to use the deadline I/O scheduler, and to use the High Precision Event Timer (HPET).
 * **Default value:** `false`
 
 `musnix.kernel.realtime`

@@ -16,7 +16,6 @@ let
     DEFAULT_DEADLINE y
     DEFAULT_IOSCHED "deadline"
     HPET_TIMER y
-    CPU_FREQ n
     TREE_RCU_TRACE n
   '';
 
@@ -75,9 +74,8 @@ in
           WARNING: Enabling this option will rebuild your kernel.
 
           If enabled, this option will configure the kernel to be
-          preemptible, use the deadline I/O scheduler and High
-          Precision Event Timer (HPET), and disable CPU frequency
-          scaling.
+          preemptible, to use the deadline I/O scheduler, and to use
+          the High Precision Event Timer (HPET).
         '';
       };
 
