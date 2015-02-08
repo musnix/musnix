@@ -26,20 +26,20 @@ let
   '';
 
   kernelSources = rec {
-    version = "3.14.25";
+    version = "3.14.31";
     src = pkgs.fetchurl {
       url = "mirror://kernel/linux/kernel/v3.x/linux-${version}.tar.xz";
-      sha256 = "422aef95cfb89d7a13fe4ce5d12424124598914b1c09e323fae5c958b98ffc1f";
+      sha256 = "a6dd667bde3eab17ccd7dc0af1fc1e8188dc12295f11c2e18113905f830b47c8";
     };
   };
 
   realtimePatch = rec {
-    version = "rt22";
-    kversion = "3.14.25";
+    version = "rt28";
+    kversion = "3.14.31";
     name = "rt-${kversion}-${version}";
     patch = pkgs.fetchurl {
       url = "https://www.kernel.org/pub/linux/kernel/projects/rt/3.14/patch-${kversion}-${version}.patch.xz";
-      sha256 = "0423a2c2ed35b5df5983b517bf2a1a7495e67803a309479b8af613dd2a47da53";
+      sha256 = "0aafc2e25dbfcb98f678276b30bd681b07209452269538ab7e268967d9fda03e";
     };
   };
 
