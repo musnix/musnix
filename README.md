@@ -1,6 +1,10 @@
 # musnix
 
-(Experimental) meta-module for realtime audio in NixOS.
+A module for real-time audio in NixOS.
+
+### About:
+
+**musnix** provides a set of simple, high-level configuration options for doing real-time audio work on [NixOS](https://nixos.org/), including optimizing the kernel, applying the [`CONFIG_PREEMPT_RT` patch](https://rt.wiki.kernel.org/index.php/Main_Page) to it, and adjusting various low-level system settings.
 
 ### Usage:
 Add the following to your `configuration.nix`:
@@ -16,7 +20,7 @@ Add the following to your `configuration.nix`:
 ### Options:
 
 `musnix.enable`
-* **Description:** Enable musnix, a meta-module for realtime audio.
+* **Description:** Enable musnix, a module for real-time audio.
 * **Default value:** `false`
 
 `musnix.kernel.optimize`
@@ -26,7 +30,7 @@ Add the following to your `configuration.nix`:
 
 `musnix.kernel.realtime`
 * **WARNING:** Enabling this option will rebuild your kernel.
-* **Description:** If enabled, this option will apply the realtime patch set to the kernel.
+* **Description:** If enabled, this option will apply the [`CONFIG_PREEMPT_RT` patch](https://rt.wiki.kernel.org/index.php/Main_Page) to the kernel.
 * **Default value:** `false`
 
 `musnix.kernel.latencytop`

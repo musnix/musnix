@@ -51,7 +51,7 @@ in
         type = types.bool;
         default = false;
         description = ''
-          Enable musnix, a meta-module for realtime audio.
+          Enable musnix, a module for real-time audio.
         '';
       };
 
@@ -85,8 +85,8 @@ in
         description = ''
           WARNING: Enabling this option will rebuild your kernel.
 
-          If enabled, this option will apply the realtime patch set
-          to the kernel.
+          If enabled, this option will apply the CONFIG_PREEMPT_RT
+          patch to the kernel.
         '';
       };
 
