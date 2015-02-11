@@ -15,6 +15,9 @@ Add the following to your `configuration.nix`:
     ];
     
   musnix.enable = true;
+
+  user.extraUsers.<username>.extraGroups = [ "audio" ];
+
 ```
 
 ### Options:
@@ -22,6 +25,42 @@ Add the following to your `configuration.nix`:
 `musnix.enable`
 * **Description:** Enable musnix, a module for real-time audio.
 * **Default value:** `false`
+* **Note:** This option must be set to `true` to use other musnix options.
+* **Details:** If enabled, this option will do the following:
+
+  * Set `vm.swappiness` to 10.
+
+  * Set the following udev rules:
+    ```
+    KERNEL=="rtc0", GROUP="audio"
+    KERNEL=="hpet", GROUP="audio"
+    ```
+
+  * Set the `max_user_freq` of `/sys/class/rtc/rtc0` to 2048.
+
+  * Set the `max-user-freq` of `/proc/sys/dev/hpet` to 2048.
+
+  * Set the following PAM limits:
+    ```
+    @audio  -       memlock unlimited
+    @audio  -       rtprio  99
+    @audio  soft    nofile  99999
+    @audio  hard    nofile  99999
+    ```
+  
+  * Set the following environment variables to default install locations in NixOS:
+    * `VST_PATH` 
+    * `LVST_PATH` 
+    * `LADSPA_PATH`
+    * `LV2_PATH`
+    * `DSSI_PATH`
+
+  * Allow users to install plugins in the following directories:
+    * `~/.vst`
+    * `~/.lvst`
+    * `~/.ladspa`
+    * `~/.lv2`
+    * `~/.dssi`
 
 `musnix.kernel.optimize`
 * **WARNING:** Enabling this option will rebuild your kernel.
@@ -55,3 +94,7 @@ Add the following to your `configuration.nix`:
   ```
 * **Default value:** `""`
 * **Example value:** `"$00:1b.0"`
+
+### More info:
+* http://wiki.linuxaudio.org/wiki/system_configuration
+* https://wiki.archlinux.org/index.php/Pro_Audio
