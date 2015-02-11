@@ -18,6 +18,7 @@ let
     HPET_TIMER y
     TREE_RCU_TRACE n
   '';
+  # PREEMPT y is set below
 
   kernelConfigRealtime = ''
     PREEMPT_RT_FULL y
