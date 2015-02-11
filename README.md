@@ -28,6 +28,8 @@ Add the following to your `configuration.nix`:
 * **Note:** This option must be set to `true` to use other musnix options.
 * **Details:** If enabled, this option will do the following:
 
+  * Activate the `performance` CPU frequency scaling governor.
+
   * Set `vm.swappiness` to 10.
 
   * Set the following udev rules:
