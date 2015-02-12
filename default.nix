@@ -24,6 +24,10 @@ let
     PREEMPT y
   '';
 
+  kernelDebug = ''
+    KGDB y
+  '';
+
   kernelSources = rec {
     version = "3.14.31";
     src = pkgs.fetchurl {
@@ -90,6 +94,19 @@ in
         '';
       };
 
+      kernel.debug = mkOption {
+        type = types.bool;
+        default = false;
+        description = ''
+          WARNING: Enabling this option will rebuild your kernel.
+
+          If enabled, this option will enable the KGDB, or the
+          kernel debugger. This is used to debug the realtime
+          kernel and should ONLY be enabled if the user knows
+          how to use it or has been instructed to use it.
+        '';
+      };
+
       alsaSeq.enable = mkOption {
         type = types.bool;
         default = true;
@@ -141,14 +158,16 @@ in
               kernelPatches = [ realtimePatch ];
               extraConfig = kernelConfigRealtime
                             + optionalString cfg.kernel.optimize kernelConfigOptimize
-                            + optionalString cfg.kernel.latencytop kernelConfigLatencyTOP;
+                            + optionalString cfg.kernel.latencytop kernelConfigLatencyTOP
+                            + optionalString cfg.kernel.debug kernelDebug;
             };
           stdKernel =
             if cfg.kernel.optimize
               then pkgs.linux.override {
                 extraConfig = "PREEMPT y\n"
                               + kernelConfigOptimize
-                              + optionalString cfg.kernel.latencytop kernelConfigLatencyTOP;
+                              + optionalString cfg.kernel.latencytop kernelConfigLatencyTOP
+                              + optionalString cfg.kernel.debug kernelDebug;
               }
               else if cfg.kernel.latencytop
                 then pkgs.linux.override { extraConfig = kernelConfigLatencyTOP; }
