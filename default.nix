@@ -111,7 +111,7 @@ in
       soundcardPciId = mkOption {
         type = types.str;
         default = "";
-        example = "$00:1b.0";
+        example = "00:1b.0";
         description = ''
           The PCI ID of the primary soundcard. Used to set the PCI
           latency timer.
