@@ -38,7 +38,7 @@ let
     kversion = "3.14.31";
     name = "rt-${kversion}-${version}";
     patch = pkgs.fetchurl {
-      url = "https://www.kernel.org/pub/linux/kernel/projects/rt/3.14/patch-${kversion}-${version}.patch.xz";
+      url = "https://www.kernel.org/pub/linux/kernel/projects/rt/3.14/older/patch-${kversion}-${version}.patch.xz";
       sha256 = "0aafc2e25dbfcb98f678276b30bd681b07209452269538ab7e268967d9fda03e";
     };
   };
