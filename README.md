@@ -95,7 +95,7 @@ Add the following to your `configuration.nix`:
   lspci | grep -i audio
   ```
 * **Default value:** `""`
-* **Example value:** `"$00:1b.0"`
+* **Example value:** `"00:1b.0"`
 
 ### More info:
 * http://wiki.linuxaudio.org/wiki/system_configuration
