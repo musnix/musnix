@@ -154,9 +154,10 @@ in
               else if cfg.kernel.latencytop
                 then pkgs.linux.override { extraConfig = kernelConfigLatencyTOP; }
                 else pkgs.linux;
-        in if cfg.kernel.realtime
-          then pkgs.recurseIntoAttrs (pkgs.linuxPackagesFor rtKernel pkgs.linuxPackages_3_14)
-          else pkgs.recurseIntoAttrs (pkgs.linuxPackagesFor stdKernel pkgs.linuxPackages);
+          musnixKernel = if cfg.kernel.realtime then rtKernel else stdKernel;
+          musnixKernelPackages =
+            pkgs.recurseIntoAttrs (pkgs.linuxPackagesFor musnixKernel musnixKernelPackages);
+        in musnixKernelPackages;
 
       kernelParams = [ "threadirq" ];
 
