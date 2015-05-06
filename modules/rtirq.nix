@@ -24,37 +24,51 @@ in {
     enable = mkOption {
       type = types.bool;
       default = true;
-      description = "Enable rtirq";
+      description = ''
+        Enable rtirq
+      '';
     };
     nameList = mkOption {
       type = types.str;
       default = "snd usb i8042";
-      description = "IRQ thread service names";
+      description = ''
+        IRQ thread service names
+      '';
     };
     prioHigh = mkOption {
       type = types.int;
       default = 90;
-      description = "Highest priority";
+      description = ''
+        Highest priority
+      '';
     };
     prioDecr = mkOption {
       type = types.int;
       default = 5;
-      description = "Priority decrease step";
+      description = ''
+        Priority decrease step
+      '';
     };
     prioLow = mkOption {
       type = types.int;
       default = 51;
-      description = "Lowest priority";
+      description = ''
+        Lowest priority
+      '';
     };
     resetAll = mkOption {
       type = types.int;
       default = 0;
-      description = "Whether to reset all IRQ threads to SCHED_OTHER";
+      description = ''
+        Whether to reset all IRQ threads to SCHED_OTHER
+      '';
     };
     nonThreaded = mkOption {
       type = types.str;
       default = "rtc snd";
-      description = "Which services should be NOT threaded";
+      description = ''
+        Which services should be NOT threaded
+      '';
     };
     highList = mkOption {
       type = types.str;
