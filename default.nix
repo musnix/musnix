@@ -46,6 +46,8 @@ let
 in
 
 {
+  imports = [ ./modules/rtirq.nix ];
+
   options = {
     musnix = {
       enable = mkOption {
