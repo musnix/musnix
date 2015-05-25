@@ -118,6 +118,12 @@ To see a description of one of the listed options (in this case `enable`):
 
   `nixos-option musnix.rtirq.enable`
 
+## Other Options
+
+`musnix.das_watchdog.enable`
+* **Description:** If enabled, start the [das_watchdog](https://github.com/kmatheussen/das_watchdog) service.  This service will ensure that a realtime process won't hang the machine.
+* **Default value:** `true` if `musnix.kernel.realtime.enable = true`, otherwise `false`
+
 ## More Information
 * http://wiki.linuxaudio.org/wiki/system_configuration
 * http://wiki.linuxaudio.org/wiki/system_configuration#rtirq
