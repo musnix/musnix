@@ -22,6 +22,7 @@ let
   kernelConfigRealtime = ''
     PREEMPT_RT_FULL y
     PREEMPT y
+    LOCK_TORTURE_TEST n
   '';
 
   musnixRealtimeKernelExtraConfig =
@@ -76,7 +77,7 @@ in {
       '';
     };
     kernel.packages = mkOption {
-      default = pkgs.linuxPackages_3_14_rt;
+      default = pkgs.linuxPackages_3_18_rt;
       description = ''
         FIXME: Kernel packages
       '';
@@ -103,7 +104,25 @@ in {
         extraConfig   = musnixRealtimeKernelExtraConfig;
       };
 
+      linux_3_18_rt   = stdenv.lib.makeOverridable (import ../pkgs/os-specific/linux/kernel/linux-3.18-rt.nix) {
+        inherit fetchurl stdenv perl buildLinux;
+        kernelPatches = [ pkgs.kernelPatches.bridge_stp_helper
+                          realtimePatches.realtimePatch_3_18
+                        ];
+        extraConfig   = musnixRealtimeKernelExtraConfig;
+      };
+
+      linux_4_0_rt    = stdenv.lib.makeOverridable (import ../pkgs/os-specific/linux/kernel/linux-4.0-rt.nix) {
+        inherit fetchurl stdenv perl buildLinux;
+        kernelPatches = [ pkgs.kernelPatches.bridge_stp_helper
+                          realtimePatches.realtimePatch_4_0
+                        ];
+        extraConfig   = musnixRealtimeKernelExtraConfig;
+      };
+
       linuxPackages_3_14_rt = recurseIntoAttrs (linuxPackagesFor linux_3_14_rt linuxPackages_3_14_rt);
+      linuxPackages_3_18_rt = recurseIntoAttrs (linuxPackagesFor linux_3_18_rt linuxPackages_3_18_rt);
+      linuxPackages_4_0_rt  = recurseIntoAttrs (linuxPackagesFor linux_4_0_rt  linuxPackages_4_0_rt);
       linuxPackages_opt     = recurseIntoAttrs (linuxPackagesFor linux_opt     linuxPackages_opt);
 
       realtimePatches = callPackage ../pkgs/os-specific/linux/kernel/patches.nix { };

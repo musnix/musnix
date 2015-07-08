@@ -24,4 +24,18 @@ in rec {
       sha256 = "1ckba761y38x6s6w4r1c5xns7d0m824ldh8lhxxm1a0s485k573n";
     };
 
+  realtimePatch_3_18 = realtimePatch
+    { branch = "3.18";
+      kversion = "3.18.17";
+      version = "rt14";
+      sha256 = "063ah6a47b48xz38bk4l3mhl8n7lqyc4h1w9ii5rngd20lzgm4qy";
+    };
+
+  realtimePatch_4_0 = realtimePatch
+    { branch = "4.0";
+      kversion = "4.0.5";
+      version = "rt4";
+      sha256 = "1pyjymq7mmj3fkkh9sv2ipr31xs219jnmj6k0lyipiygm5n1c0wm";
+    };
+
  }
