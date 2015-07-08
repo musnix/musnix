@@ -92,32 +92,32 @@ in {
 
     nixpkgs.config.packageOverrides = pkgs: with pkgs; rec {
 
-      linux_opt       = pkgs.linux.override {
-        extraConfig   = musnixStandardKernelExtraConfig;
-      };
-
-      linux_3_14_rt   = stdenv.lib.makeOverridable (import ../pkgs/os-specific/linux/kernel/linux-3.14-rt.nix) {
+      linux_3_14_rt   = makeOverridable (import ../pkgs/os-specific/linux/kernel/linux-3.14-rt.nix) {
         inherit fetchurl stdenv perl buildLinux;
-        kernelPatches = [ pkgs.kernelPatches.bridge_stp_helper
+        kernelPatches = [ kernelPatches.bridge_stp_helper
                           realtimePatches.realtimePatch_3_14
                         ];
         extraConfig   = musnixRealtimeKernelExtraConfig;
       };
 
-      linux_3_18_rt   = stdenv.lib.makeOverridable (import ../pkgs/os-specific/linux/kernel/linux-3.18-rt.nix) {
+      linux_3_18_rt   = makeOverridable (import ../pkgs/os-specific/linux/kernel/linux-3.18-rt.nix) {
         inherit fetchurl stdenv perl buildLinux;
-        kernelPatches = [ pkgs.kernelPatches.bridge_stp_helper
+        kernelPatches = [ kernelPatches.bridge_stp_helper
                           realtimePatches.realtimePatch_3_18
                         ];
         extraConfig   = musnixRealtimeKernelExtraConfig;
       };
 
-      linux_4_0_rt    = stdenv.lib.makeOverridable (import ../pkgs/os-specific/linux/kernel/linux-4.0-rt.nix) {
+      linux_4_0_rt    = makeOverridable (import ../pkgs/os-specific/linux/kernel/linux-4.0-rt.nix) {
         inherit fetchurl stdenv perl buildLinux;
-        kernelPatches = [ pkgs.kernelPatches.bridge_stp_helper
+        kernelPatches = [ kernelPatches.bridge_stp_helper
                           realtimePatches.realtimePatch_4_0
                         ];
         extraConfig   = musnixRealtimeKernelExtraConfig;
+      };
+
+      linux_opt       = linux.override {
+        extraConfig   = musnixStandardKernelExtraConfig;
       };
 
       linuxPackages_3_14_rt = recurseIntoAttrs (linuxPackagesFor linux_3_14_rt linuxPackages_3_14_rt);
