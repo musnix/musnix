@@ -18,30 +18,25 @@ let
     HPET_TIMER y
     TREE_RCU_TRACE n
   '';
-  # PREEMPT y is set below
 
   kernelConfigRealtime = ''
     PREEMPT_RT_FULL y
     PREEMPT y
   '';
 
-  kernelSources = rec {
-    version = "3.14.36";
-    src = pkgs.fetchurl {
-      url = "mirror://kernel/linux/kernel/v3.x/linux-${version}.tar.xz";
-      sha256 = "03pl303z3vvldc3hamlrq77mcy66nsqdfk7yi43nzyrnmrby3l0r";
-    };
-  };
+  musnixRealtimeKernelExtraConfig =
+    kernelConfigRealtime
+    + optionalString cfg.kernel.optimize kernelConfigOptimize
+    + optionalString cfg.kernel.latencytop kernelConfigLatencyTOP;
 
-  realtimePatch = rec {
-    version = "rt34";
-    kversion = "3.14.36";
-    name = "rt-${kversion}-${version}";
-    patch = pkgs.fetchurl {
-      url = "https://www.kernel.org/pub/linux/kernel/projects/rt/3.14/older/patch-${kversion}-${version}.patch.xz";
-      sha256 = "098nnnbh989rci2x2zmsjdj5h6ivgz4yp3qa30494rbay6v8faiv";
-    };
-  };
+  musnixStandardKernelExtraConfig =
+    if cfg.kernel.optimize
+      then "PREEMPT y\n"
+           + kernelConfigOptimize
+           + optionalString cfg.kernel.latencytop kernelConfigLatencyTOP
+      else if cfg.kernel.latencytop
+        then kernelConfigLatencyTOP
+        else "";
 
 in {
   options.musnix = {
@@ -80,33 +75,39 @@ in {
         patch to the kernel.
       '';
     };
+    kernel.packages = mkOption {
+      default = pkgs.linuxPackages_3_14_rt;
+      description = ''
+        FIXME: Kernel packages
+      '';
+    };
   };
 
   config = {
     boot.kernelPackages =
-      let
-        rtKernel =
-          pkgs.linux_3_14.override {
-            argsOverride = kernelSources;
-            kernelPatches = [ realtimePatch ];
-            extraConfig = kernelConfigRealtime
-                          + optionalString cfg.kernel.optimize kernelConfigOptimize
-                          + optionalString cfg.kernel.latencytop kernelConfigLatencyTOP;
-          };
-        stdKernel =
-          if cfg.kernel.optimize
-            then pkgs.linux.override {
-              extraConfig = "PREEMPT y\n"
-                            + kernelConfigOptimize
-                            + optionalString cfg.kernel.latencytop kernelConfigLatencyTOP;
-            }
-            else if cfg.kernel.latencytop
-              then pkgs.linux.override { extraConfig = kernelConfigLatencyTOP; }
-              else pkgs.linux;
-        musnixKernel =
-          if cfg.kernel.realtime then rtKernel else stdKernel;
-        musnixKernelPackages =
-          pkgs.recurseIntoAttrs (pkgs.linuxPackagesFor musnixKernel musnixKernelPackages);
-      in musnixKernelPackages;
+      if cfg.kernel.realtime
+        then cfg.kernel.packages
+        else pkgs.linuxPackages_opt;
+
+    nixpkgs.config.packageOverrides = pkgs: with pkgs; rec {
+
+      linux_opt       = pkgs.linux.override {
+        extraConfig   = musnixStandardKernelExtraConfig;
+      };
+
+      linux_3_14_rt   = stdenv.lib.makeOverridable (import ../pkgs/os-specific/linux/kernel/linux-3.14-rt.nix) {
+        inherit fetchurl stdenv perl buildLinux;
+        kernelPatches = [ pkgs.kernelPatches.bridge_stp_helper
+                          realtimePatches.realtimePatch_3_14
+                        ];
+        extraConfig   = musnixRealtimeKernelExtraConfig;
+      };
+
+      linuxPackages_3_14_rt = recurseIntoAttrs (linuxPackagesFor linux_3_14_rt linuxPackages_3_14_rt);
+      linuxPackages_opt     = recurseIntoAttrs (linuxPackagesFor linux_opt     linuxPackages_opt);
+
+      realtimePatches = callPackage ../pkgs/os-specific/linux/kernel/patches.nix { };
+
+    };
   };
 }
