@@ -96,6 +96,14 @@ Add the following to your `configuration.nix`:
 * **Description:** If enabled, this option will apply the [`CONFIG_PREEMPT_RT`](https://rt.wiki.kernel.org/index.php/Main_Page) patch to the kernel.
 * **Default value:** `false`
 
+`musnix.kernel.packages`
+* **Description:** This option allows you to select the real-time kernel used by musnix.
+* **Default value:** `pkgs.linuxPackages_3_18_rt`
+* Available packages:
+  * `pkgs.linuxPackages_3_14_rt`
+  * `pkgs.linuxPackages_3_18_rt`
+  * `pkgs.linuxPackages_4_0_rt`
+
 `musnix.kernel.latencytop`
 * **NOTE:** Enabling this option will rebuild your kernel.
 * **NOTE:** This option is only intended to be used for diagnostic purposes, and may cause other issues.

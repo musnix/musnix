@@ -79,7 +79,12 @@ in {
     kernel.packages = mkOption {
       default = pkgs.linuxPackages_3_18_rt;
       description = ''
-        FIXME: Kernel packages
+        This option allows you to select the real-time kernel used by musnix.
+
+        Available packages:
+        * pkgs.linuxPackages_3_14_rt
+        * pkgs.linuxPackages_3_18_rt
+        * pkgs.linuxPackages_4_0_rt
       '';
     };
   };
