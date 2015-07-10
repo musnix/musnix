@@ -6,7 +6,7 @@ let
 
   cfg = config.musnix.rtirq;
 
-  rtirq = pkgs.callPackage ../pkgs/rtirq/default.nix { };
+  rtirq = pkgs.callPackage ../pkgs/os-specific/linux/rtirq/default.nix { };
 
   rtirqConf = pkgs.writeText "rtirq.conf" ''
     # This is a generated file.  Do not edit!
