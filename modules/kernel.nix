@@ -89,7 +89,7 @@ in {
     };
   };
 
-  config = {
+  config = mkIf (cfg.kernel.latencytop || cfg.kernel.optimize || cfg.kernel.realtime) {
     boot.kernelPackages =
       if cfg.kernel.realtime
         then cfg.kernel.packages
