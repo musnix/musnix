@@ -22,7 +22,6 @@ let
   kernelConfigRealtime = ''
     PREEMPT_RT_FULL y
     PREEMPT y
-    LOCK_TORTURE_TEST n
   '';
 
   musnixRealtimeKernelExtraConfig =
@@ -110,7 +109,7 @@ in {
         kernelPatches = [ kernelPatches.bridge_stp_helper
                           realtimePatches.realtimePatch_3_18
                         ];
-        extraConfig   = musnixRealtimeKernelExtraConfig;
+        extraConfig   = musnixRealtimeKernelExtraConfig + "LOCK_TORTURE_TEST n\n";
       };
 
       linux_4_0_rt    = makeOverridable (import ../pkgs/os-specific/linux/kernel/linux-4.0-rt.nix) {
@@ -118,7 +117,7 @@ in {
         kernelPatches = [ kernelPatches.bridge_stp_helper
                           realtimePatches.realtimePatch_4_0
                         ];
-        extraConfig   = musnixRealtimeKernelExtraConfig;
+        extraConfig   = musnixRealtimeKernelExtraConfig + "LOCK_TORTURE_TEST n\n";
       };
 
       linux_opt       = linux.override {
