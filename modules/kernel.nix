@@ -84,6 +84,7 @@ in {
         * pkgs.linuxPackages_3_14_rt
         * pkgs.linuxPackages_3_18_rt
         * pkgs.linuxPackages_4_0_rt
+        * pkgs.linuxPackages_4_1_rt
       '';
     };
   };
@@ -120,6 +121,14 @@ in {
         extraConfig   = musnixRealtimeKernelExtraConfig + "LOCK_TORTURE_TEST n\n";
       };
 
+      linux_4_1_rt    = makeOverridable (import ../pkgs/os-specific/linux/kernel/linux-4.1-rt.nix) {
+        inherit fetchurl stdenv perl buildLinux;
+        kernelPatches = [ kernelPatches.bridge_stp_helper
+                          realtimePatches.realtimePatch_4_1
+                        ];
+        extraConfig   = musnixRealtimeKernelExtraConfig;
+      };
+
       linux_opt       = linux.override {
         extraConfig   = musnixStandardKernelExtraConfig;
       };
@@ -127,6 +136,7 @@ in {
       linuxPackages_3_14_rt = recurseIntoAttrs (linuxPackagesFor linux_3_14_rt linuxPackages_3_14_rt);
       linuxPackages_3_18_rt = recurseIntoAttrs (linuxPackagesFor linux_3_18_rt linuxPackages_3_18_rt);
       linuxPackages_4_0_rt  = recurseIntoAttrs (linuxPackagesFor linux_4_0_rt  linuxPackages_4_0_rt);
+      linuxPackages_4_1_rt  = recurseIntoAttrs (linuxPackagesFor linux_4_1_rt  linuxPackages_4_1_rt);
       linuxPackages_opt     = recurseIntoAttrs (linuxPackagesFor linux_opt     linuxPackages_opt);
 
       realtimePatches = callPackage ../pkgs/os-specific/linux/kernel/patches.nix { };
