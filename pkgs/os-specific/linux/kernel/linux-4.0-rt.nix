@@ -1,11 +1,13 @@
 { stdenv, fetchurl, ... } @ args:
 
 import <nixpkgs/pkgs/os-specific/linux/kernel/generic.nix> (args // rec {
-  version = "4.0.8";
+  kversion = "4.0.8";
+  pversion = "rt6";
+  version = "${kversion}-${pversion}";
   extraMeta.branch = "4.0";
 
   src = fetchurl {
-    url = "mirror://kernel/linux/kernel/v4.x/linux-${version}.tar.xz";
+    url = "mirror://kernel/linux/kernel/v4.x/linux-${kversion}.tar.xz";
     sha256 = "1cggqi5kdan818xw5g5wmapcsf501f5m9bympsy6a2cpphknfdmn";
   };
 
