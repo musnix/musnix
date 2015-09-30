@@ -3,6 +3,7 @@
 { imports =
     [ ./modules/base.nix
       ./modules/kernel.nix
+      ./modules/other.nix
       ./modules/rtirq.nix
     ];
 }
