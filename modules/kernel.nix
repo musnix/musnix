@@ -139,6 +139,8 @@ in {
       linuxPackages_4_1_rt  = recurseIntoAttrs (linuxPackagesFor linux_4_1_rt  linuxPackages_4_1_rt);
       linuxPackages_opt     = recurseIntoAttrs (linuxPackagesFor linux_opt     linuxPackages_opt);
 
+      linuxPackages_latest_rt = linuxPackages_4_1_rt;
+
       realtimePatches = callPackage ../pkgs/os-specific/linux/kernel/patches.nix { };
 
     };

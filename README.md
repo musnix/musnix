@@ -105,6 +105,9 @@ Add the following to your `configuration.nix`:
   * `pkgs.linuxPackages_4_0_rt`
   * `pkgs.linuxPackages_4_1_rt`
 
+  or:
+  * `pkgs.linuxPackages_latest_rt` (currently `pkgs.linuxPackages_4_1_rt`)
+
 `musnix.kernel.latencytop`
 * **NOTE:** Enabling this option will rebuild your kernel.
 * **NOTE:** This option is only intended to be used for diagnostic purposes, and may cause other issues.
