@@ -1,15 +1,15 @@
 { stdenv, fetchurl, perl, buildLinux, ... } @ args:
 
 import <nixpkgs/pkgs/os-specific/linux/kernel/generic.nix> (args // rec {
-  kversion = "4.4-rc6";
-  pversion = "rt1";
+  kversion = "4.4";
+  pversion = "rt2";
   version = "${kversion}-${pversion}";
-  modDirVersion = "4.4.0-rc6-rt1";
+  modDirVersion = "4.4.0-rt2";
   extraMeta.branch = "4.4";
 
   src = fetchurl {
-    url = "mirror://kernel/linux/kernel/v4.x/testing/linux-${kversion}.tar.xz";
-    sha256 = "1brb1v6185pf8gnff753hvpdsbdmjr5nsbvj0s4ljlpcgljrn6cb";
+    url = "mirror://kernel/linux/kernel/v4.x/linux-${kversion}.tar.xz";
+    sha256 = "1chqahb0ssvla7n9arzi4882x72fm72p436ic2j9jjarxy7pq7a0";
   };
 
   features.iwlwifi = true;
