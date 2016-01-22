@@ -9,11 +9,11 @@ Real-time audio in NixOS
 ## Usage
 Add the following to your `configuration.nix`:
 ```
-  imports = 
+  imports =
     [ <existing imports>
       /path/to/musnix
     ];
-    
+
   musnix.enable = true;
 
   user.extraUsers.<username>.extraGroups = [ "audio" ];
@@ -49,10 +49,10 @@ Add the following to your `configuration.nix`:
     @audio  soft    nofile  99999
     @audio  hard    nofile  99999
     ```
-  
+
   * Set the following environment variables to default install locations in NixOS:
-    * `VST_PATH` 
-    * `LVST_PATH` 
+    * `VST_PATH`
+    * `LVST_PATH`
     * `LADSPA_PATH`
     * `LV2_PATH`
     * `DSSI_PATH`
@@ -104,9 +104,10 @@ Add the following to your `configuration.nix`:
   * `pkgs.linuxPackages_3_18_rt`
   * `pkgs.linuxPackages_4_0_rt`
   * `pkgs.linuxPackages_4_1_rt`
+  * `pkgs.linuxPackages_4_4_rt`
 
   or:
-  * `pkgs.linuxPackages_latest_rt` (currently `pkgs.linuxPackages_4_1_rt`)
+  * `pkgs.linuxPackages_latest_rt` (currently `pkgs.linuxPackages_4_4_rt`)
 
 `musnix.kernel.latencytop`
 * **NOTE:** Enabling this option will rebuild your kernel.
@@ -116,7 +117,7 @@ Add the following to your `configuration.nix`:
 
 ## rtirq Options
 
-**NOTES**: 
+**NOTES**:
 * The following rtirq options can be used without setting `musnix.enable = true;`
 * `musnix.kernel.realtime` must be set to `true` to use these options.
 

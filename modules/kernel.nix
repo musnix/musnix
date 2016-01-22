@@ -85,6 +85,9 @@ in {
         * pkgs.linuxPackages_3_18_rt
         * pkgs.linuxPackages_4_0_rt
         * pkgs.linuxPackages_4_1_rt
+        * pkgs.linuxPackages_4_4_rt
+        or:
+        * pkgs.linuxPackages_latest_rt (currently pkgs.linuxPackages_4_4_rt)
       '';
     };
   };
