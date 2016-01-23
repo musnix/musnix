@@ -2,9 +2,9 @@
 
 import <nixpkgs/pkgs/os-specific/linux/kernel/generic.nix> (args // rec {
   kversion = "4.4";
-  pversion = "rt2";
+  pversion = "rt3";
   version = "${kversion}-${pversion}";
-  modDirVersion = "4.4.0-rt2";
+  modDirVersion = "4.4.0-rt3";
   extraMeta.branch = "4.4";
 
   src = fetchurl {
