@@ -65,7 +65,7 @@ in {
 
     environment.systemPackages =
       if cfg.ffado.enable
-        then [ pkgs.ffado ]
+        then [ pkgs.ffadoFull ]
         else [];
 
     environment.variables = {
@@ -88,7 +88,7 @@ in {
     services.udev = {
       packages =
         if cfg.ffado.enable
-          then [ pkgs.ffado ]
+          then [ pkgs.ffadoFull ]
           else [];
       extraRules = ''
         KERNEL=="rtc0", GROUP="audio"
