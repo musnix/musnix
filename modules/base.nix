@@ -58,8 +58,8 @@ in {
         echo 2048 > /sys/class/rtc/rtc0/max_user_freq
         echo 2048 > /proc/sys/dev/hpet/max-user-freq
       '' + optionalString (cfg.soundcardPciId != "") ''
-        setpci -v -d *:* latency_timer=b0
-        setpci -v -s ${cfg.soundcardPciId} latency_timer=ff
+        ${pkgs.pciutils}/bin/setpci -v -d *:* latency_timer=b0
+        ${pkgs.pciutils}/bin/setpci -v -s ${cfg.soundcardPciId} latency_timer=ff
       '';
     };
 
