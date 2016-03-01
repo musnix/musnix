@@ -113,7 +113,7 @@ in {
         kernelPatches = [ kernelPatches.bridge_stp_helper
                           realtimePatches.realtimePatch_3_18
                         ];
-        extraConfig   = musnixRealtimeKernelExtraConfig + "LOCK_TORTURE_TEST n\n";
+        extraConfig   = musnixRealtimeKernelExtraConfig;
       };
 
       linux_4_0_rt    = makeOverridable (import ../pkgs/os-specific/linux/kernel/linux-4.0-rt.nix) {
