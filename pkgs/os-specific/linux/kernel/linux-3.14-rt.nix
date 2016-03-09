@@ -2,7 +2,7 @@
 
 import <nixpkgs/pkgs/os-specific/linux/kernel/generic.nix> (args // rec {
   kversion = "3.14.61";
-  pversion = "rt63";
+  pversion = "rt64";
   version = "${kversion}-${pversion}";
   extraMeta.branch = "3.14";
 
