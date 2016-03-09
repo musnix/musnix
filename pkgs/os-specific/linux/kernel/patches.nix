@@ -27,8 +27,8 @@ in rec {
   realtimePatch_3_18 = realtimePatch
     { branch = "3.18";
       kversion = "3.18.27";
-      pversion = "rt26";
-      sha256 = "02ajg1wz8xq12rg7ca5a56wgkqmgrb78ia1mx4i8z42n2plhkzll";
+      pversion = "rt27";
+      sha256 = "121dgxhlpbw5fybakkbm1i737b7yrp3dhhhagy72xbl5bd86bn01";
     };
 
   realtimePatch_4_0 = realtimePatch
