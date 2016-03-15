@@ -31,13 +31,6 @@ in rec {
       sha256 = "1i9jp272v41ag9z0r255k507dz5q81kddab8wzbmmihhr5wwv1yd";
     };
 
-  realtimePatch_4_0 = realtimePatch
-    { branch = "4.0";
-      kversion = "4.0.8";
-      pversion = "rt6";
-      sha256 = "0x3in9rjcw7lja902nj8647lhmxw3dsnav0xm2jg1irjicqk77p8";
-    };
-
   realtimePatch_4_1 = realtimePatch
     { branch = "4.1";
       kversion = "4.1.19";

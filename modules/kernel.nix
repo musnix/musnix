@@ -116,14 +116,6 @@ in {
         extraConfig   = musnixRealtimeKernelExtraConfig;
       };
 
-      linux_4_0_rt    = makeOverridable (import ../pkgs/os-specific/linux/kernel/linux-4.0-rt.nix) {
-        inherit fetchurl stdenv perl buildLinux;
-        kernelPatches = [ kernelPatches.bridge_stp_helper
-                          realtimePatches.realtimePatch_4_0
-                        ];
-        extraConfig   = musnixRealtimeKernelExtraConfig + "LOCK_TORTURE_TEST n\n";
-      };
-
       linux_4_1_rt    = makeOverridable (import ../pkgs/os-specific/linux/kernel/linux-4.1-rt.nix) {
         inherit fetchurl stdenv perl buildLinux;
         kernelPatches = [ kernelPatches.bridge_stp_helper
@@ -146,7 +138,6 @@ in {
 
       linuxPackages_3_14_rt = recurseIntoAttrs (linuxPackagesFor linux_3_14_rt linuxPackages_3_14_rt);
       linuxPackages_3_18_rt = recurseIntoAttrs (linuxPackagesFor linux_3_18_rt linuxPackages_3_18_rt);
-      linuxPackages_4_0_rt  = recurseIntoAttrs (linuxPackagesFor linux_4_0_rt  linuxPackages_4_0_rt);
       linuxPackages_4_1_rt  = recurseIntoAttrs (linuxPackagesFor linux_4_1_rt  linuxPackages_4_1_rt);
       linuxPackages_4_4_rt  = recurseIntoAttrs (linuxPackagesFor linux_4_4_rt  linuxPackages_4_4_rt);
       linuxPackages_opt     = recurseIntoAttrs (linuxPackagesFor linux_opt     linuxPackages_opt);
