@@ -83,7 +83,6 @@ in {
         Available packages:
         * pkgs.linuxPackages_3_14_rt
         * pkgs.linuxPackages_3_18_rt
-        * pkgs.linuxPackages_4_0_rt
         * pkgs.linuxPackages_4_1_rt
         * pkgs.linuxPackages_4_4_rt
         or:
