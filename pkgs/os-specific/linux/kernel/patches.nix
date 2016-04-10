@@ -41,9 +41,8 @@ in rec {
   realtimePatch_4_4 = realtimePatch rec
     { branch = "4.4";
       kversion = "4.4.6";
-      pversion = "rt12";
-      sha256 = "0j1bjlm2vs9bzdnwpq0agjq04spmnhi4jjnq59i8zvdykpi26ac3";
-      url = "https://www.kernel.org/pub/linux/kernel/projects/rt/${branch}/older/patch-${kversion}-${pversion}.patch.xz";
+      pversion = "rt14";
+      sha256 = "1456fdk4021a2r7qhpn0gk6qry7avl2s086hrywx9y2bpiwfsbln";
     };
 
 }
