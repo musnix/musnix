@@ -26,6 +26,7 @@ The following sections contain information about the various configuration optio
 
 `musnix.enable`
 * **Description:** Enable musnix, a module for real-time audio.
+* **Type:** `boolean`
 * **Default value:** `false`
 * **NOTE:** This option must be set to `true` to use other musnix base options.
 * **Details:** If enabled, this option will do the following:
@@ -68,10 +69,12 @@ The following sections contain information about the various configuration optio
 
 `musnix.alsaSeq.enable`
 * **Description:** If enabled, load ALSA Sequencer kernel modules.  Currently, this only loads the `snd_seq` and `snd_rawmidi` modules.
+* **Type:** `boolean`
 * **Default value:** `true`
 
 `musnix.ffado.enable`
 * **Description:** If enabled, use the Free FireWire Audio Drivers (FFADO).
+* **Type:** `boolean`
 * **Default value:** `false`
 
 `musnix.soundcardPciId`
@@ -81,6 +84,7 @@ The following sections contain information about the various configuration optio
   ```
   lspci | grep -i audio
   ```
+* **Type:** `string`
 * **Default value:** `""`
 * **Example value:** `"00:1b.0"`
 
@@ -91,15 +95,18 @@ The following sections contain information about the various configuration optio
 `musnix.kernel.optimize`
 * **NOTE:** Enabling this option will rebuild your kernel.
 * **Description:** If enabled, this option will configure the kernel to be preemptible, to use the deadline I/O scheduler, and to use the High Precision Event Timer (HPET).
+* **Type:** `boolean`
 * **Default value:** `false`
 
 `musnix.kernel.realtime`
 * **NOTE:** Enabling this option will rebuild your kernel.
 * **Description:** If enabled, this option will apply the [`CONFIG_PREEMPT_RT`](https://rt.wiki.kernel.org/index.php/Main_Page) patch to the kernel.
+* **Type:** `boolean`
 * **Default value:** `false`
 
 `musnix.kernel.packages`
 * **Description:** This option allows you to select the real-time kernel used by musnix.
+* **Type:** `package`
 * **Default value:** `pkgs.linuxPackages_3_18_rt`
 * Available packages:
   * `pkgs.linuxPackages_3_14_rt`
@@ -114,6 +121,7 @@ The following sections contain information about the various configuration optio
 * **NOTE:** Enabling this option will rebuild your kernel.
 * **NOTE:** This option is only intended to be used for diagnostic purposes, and may cause other issues.
 * **Description:** If enabled, this option will configure the kernel to use a latency tracking infrastructure that is used by the "latencytop" userspace tool.
+* **Type:** `boolean`
 * **Default value:** `false`
 
 ## rtirq Options
@@ -136,6 +144,7 @@ To see a description of one of the listed options (in this case `enable`):
 
 `musnix.das_watchdog.enable`
 * **Description:** If enabled, start the [das_watchdog](https://github.com/kmatheussen/das_watchdog) service.  This service will ensure that a realtime process won't hang the machine.
+* **Type:** `boolean`
 * **Default value:** `true` if `musnix.kernel.realtime.enable = true`, otherwise `false`
 
 ## Communication
