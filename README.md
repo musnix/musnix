@@ -6,7 +6,7 @@ Real-time audio in NixOS
 
 **musnix** provides a set of simple, high-level configuration options for doing real-time audio work in [NixOS](https://nixos.org/), including optimizing the kernel, applying the [`CONFIG_PREEMPT_RT`](https://rt.wiki.kernel.org/index.php/Main_Page) patch to it, and adjusting various low-level system settings.
 
-## Usage
+## Basic Usage
 Add the following to your `configuration.nix`:
 ```
   imports =
@@ -19,6 +19,8 @@ Add the following to your `configuration.nix`:
   user.extraUsers.<username>.extraGroups = [ "audio" ];
 
 ```
+
+The following sections contain information about the various configuration options.
 
 ## Base Options
 
@@ -135,6 +137,10 @@ To see a description of one of the listed options (in this case `enable`):
 `musnix.das_watchdog.enable`
 * **Description:** If enabled, start the [das_watchdog](https://github.com/kmatheussen/das_watchdog) service.  This service will ensure that a realtime process won't hang the machine.
 * **Default value:** `true` if `musnix.kernel.realtime.enable = true`, otherwise `false`
+
+## Communication
+
+* **IRC:** `#musnix` on [freenode](http://freenode.net/)
 
 ## More Information
 * http://wiki.linuxaudio.org/wiki/system_configuration
