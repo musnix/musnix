@@ -11,6 +11,8 @@ import <nixpkgs/pkgs/os-specific/linux/kernel/generic.nix> (args // rec {
     sha256 = "0pqfgzinwgllvyx0cfv0vnllgvzrrpbr2yi21zgppdd1iw6nipsd";
   };
 
+  kernelPatches = args.kernelPatches;
+
   features.iwlwifi = true;
   features.efiBootStub = true;
   features.needsCifsUtils = true;
