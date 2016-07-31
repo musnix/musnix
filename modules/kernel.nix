@@ -100,7 +100,7 @@ in {
 
     nixpkgs.config.packageOverrides = pkgs: with pkgs; rec {
 
-      linux_3_14_rt   = makeOverridable (import ../pkgs/os-specific/linux/kernel/linux-3.14-rt.nix) {
+      linux_3_14_rt = makeOverridable (import ../pkgs/os-specific/linux/kernel/linux-3.14-rt.nix) {
         inherit fetchurl stdenv perl buildLinux;
         kernelPatches = [ kernelPatches.bridge_stp_helper
                           realtimePatches.realtimePatch_3_14
@@ -108,7 +108,7 @@ in {
         extraConfig   = musnixRealtimeKernelExtraConfig;
       };
 
-      linux_3_18_rt   = makeOverridable (import ../pkgs/os-specific/linux/kernel/linux-3.18-rt.nix) {
+      linux_3_18_rt = makeOverridable (import ../pkgs/os-specific/linux/kernel/linux-3.18-rt.nix) {
         inherit fetchurl stdenv perl buildLinux;
         kernelPatches = [ kernelPatches.bridge_stp_helper
                           realtimePatches.realtimePatch_3_18
@@ -116,7 +116,7 @@ in {
         extraConfig   = musnixRealtimeKernelExtraConfig;
       };
 
-      linux_4_1_rt    = makeOverridable (import ../pkgs/os-specific/linux/kernel/linux-4.1-rt.nix) {
+      linux_4_1_rt = makeOverridable (import ../pkgs/os-specific/linux/kernel/linux-4.1-rt.nix) {
         inherit fetchurl stdenv perl buildLinux;
         kernelPatches = [ kernelPatches.bridge_stp_helper
                           realtimePatches.realtimePatch_4_1
@@ -124,7 +124,7 @@ in {
         extraConfig   = musnixRealtimeKernelExtraConfig;
       };
 
-      linux_4_4_rt    = makeOverridable (import ../pkgs/os-specific/linux/kernel/linux-4.4-rt.nix) {
+      linux_4_4_rt = makeOverridable (import ../pkgs/os-specific/linux/kernel/linux-4.4-rt.nix) {
         inherit fetchurl stdenv perl buildLinux;
         kernelPatches = [ kernelPatches.bridge_stp_helper
                           realtimePatches.realtimePatch_4_4
@@ -132,7 +132,7 @@ in {
         extraConfig   = musnixRealtimeKernelExtraConfig;
       };
 
-      linux_4_6_rt    = makeOverridable (import ../pkgs/os-specific/linux/kernel/linux-4.6-rt.nix) {
+      linux_4_6_rt = makeOverridable (import ../pkgs/os-specific/linux/kernel/linux-4.6-rt.nix) {
         inherit fetchurl stdenv perl buildLinux;
         kernelPatches = [ kernelPatches.bridge_stp_helper
                           realtimePatches.realtimePatch_4_6
@@ -140,8 +140,8 @@ in {
         extraConfig   = musnixRealtimeKernelExtraConfig;
       };
 
-      linux_opt       = linux.override {
-        extraConfig   = musnixStandardKernelExtraConfig;
+      linux_opt = linux.override {
+        extraConfig = musnixStandardKernelExtraConfig;
       };
 
       linuxPackages_3_14_rt = recurseIntoAttrs (linuxPackagesFor linux_3_14_rt linuxPackages_3_14_rt);
