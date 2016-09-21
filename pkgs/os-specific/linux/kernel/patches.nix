@@ -6,7 +6,7 @@ let
     { branch
     , kversion
     , pversion
-    , url ? "https://www.kernel.org/pub/linux/kernel/projects/rt/${branch}/patch-${kversion}-${pversion}.patch.xz"
+    , url ? "https://www.kernel.org/pub/linux/kernel/projects/rt/${branch}/older/patch-${kversion}-${pversion}.patch.xz"
     , sha256
     }:
     { name  = "rt-${kversion}-${pversion}";
