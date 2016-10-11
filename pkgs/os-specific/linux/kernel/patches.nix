@@ -6,7 +6,7 @@ let
     { branch
     , kversion
     , pversion
-    , url ? "https://www.kernel.org/pub/linux/kernel/projects/rt/${branch}/patch-${kversion}-${pversion}.patch.xz"
+    , url ? "https://www.kernel.org/pub/linux/kernel/projects/rt/${branch}/older/patch-${kversion}-${pversion}.patch.xz"
     , sha256
     }:
     { name  = "rt-${kversion}-${pversion}";
@@ -19,36 +19,43 @@ in rec {
 
   realtimePatch_3_14 = realtimePatch
     { branch = "3.14";
-      kversion = "3.14.65";
-      pversion = "rt68";
-      sha256 = "1xzwk1v7iv82wkdj4n3vclha1vz2678qqkczrvsx0apdxqcnpp8c";
+      kversion = "3.14.73";
+      pversion = "rt78";
+      sha256 = "0fxqh4vdgzkl5jfc231lh7zmqy6s1ygx8brxw0ja7v4hh09rfshz";
     };
 
   realtimePatch_3_18 = realtimePatch
     { branch = "3.18";
-      kversion = "3.18.29";
-      pversion = "rt30";
-      sha256 = "05n69kywqn92jg0x2l8qpyv2xwxs66myj7yv739x592yzihzjpyp";
+      kversion = "3.18.36";
+      pversion = "rt38";
+      sha256 = "051bc6cyy3l6wkvnzss7rdm87mldlv1rsncd45s25h5qf55gjimc";
     };
 
   realtimePatch_4_1 = realtimePatch
     { branch = "4.1";
-      kversion = "4.1.20";
-      pversion = "rt23";
-      sha256 = "1iyi8f35ryvbiy7xbkhpmiiy4nadqnv7kpl7mz4i6njs9zbjdgk6";
+      kversion = "4.1.27";
+      pversion = "rt31";
+      sha256 = "1dhmq9ml78w62pjaxyrq8k2h2wywy5wv2rj6l7gh51px20kgzdd2";
     };
 
   realtimePatch_4_4 = realtimePatch rec
     { branch = "4.4";
-      kversion = "4.4.12";
-      pversion = "rt19";
-      sha256 = "078s6cq13g7qx8rrqycxfdky178sy7p201acqj10cgdparczkqqg";
+      kversion = "4.4.15";
+      pversion = "rt23";
+      sha256 = "1i58dibdd8lv7gmap55px9kkv32xzxkh8mml28v9r97kl32dr9da";
     };
 
   realtimePatch_4_6 = realtimePatch rec
     { branch = "4.6";
-      kversion = "4.6.2";
-      pversion = "rt5";
-      sha256 = "12is6hw34k816p935n4f1i7jqq3r6qws8fhvsj7lqm55i731h4qg";
+      kversion = "4.6.7";
+      pversion = "rt11";
+      sha256 = "1ny3d6648rbm5lg5fi4gix7an6pa9jwa30sh2djp3mg29lzpivs9";
+    };
+
+  realtimePatch_4_8 = realtimePatch rec
+    { branch = "4.8";
+      kversion = "4.8";
+      pversion = "rt1";
+      sha256 = "0w9c2d1qqa55a1bqzq8hs30x5d2zdbq0mmdsf0kj6fhzg5kcgmc5";
     };
 }
