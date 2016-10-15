@@ -86,8 +86,9 @@ in {
         * pkgs.linuxPackages_4_1_rt
         * pkgs.linuxPackages_4_4_rt
         * pkgs.linuxPackages_4_6_rt
+        * pkgs.linuxPackages_4_8_rt
         or:
-        * pkgs.linuxPackages_latest_rt (currently pkgs.linuxPackages_4_6_rt)
+        * pkgs.linuxPackages_latest_rt (currently pkgs.linuxPackages_4_8_rt)
       '';
     };
   };
@@ -140,6 +141,15 @@ in {
         extraConfig   = musnixRealtimeKernelExtraConfig;
       };
 
+      linux_4_8_rt = makeOverridable (import ../pkgs/os-specific/linux/kernel/linux-4.8-rt.nix) {
+        inherit fetchurl stdenv perl buildLinux;
+        kernelPatches = [ kernelPatches.bridge_stp_helper
+                          kernelPatches.modinst_arg_list_too_long
+                          realtimePatches.realtimePatch_4_8
+                        ];
+        extraConfig   = musnixRealtimeKernelExtraConfig;
+      };
+
       linux_opt = linux.override {
         extraConfig = musnixStandardKernelExtraConfig;
       };
@@ -149,9 +159,10 @@ in {
       linuxPackages_4_1_rt  = recurseIntoAttrs (linuxPackagesFor linux_4_1_rt  linuxPackages_4_1_rt);
       linuxPackages_4_4_rt  = recurseIntoAttrs (linuxPackagesFor linux_4_4_rt  linuxPackages_4_4_rt);
       linuxPackages_4_6_rt  = recurseIntoAttrs (linuxPackagesFor linux_4_6_rt  linuxPackages_4_6_rt);
+      linuxPackages_4_8_rt  = recurseIntoAttrs (linuxPackagesFor linux_4_8_rt  linuxPackages_4_8_rt);
       linuxPackages_opt     = recurseIntoAttrs (linuxPackagesFor linux_opt     linuxPackages_opt);
 
-      linuxPackages_latest_rt = linuxPackages_4_6_rt;
+      linuxPackages_latest_rt = linuxPackages_4_8_rt;
 
       realtimePatches = callPackage ../pkgs/os-specific/linux/kernel/patches.nix { };
 
