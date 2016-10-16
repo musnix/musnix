@@ -17,6 +17,7 @@ let
     DEFAULT_IOSCHED deadline
     HPET_TIMER y
     TREE_RCU_TRACE n
+    RT_GROUP_SCHED? n
   '';
 
   kernelConfigRealtime = ''
