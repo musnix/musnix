@@ -14,7 +14,7 @@ let
   kernelConfigOptimize = ''
     IOSCHED_DEADLINE y
     DEFAULT_DEADLINE y
-    DEFAULT_IOSCHED "deadline"
+    DEFAULT_IOSCHED deadline
     HPET_TIMER y
     TREE_RCU_TRACE n
   '';
