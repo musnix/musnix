@@ -41,9 +41,10 @@ in rec {
 
   realtimePatch_4_4 = realtimePatch rec
     { branch = "4.4";
-      kversion = "4.4.15";
-      pversion = "rt23";
-      sha256 = "1i58dibdd8lv7gmap55px9kkv32xzxkh8mml28v9r97kl32dr9da";
+      kversion = "4.4.23";
+      pversion = "rt33";
+      sha256 = "1zlm5qj8am7k6rjddb08x075ik75qg52ysnjm4x46gyk6prdjjwd";
+      url = "https://www.kernel.org/pub/linux/kernel/projects/rt/4.4/patch-4.4.23-rt33.patch.xz";
     };
 
   realtimePatch_4_6 = realtimePatch rec
