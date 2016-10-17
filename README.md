@@ -107,7 +107,7 @@ The following sections contain information about the various configuration optio
 `musnix.kernel.packages`
 * **Description:** This option allows you to select the real-time kernel used by musnix.
 * **Type:** `package`
-* **Default value:** `pkgs.linuxPackages_3_18_rt`
+* **Default value:** `pkgs.linuxPackages_4_4_rt`
 * Available packages:
   * `pkgs.linuxPackages_3_14_rt`
   * `pkgs.linuxPackages_3_18_rt`
