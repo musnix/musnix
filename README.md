@@ -114,9 +114,10 @@ The following sections contain information about the various configuration optio
   * `pkgs.linuxPackages_4_1_rt`
   * `pkgs.linuxPackages_4_4_rt`
   * `pkgs.linuxPackages_4_6_rt`
+  * `pkgs.linuxPackages_4_8_rt`
 
   or:
-  * `pkgs.linuxPackages_latest_rt` (currently `pkgs.linuxPackages_4_6_rt`)
+  * `pkgs.linuxPackages_latest_rt` (currently `pkgs.linuxPackages_4_8_rt`)
 
 `musnix.kernel.latencytop`
 * **NOTE:** Enabling this option will rebuild your kernel.
