@@ -33,10 +33,9 @@ in rec {
 
   realtimePatch_4_1 = realtimePatch
     { branch = "4.1";
-      kversion = "4.1.33";
-      pversion = "rt38";
-      sha256 = "0d31yxb8w29mpkqwf1zrpls0np2rnzrk3b6k38i2rk60dp43n7nj";
-      url = "https://www.kernel.org/pub/linux/kernel/projects/rt/4.1/patch-4.1.33-rt38.patch.xz";
+      kversion = "4.1.37";
+      pversion = "rt43";
+      sha256 = "0jq31y8by3lm69mxc22qv9a8hmg3nb83rkqkwsh6mpdwpij506lc";
     };
 
   realtimePatch_4_4 = realtimePatch rec
