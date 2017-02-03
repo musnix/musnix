@@ -38,12 +38,11 @@ in rec {
       sha256 = "0jq31y8by3lm69mxc22qv9a8hmg3nb83rkqkwsh6mpdwpij506lc";
     };
 
-  realtimePatch_4_4 = realtimePatch rec
+  realtimePatch_4_4 = realtimePatch
     { branch = "4.4";
-      kversion = "4.4.23";
-      pversion = "rt33";
-      sha256 = "1zlm5qj8am7k6rjddb08x075ik75qg52ysnjm4x46gyk6prdjjwd";
-      url = "https://www.kernel.org/pub/linux/kernel/projects/rt/4.4/patch-4.4.23-rt33.patch.xz";
+      kversion = "4.4.39";
+      pversion = "rt50";
+      sha256 = "1k6hlsc32rsnb7zvgx4dx8mgx51yxcin4vmn15cndm0713y5isjq";
     };
 
   realtimePatch_4_6 = realtimePatch rec
