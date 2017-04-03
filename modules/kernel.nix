@@ -146,6 +146,14 @@ in {
         extraConfig   = musnixRealtimeKernelExtraConfig;
       };
 
+      linux_4_9_rt = callPackage ../pkgs/os-specific/linux/kernel/linux-4.9-rt.nix {
+        kernelPatches = [ kernelPatches.bridge_stp_helper
+                          kernelPatches.modinst_arg_list_too_long
+                          realtimePatches.realtimePatch_4_9
+                        ];
+        extraConfig   = musnixRealtimeKernelExtraConfig;
+      };
+
       linux_opt = linux.override {
         extraConfig = musnixStandardKernelExtraConfig;
       };
@@ -156,9 +164,10 @@ in {
       linuxPackages_4_4_rt  = recurseIntoAttrs (linuxPackagesFor linux_4_4_rt);
       linuxPackages_4_6_rt  = recurseIntoAttrs (linuxPackagesFor linux_4_6_rt);
       linuxPackages_4_8_rt  = recurseIntoAttrs (linuxPackagesFor linux_4_8_rt);
+      linuxPackages_4_9_rt  = recurseIntoAttrs (linuxPackagesFor linux_4_9_rt);
       linuxPackages_opt     = recurseIntoAttrs (linuxPackagesFor linux_opt);
 
-      linuxPackages_latest_rt = linuxPackages_4_8_rt;
+      linuxPackages_latest_rt = linuxPackages_4_9_rt;
 
       realtimePatches = callPackage ../pkgs/os-specific/linux/kernel/patches.nix { };
     };
