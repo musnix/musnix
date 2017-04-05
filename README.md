@@ -120,7 +120,7 @@ See [#42](https://github.com/musnix/musnix/pull/42) for more information about t
 `musnix.kernel.packages`
 * **Description:** This option allows you to select the real-time kernel used by musnix.
 * **Type:** `package`
-* **Default value:** `pkgs.linuxPackages_4_4_rt`
+* **Default value:** `pkgs.linuxPackages_4_9_rt`
 * Available packages:
   * `pkgs.linuxPackages_3_14_rt`
   * `pkgs.linuxPackages_3_18_rt`

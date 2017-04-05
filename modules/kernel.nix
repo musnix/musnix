@@ -77,7 +77,7 @@ in {
       '';
     };
     kernel.packages = mkOption {
-      default = pkgs.linuxPackages_4_4_rt;
+      default = pkgs.linuxPackages_4_9_rt;
       description = ''
         This option allows you to select the real-time kernel used by musnix.
 
