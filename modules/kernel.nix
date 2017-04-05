@@ -14,9 +14,10 @@ let
   kernelConfigOptimize = ''
     IOSCHED_DEADLINE y
     DEFAULT_DEADLINE y
-    DEFAULT_IOSCHED "deadline"
+    DEFAULT_IOSCHED deadline
     HPET_TIMER y
     TREE_RCU_TRACE n
+    RT_GROUP_SCHED? n
   '';
 
   kernelConfigRealtime = ''
@@ -94,6 +95,7 @@ in {
   };
 
   config = mkIf (cfg.kernel.latencytop || cfg.kernel.optimize || cfg.kernel.realtime) {
+
     boot.kernelPackages =
       if cfg.kernel.realtime
         then cfg.kernel.packages
@@ -101,51 +103,53 @@ in {
 
     nixpkgs.config.packageOverrides = pkgs: with pkgs; rec {
 
-      linux_3_14_rt = makeOverridable (import ../pkgs/os-specific/linux/kernel/linux-3.14-rt.nix) {
-        inherit fetchurl stdenv perl buildLinux;
+      linux_3_14_rt = callPackage ../pkgs/os-specific/linux/kernel/linux-3.14-rt.nix {
         kernelPatches = [ kernelPatches.bridge_stp_helper
                           realtimePatches.realtimePatch_3_14
                         ];
         extraConfig   = musnixRealtimeKernelExtraConfig;
       };
 
-      linux_3_18_rt = makeOverridable (import ../pkgs/os-specific/linux/kernel/linux-3.18-rt.nix) {
-        inherit fetchurl stdenv perl buildLinux;
+      linux_3_18_rt = callPackage ../pkgs/os-specific/linux/kernel/linux-3.18-rt.nix {
         kernelPatches = [ kernelPatches.bridge_stp_helper
                           realtimePatches.realtimePatch_3_18
                         ];
         extraConfig   = musnixRealtimeKernelExtraConfig;
       };
 
-      linux_4_1_rt = makeOverridable (import ../pkgs/os-specific/linux/kernel/linux-4.1-rt.nix) {
-        inherit fetchurl stdenv perl buildLinux;
+      linux_4_1_rt = callPackage ../pkgs/os-specific/linux/kernel/linux-4.1-rt.nix {
         kernelPatches = [ kernelPatches.bridge_stp_helper
                           realtimePatches.realtimePatch_4_1
                         ];
         extraConfig   = musnixRealtimeKernelExtraConfig;
       };
 
-      linux_4_4_rt = makeOverridable (import ../pkgs/os-specific/linux/kernel/linux-4.4-rt.nix) {
-        inherit fetchurl stdenv perl buildLinux;
+      linux_4_4_rt = callPackage ../pkgs/os-specific/linux/kernel/linux-4.4-rt.nix {
         kernelPatches = [ kernelPatches.bridge_stp_helper
                           realtimePatches.realtimePatch_4_4
                         ];
         extraConfig   = musnixRealtimeKernelExtraConfig;
       };
 
-      linux_4_6_rt = makeOverridable (import ../pkgs/os-specific/linux/kernel/linux-4.6-rt.nix) {
-        inherit fetchurl stdenv perl buildLinux;
+      linux_4_6_rt = callPackage ../pkgs/os-specific/linux/kernel/linux-4.6-rt.nix {
         kernelPatches = [ kernelPatches.bridge_stp_helper
                           realtimePatches.realtimePatch_4_6
                         ];
         extraConfig   = musnixRealtimeKernelExtraConfig;
       };
 
-      linux_4_8_rt = makeOverridable (import ../pkgs/os-specific/linux/kernel/linux-4.8-rt.nix) {
-        inherit fetchurl stdenv perl buildLinux;
+      linux_4_8_rt = callPackage ../pkgs/os-specific/linux/kernel/linux-4.8-rt.nix {
         kernelPatches = [ kernelPatches.bridge_stp_helper
                           kernelPatches.modinst_arg_list_too_long
                           realtimePatches.realtimePatch_4_8
+                        ];
+        extraConfig   = musnixRealtimeKernelExtraConfig;
+      };
+
+      linux_4_9_rt = callPackage ../pkgs/os-specific/linux/kernel/linux-4.9-rt.nix {
+        kernelPatches = [ kernelPatches.bridge_stp_helper
+                          kernelPatches.modinst_arg_list_too_long
+                          realtimePatches.realtimePatch_4_9
                         ];
         extraConfig   = musnixRealtimeKernelExtraConfig;
       };
@@ -154,18 +158,18 @@ in {
         extraConfig = musnixStandardKernelExtraConfig;
       };
 
-      linuxPackages_3_14_rt = recurseIntoAttrs (linuxPackagesFor linux_3_14_rt linuxPackages_3_14_rt);
-      linuxPackages_3_18_rt = recurseIntoAttrs (linuxPackagesFor linux_3_18_rt linuxPackages_3_18_rt);
-      linuxPackages_4_1_rt  = recurseIntoAttrs (linuxPackagesFor linux_4_1_rt  linuxPackages_4_1_rt);
-      linuxPackages_4_4_rt  = recurseIntoAttrs (linuxPackagesFor linux_4_4_rt  linuxPackages_4_4_rt);
-      linuxPackages_4_6_rt  = recurseIntoAttrs (linuxPackagesFor linux_4_6_rt  linuxPackages_4_6_rt);
-      linuxPackages_4_8_rt  = recurseIntoAttrs (linuxPackagesFor linux_4_8_rt  linuxPackages_4_8_rt);
-      linuxPackages_opt     = recurseIntoAttrs (linuxPackagesFor linux_opt     linuxPackages_opt);
+      linuxPackages_3_14_rt = recurseIntoAttrs (linuxPackagesFor linux_3_14_rt);
+      linuxPackages_3_18_rt = recurseIntoAttrs (linuxPackagesFor linux_3_18_rt);
+      linuxPackages_4_1_rt  = recurseIntoAttrs (linuxPackagesFor linux_4_1_rt);
+      linuxPackages_4_4_rt  = recurseIntoAttrs (linuxPackagesFor linux_4_4_rt);
+      linuxPackages_4_6_rt  = recurseIntoAttrs (linuxPackagesFor linux_4_6_rt);
+      linuxPackages_4_8_rt  = recurseIntoAttrs (linuxPackagesFor linux_4_8_rt);
+      linuxPackages_4_9_rt  = recurseIntoAttrs (linuxPackagesFor linux_4_9_rt);
+      linuxPackages_opt     = recurseIntoAttrs (linuxPackagesFor linux_opt);
 
-      linuxPackages_latest_rt = linuxPackages_4_8_rt;
+      linuxPackages_latest_rt = linuxPackages_4_9_rt;
 
       realtimePatches = callPackage ../pkgs/os-specific/linux/kernel/patches.nix { };
-
     };
   };
 }

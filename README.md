@@ -20,7 +20,20 @@ Add the following to your `configuration.nix`:
 
 ```
 
-The following sections contain information about the various configuration options.
+Later sections of this document contain information about the various configuration options.
+
+### A note about NixOS versions
+
+Users who are on NixOS 16.09 or earlier should use the [`pre-17.03`](https://github.com/musnix/musnix/tree/pre-17.03) branch.
+
+You can check your NixOS version with the `nixos-version` command.
+
+You can clone the `pre-17.03` branch directly with the following command:
+```
+git clone --branch=pre-17.03 https://github.com/musnix/musnix.git
+```
+
+See [#42](https://github.com/musnix/musnix/pull/42) for more information about this change.
 
 ## Base Options
 
