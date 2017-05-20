@@ -17,13 +17,6 @@ let
 
 in rec {
 
-  realtimePatch_3_14 = realtimePatch
-    { branch = "3.14";
-      kversion = "3.14.73";
-      pversion = "rt78";
-      sha256 = "0fxqh4vdgzkl5jfc231lh7zmqy6s1ygx8brxw0ja7v4hh09rfshz";
-    };
-
   realtimePatch_3_18 = realtimePatch
     { branch = "3.18";
       kversion = "3.18.51";

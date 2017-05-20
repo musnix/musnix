@@ -82,7 +82,6 @@ in {
         This option allows you to select the real-time kernel used by musnix.
 
         Available packages:
-        * pkgs.linuxPackages_3_14_rt
         * pkgs.linuxPackages_3_18_rt
         * pkgs.linuxPackages_4_1_rt
         * pkgs.linuxPackages_4_4_rt
@@ -103,13 +102,6 @@ in {
         else pkgs.linuxPackages_opt;
 
     nixpkgs.config.packageOverrides = pkgs: with pkgs; rec {
-
-      linux_3_14_rt = callPackage ../pkgs/os-specific/linux/kernel/linux-3.14-rt.nix {
-        kernelPatches = [ kernelPatches.bridge_stp_helper
-                          realtimePatches.realtimePatch_3_14
-                        ];
-        extraConfig   = musnixRealtimeKernelExtraConfig;
-      };
 
       linux_3_18_rt = callPackage ../pkgs/os-specific/linux/kernel/linux-3.18-rt.nix {
         kernelPatches = [ kernelPatches.bridge_stp_helper
@@ -159,7 +151,6 @@ in {
         extraConfig = musnixStandardKernelExtraConfig;
       };
 
-      linuxPackages_3_14_rt = recurseIntoAttrs (linuxPackagesFor linux_3_14_rt);
       linuxPackages_3_18_rt = recurseIntoAttrs (linuxPackagesFor linux_3_18_rt);
       linuxPackages_4_1_rt  = recurseIntoAttrs (linuxPackagesFor linux_4_1_rt);
       linuxPackages_4_4_rt  = recurseIntoAttrs (linuxPackagesFor linux_4_4_rt);

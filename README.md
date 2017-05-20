@@ -122,7 +122,6 @@ See [#42](https://github.com/musnix/musnix/pull/42) for more information about t
 * **Type:** `package`
 * **Default value:** `pkgs.linuxPackages_4_9_rt`
 * Available packages:
-  * `pkgs.linuxPackages_3_14_rt`
   * `pkgs.linuxPackages_3_18_rt`
   * `pkgs.linuxPackages_4_1_rt`
   * `pkgs.linuxPackages_4_4_rt`
