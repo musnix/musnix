@@ -1,4 +1,4 @@
-{ stdenv, fetchurl, perl, buildLinux, ... } @ args:
+{ stdenv, hostPlatform, fetchurl, perl, buildLinux, ... } @ args:
 
 import <nixpkgs/pkgs/os-specific/linux/kernel/generic.nix> (args // rec {
   kversion = "3.18.51";
