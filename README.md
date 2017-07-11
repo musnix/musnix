@@ -125,8 +125,6 @@ See [#42](https://github.com/musnix/musnix/pull/42) for more information about t
   * `pkgs.linuxPackages_3_18_rt`
   * `pkgs.linuxPackages_4_1_rt`
   * `pkgs.linuxPackages_4_4_rt`
-  * `pkgs.linuxPackages_4_6_rt`
-  * `pkgs.linuxPackages_4_8_rt`
   * `pkgs.linuxPackages_4_9_rt`
   * `pkgs.linuxPackages_4_11_rt`
 

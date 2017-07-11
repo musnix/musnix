@@ -85,8 +85,6 @@ in {
         * pkgs.linuxPackages_3_18_rt
         * pkgs.linuxPackages_4_1_rt
         * pkgs.linuxPackages_4_4_rt
-        * pkgs.linuxPackages_4_6_rt
-        * pkgs.linuxPackages_4_8_rt
         * pkgs.linuxPackages_4_9_rt
         * pkgs.linuxPackages_4_11_rt
         or:
@@ -125,21 +123,6 @@ in {
         extraConfig   = musnixRealtimeKernelExtraConfig;
       };
 
-      linux_4_6_rt = callPackage ../pkgs/os-specific/linux/kernel/linux-4.6-rt.nix {
-        kernelPatches = [ kernelPatches.bridge_stp_helper
-                          realtimePatches.realtimePatch_4_6
-                        ];
-        extraConfig   = musnixRealtimeKernelExtraConfig;
-      };
-
-      linux_4_8_rt = callPackage ../pkgs/os-specific/linux/kernel/linux-4.8-rt.nix {
-        kernelPatches = [ kernelPatches.bridge_stp_helper
-                          kernelPatches.modinst_arg_list_too_long
-                          realtimePatches.realtimePatch_4_8
-                        ];
-        extraConfig   = musnixRealtimeKernelExtraConfig;
-      };
-
       linux_4_9_rt = callPackage ../pkgs/os-specific/linux/kernel/linux-4.9-rt.nix {
         kernelPatches = [ kernelPatches.bridge_stp_helper
                           kernelPatches.modinst_arg_list_too_long
@@ -163,8 +146,6 @@ in {
       linuxPackages_3_18_rt = recurseIntoAttrs (linuxPackagesFor linux_3_18_rt);
       linuxPackages_4_1_rt  = recurseIntoAttrs (linuxPackagesFor linux_4_1_rt);
       linuxPackages_4_4_rt  = recurseIntoAttrs (linuxPackagesFor linux_4_4_rt);
-      linuxPackages_4_6_rt  = recurseIntoAttrs (linuxPackagesFor linux_4_6_rt);
-      linuxPackages_4_8_rt  = recurseIntoAttrs (linuxPackagesFor linux_4_8_rt);
       linuxPackages_4_9_rt  = recurseIntoAttrs (linuxPackagesFor linux_4_9_rt);
       linuxPackages_4_11_rt = recurseIntoAttrs (linuxPackagesFor linux_4_11_rt);
       linuxPackages_opt     = recurseIntoAttrs (linuxPackagesFor linux_opt);
