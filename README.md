@@ -128,9 +128,10 @@ See [#42](https://github.com/musnix/musnix/pull/42) for more information about t
   * `pkgs.linuxPackages_4_9_rt`
   * `pkgs.linuxPackages_4_11_rt`
   * `pkgs.linuxPackages_4_13_rt`
+  * `pkgs.linuxPackages_4_14_rt`
 
   or:
-  * `pkgs.linuxPackages_latest_rt` (currently `pkgs.linuxPackages_4_13_rt`)
+  * `pkgs.linuxPackages_latest_rt` (currently `pkgs.linuxPackages_4_14_rt`)
 
 `musnix.kernel.latencytop`
 * **NOTE:** Enabling this option will rebuild your kernel.
