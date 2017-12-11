@@ -23,6 +23,7 @@ let
   kernelConfigRealtime = ''
     PREEMPT_RT_FULL y
     PREEMPT y
+    RT_GROUP_SCHED? n
   '';
 
   musnixRealtimeKernelExtraConfig =
