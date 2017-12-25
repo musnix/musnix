@@ -1,14 +1,14 @@
 { stdenv, fetchurl, hostPlatform, perl, buildLinux, ... } @ args:
 
 import <nixpkgs/pkgs/os-specific/linux/kernel/generic.nix> (args // rec {
-  kversion = "4.14.6";
-  pversion = "rt7";
+  kversion = "4.14.8";
+  pversion = "rt9";
   version = "${kversion}-${pversion}";
   extraMeta.branch = "4.14";
 
   src = fetchurl {
     url = "mirror://kernel/linux/kernel/v4.x/linux-${kversion}.tar.xz";
-    sha256 = "1k3c6kmb7zwyh1ga3jb1bimqjszmcdihn2ndvvdns57am65nf1q9";
+    sha256 = "0cwk9liv79hw5l34xvwnf05spx1jvv8q8w9lfbw4lw8xldxwbg3f";
   };
 
   kernelPatches = args.kernelPatches;
