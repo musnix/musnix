@@ -7,18 +7,29 @@ Real-time audio in NixOS
 **musnix** provides a set of simple, high-level configuration options for doing real-time audio work in [NixOS](https://nixos.org/), including optimizing the kernel, applying the [`CONFIG_PREEMPT_RT`](https://rt.wiki.kernel.org/index.php/Main_Page) patch to it, and adjusting various low-level system settings.
 
 ## Basic Usage
-Add the following to your `configuration.nix`:
+
+Add and update `musnix` channel:
+
 ```
-  imports =
-    [ <existing imports>
-      /path/to/musnix
-    ];
+$ sudo nix-channel --add https://github.com/musnix/musnix/archive/master.tar.gz musnix
+$ sudo nix-channel --update musnix
+```
+
+Then, in `/etc/nixos/configuration.nix`, append `<musnix>` to `imports`, enable `musix.enable` option, and add your user to `audio` group:
+
+```nix
+{
+  imports = [
+    # ...
+    <musnix>
+  ];
 
   musnix.enable = true;
-
-  user.extraUsers.<username>.extraGroups = [ "audio" ];
-
+  users.users.johndoe.extraGroups = [ "audio" ];
+}
 ```
+
+To update musnix, run `sudo nix-channel --update musnix`.
 
 Later sections of this document contain information about the various configuration options.
 
