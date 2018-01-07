@@ -15,7 +15,7 @@ $ sudo nix-channel --add https://github.com/musnix/musnix/archive/master.tar.gz 
 $ sudo nix-channel --update musnix
 ```
 
-Then, in `/etc/nixos/configuration.nix`, append `<musnix>` to `imports`, enable `musix.enable` option, and add your user to `audio` group:
+Then, in `/etc/nixos/configuration.nix`, append `<musnix>` to `imports`, enable `musnix.enable` option, and add your user to `audio` group:
 
 ```nix
 {
