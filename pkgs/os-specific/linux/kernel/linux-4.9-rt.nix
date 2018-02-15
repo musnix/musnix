@@ -1,10 +1,13 @@
 { stdenv, hostPlatform, fetchurl, buildPackages, perl, buildLinux, ... } @ args:
 
-import <nixpkgs/pkgs/os-specific/linux/kernel/generic.nix> (args // rec {
+with stdenv.lib;
+
+buildLinux (args // rec {
   kversion = "4.9.35";
   pversion = "rt25";
   version = "${kversion}-${pversion}";
-  extraMeta.branch = "4.9";
+    # branchVersion needs to be x.y
+  extraMeta.branch = concatStrings (intersperse "." (take 2 (splitString "." version)));
 
   src = fetchurl {
     url = "mirror://kernel/linux/kernel/v4.x/linux-${kversion}.tar.xz";
