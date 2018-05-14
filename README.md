@@ -50,10 +50,10 @@ sudo -i nix-channel --update musnix
 Add `<musnix>` to `imports` in your `configuration.nix`:
 ```nix
 {
-  imports = [
-    # ...
-    <musnix>
-  ];
+  imports =
+    [ # ...
+      <musnix>
+    ];
 
   musnix.enable = true;
   users.users.johndoe.extraGroups = [ "audio" ];
