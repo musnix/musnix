@@ -11,6 +11,7 @@ Clone this project.
 
 Add the following to your `configuration.nix`:
 ```nix
+{
   imports =
     [ # ...
       /path/to/musnix/clone
@@ -18,6 +19,7 @@ Add the following to your `configuration.nix`:
 
   musnix.enable = true;
   users.users.johndoe.extraGroups = [ "audio" ];
+}
 ```
 
 To update musnix, run `git pull`.
