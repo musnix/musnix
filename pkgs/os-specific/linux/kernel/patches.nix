@@ -65,4 +65,11 @@ in rec {
       pversion = "rt30";
       sha256 = "0xfzi7h60hlm5m0sw13a4g33c0x0r8p9fqfhdlxdwzbs92pywa5x";
     };
+
+  realtimePatch_4_16 = realtimePatch
+    { branch = "4.16";
+      kversion = "4.16.7";
+      pversion = "rt1";
+      sha256 = "1c265wsn1cchjmk6kgsay9i24mbvwbqrdaskflghxd0g0p5hs4a1";
+    };
 }
