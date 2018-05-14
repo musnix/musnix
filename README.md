@@ -7,29 +7,20 @@ Real-time audio in NixOS
 **musnix** provides a set of simple, high-level configuration options for doing real-time audio work in [NixOS](https://nixos.org/), including optimizing the kernel, applying the [`CONFIG_PREEMPT_RT`](https://rt.wiki.kernel.org/index.php/Main_Page) patch to it, and adjusting various low-level system settings.
 
 ## Basic Usage
+Clone this project.
 
-Add and update `musnix` channel:
-
+Add the following to your `configuration.nix`:
 ```
-$ sudo nix-channel --add https://github.com/musnix/musnix/archive/master.tar.gz musnix
-$ sudo nix-channel --update musnix
-```
-
-Then, in `/etc/nixos/configuration.nix`, append `<musnix>` to `imports`, enable `musnix.enable` option, and add your user to `audio` group:
-
-```nix
-{
-  imports = [
-    # ...
-    <musnix>
-  ];
+  imports =
+    [ # ...
+      /path/to/musnix/clone
+    ];
 
   musnix.enable = true;
   users.users.johndoe.extraGroups = [ "audio" ];
-}
 ```
 
-To update musnix, run `sudo nix-channel --update musnix`.
+To update musnix, run `git pull`.
 
 Later sections of this document contain information about the various configuration options.
 
@@ -47,6 +38,29 @@ git clone --branch=pre-18.03 https://github.com/musnix/musnix.git
 ```
 
 See [#42](https://github.com/musnix/musnix/pull/42) for more information about this change.
+
+### Using musnix as a channel
+As an alternative to the above approach, you can instead add musnix as a channel:
+
+```
+$ sudo -i nix-channel --add https://github.com/musnix/musnix/archive/master.tar.gz musnix
+$ sudo -i nix-channel --update musnix
+```
+
+Add `<musnix>` to `imports` in your `configuration.nix`:
+```nix
+{
+  imports = [
+    # ...
+    <musnix>
+  ];
+
+  musnix.enable = true;
+  users.users.johndoe.extraGroups = [ "audio" ];
+}
+```
+
+To update musnix, run `sudo -i nix-channel --update musnix`.
 
 ## Base Options
 
