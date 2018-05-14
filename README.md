@@ -10,7 +10,7 @@ Real-time audio in NixOS
 Clone this project.
 
 Add the following to your `configuration.nix`:
-```
+```nix
   imports =
     [ # ...
       /path/to/musnix/clone
@@ -28,7 +28,7 @@ Later sections of this document contain information about the various configurat
 
 Users who are on NixOS 17.09 or earlier should use the [`pre-18.03`](https://github.com/musnix/musnix/tree/pre-18.03) branch.
 
-Users who are on NixOS 16.09 or earlier should use the [`pre-17.03`](https://github.com/musnix/musnix/tree/pre-17.03) branch.
+Users who are on NixOS 16.09 or earlier should use the [`pre-17.03`](https://github.com/musnix/musnix/tree/pre-17.03) branch.  See [#42](https://github.com/musnix/musnix/pull/42) for more information about this change.
 
 You can check your NixOS version with the `nixos-version` command.
 
@@ -37,14 +37,12 @@ You can clone the `pre-18.03` branch directly with the following command:
 git clone --branch=pre-18.03 https://github.com/musnix/musnix.git
 ```
 
-See [#42](https://github.com/musnix/musnix/pull/42) for more information about this change.
-
 ### Using musnix as a channel
 As an alternative to the above approach, you can instead add musnix as a channel:
 
 ```
-$ sudo -i nix-channel --add https://github.com/musnix/musnix/archive/master.tar.gz musnix
-$ sudo -i nix-channel --update musnix
+sudo -i nix-channel --add https://github.com/musnix/musnix/archive/master.tar.gz musnix
+sudo -i nix-channel --update musnix
 ```
 
 Add `<musnix>` to `imports` in your `configuration.nix`:
@@ -60,7 +58,10 @@ Add `<musnix>` to `imports` in your `configuration.nix`:
 }
 ```
 
-To update musnix, run `sudo -i nix-channel --update musnix`.
+To update musnix, run:
+```
+sudo -i nix-channel --update musnix
+```
 
 ## Base Options
 
