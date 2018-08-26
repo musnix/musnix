@@ -54,10 +54,7 @@ in {
                ]
           else [];
       kernelParams = [ "threadirq" ];
-      postBootCommands = ''
-        echo 2048 > /sys/class/rtc/rtc0/max_user_freq
-        echo 2048 > /proc/sys/dev/hpet/max-user-freq
-      '' + optionalString (cfg.soundcardPciId != "") ''
+      postBootCommands = optionalString (cfg.soundcardPciId != "") ''
         ${pkgs.pciutils}/bin/setpci -v -d *:* latency_timer=b0
         ${pkgs.pciutils}/bin/setpci -v -s ${cfg.soundcardPciId} latency_timer=ff
       '';
