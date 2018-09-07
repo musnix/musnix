@@ -160,10 +160,9 @@ sudo -i nix-channel --update musnix
   * `pkgs.linuxPackages_4_13_rt`
   * `pkgs.linuxPackages_4_14_rt`
   * `pkgs.linuxPackages_4_16_rt`
-  * `pkgs.linuxPackages_4_18_rt`
 
   or:
-  * `pkgs.linuxPackages_latest_rt` (currently `pkgs.linuxPackages_4_18_rt`)
+  * `pkgs.linuxPackages_latest_rt` (currently `pkgs.linuxPackages_4_16_rt`)
 
 `musnix.kernel.latencytop`
 * **NOTE:** Enabling this option will rebuild your kernel.
