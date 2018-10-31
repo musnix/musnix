@@ -2,7 +2,7 @@
 
 buildLinux (args // rec {
   kversion = "4.18.16";
-  pversion = "rt8";
+  pversion = "rt9";
   version = "${kversion}-${pversion}";
   extraMeta.branch = "4.18";
 
