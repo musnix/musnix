@@ -79,4 +79,11 @@ in rec {
     pversion = "rt9";
     sha256 = "04zzm1mlm9km1776w9bgblyr6c36wc10wmyvkf4pimwdd7ch50mb";
   };
+
+  realtimePatch_4_19 = realtimePatch
+    { branch = "4.19";
+      kversion = "4.19.15";
+    pversion = "rt12";
+    sha256 = "0v0w35fjkxpw6rh4mn00g35nqdwgvd9n1srsy23n7cbdxjm5ldnj";
+  };
 }
