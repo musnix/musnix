@@ -1,13 +1,13 @@
 { stdenv, fetchurl, hostPlatform, buildPackages, perl, buildLinux, ... } @ args:
 
 buildLinux (args // rec {
-  kversion = "4.19.15";
-  pversion = "rt12";
+  kversion = "4.19.23";
+  pversion = "rt14";
   version = "${kversion}-${pversion}";
   extraMeta.branch = "4.19";
 
   src = fetchurl {
     url = "mirror://kernel/linux/kernel/v4.x/linux-${kversion}.tar.xz";
-    sha256 = "0v9nbkxc017ydcah5q0yhrlq1f7awc33m6w4gpif2f0wvxfimxkq";
+    sha256 = "02hkiz5vlx2qhyi1hxar9d1cr2gfnrpjdrjjkh83yzxci9kjb6rd";
   };
 } // (args.argsOverride or {}))
