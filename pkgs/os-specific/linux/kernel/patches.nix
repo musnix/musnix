@@ -82,8 +82,8 @@ in rec {
 
   realtimePatch_4_19 = realtimePatch
     { branch = "4.19";
-      kversion = "4.19.15";
-    pversion = "rt12";
-    sha256 = "0v0w35fjkxpw6rh4mn00g35nqdwgvd9n1srsy23n7cbdxjm5ldnj";
+      kversion = "4.19.25";
+    pversion = "rt16";
+    sha256 = "0dl0ywin4rcq3ax58s8hnazc3w8f8fjx8ab29fml96padbb7jh4h";
   };
 }
