@@ -82,11 +82,7 @@ in {
 
   config = mkIf cfg.enable {
     environment.systemPackages = [ rtirq ];
-    environment.etc =
-      [ { source = rtirqConf;
-          target = "rtirq.conf";
-        }
-      ];
+    environment.etc."rtirq.conf".source = rtirqConf;
     systemd.services.rtirq = {
       description = "IRQ thread tuning for realtime kernels";
       after = [ "multi-user.target" "sound.target" ];
