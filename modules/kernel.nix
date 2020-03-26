@@ -1,47 +1,30 @@
 { config, lib, pkgs, ... }:
 
 with lib;
+with lib.kernel;
 
 let
 
   cfg = config.musnix;
 
-  kernelConfigLatencyTOP = ''
-    LATENCYTOP y
-    SCHEDSTATS y
-  '';
+  standardConfig = version: with (lib.kernel.whenHelpers version);
+    optionalAttrs cfg.kernel.latencytop {
+      LATENCYTOP = yes;
+      SCHEDSTATS = yes;
+    } //
+    optionalAttrs cfg.kernel.optimize {
+      PREEMPT = yes;
+      # DEADLINE was renamed to MT_DEADLINE and enabled by default.
+      IOSCHED_DEADLINE = whenOlder "5" yes;
+      DEFAULT_DEADLINE = whenOlder "5" yes;
+      DEFAULT_IOSCHED = whenOlder "5" (freeform "deadline");
+    };
 
-  kernelConfigOptimizeDeadline = ''
-    IOSCHED_DEADLINE y
-    DEFAULT_DEADLINE y
-    DEFAULT_IOSCHED deadline
-  '';
-
-  kernelConfigOptimize = ''
-    HPET_TIMER y
-    TREE_RCU_TRACE? n
-    RT_GROUP_SCHED? n
-  '';
-
-  kernelConfigRealtime = ''
-    PREEMPT y
-    PREEMPT_RT_FULL y
-    RT_GROUP_SCHED? n
-  '';
-
-  musnixRealtimeKernelExtraConfig =
-    kernelConfigRealtime
-    + optionalString cfg.kernel.optimize kernelConfigOptimize
-    + optionalString cfg.kernel.latencytop kernelConfigLatencyTOP;
-
-  musnixStandardKernelExtraConfig =
-    if cfg.kernel.optimize
-      then "PREEMPT y\n"
-           + kernelConfigOptimize
-           + optionalString cfg.kernel.latencytop kernelConfigLatencyTOP
-      else if cfg.kernel.latencytop
-        then kernelConfigLatencyTOP
-        else "";
+  realtimeConfig = version:
+    (standardConfig version) // {
+      PREEMPT = yes;
+      PREEMPT_RT_FULL = yes;
+    };
 
 in {
   options.musnix = {
@@ -55,8 +38,7 @@ in {
         and may cause other issues.
 
         If enabled, this option will configure the kernel to use a
-        latency tracking infrastructure that is used by the
-        "latencytop" userspace tool.
+        preemptible and use the deadline I/O scheduler.
       '';
     };
     kernel.optimize = mkOption {
@@ -116,21 +98,21 @@ in {
         kernelPatches = [ kernelPatches.bridge_stp_helper
                           realtimePatches.realtimePatch_3_18
                         ];
-        extraConfig   = musnixRealtimeKernelExtraConfig + optionalString cfg.kernel.optimize kernelConfigOptimizeDeadline;
+        structuredExtraConfig = realtimeConfig "3.18";
       };
 
       linux_4_1_rt = callPackage ../pkgs/os-specific/linux/kernel/linux-4.1-rt.nix {
         kernelPatches = [ kernelPatches.bridge_stp_helper
                           realtimePatches.realtimePatch_4_1
                         ];
-        extraConfig   = musnixRealtimeKernelExtraConfig + optionalString cfg.kernel.optimize kernelConfigOptimizeDeadline;
+        structuredExtraConfig = realtimeConfig "4.1";
       };
 
       linux_4_4_rt = callPackage ../pkgs/os-specific/linux/kernel/linux-4.4-rt.nix {
         kernelPatches = [ kernelPatches.bridge_stp_helper
                           realtimePatches.realtimePatch_4_4
                         ];
-        extraConfig   = musnixRealtimeKernelExtraConfig + optionalString cfg.kernel.optimize kernelConfigOptimizeDeadline;
+        structuredExtraConfig = realtimeConfig "4.4";
       };
 
       linux_4_9_rt = callPackage ../pkgs/os-specific/linux/kernel/linux-4.9-rt.nix {
@@ -138,7 +120,7 @@ in {
                           kernelPatches.modinst_arg_list_too_long
                           realtimePatches.realtimePatch_4_9
                         ];
-        extraConfig   = musnixRealtimeKernelExtraConfig + optionalString cfg.kernel.optimize kernelConfigOptimizeDeadline;
+        structuredExtraConfig = realtimeConfig "4.9";
       };
 
       linux_4_11_rt = callPackage ../pkgs/os-specific/linux/kernel/linux-4.11-rt.nix {
@@ -146,7 +128,7 @@ in {
                           kernelPatches.modinst_arg_list_too_long
                           realtimePatches.realtimePatch_4_11
                         ];
-        extraConfig   = musnixRealtimeKernelExtraConfig + optionalString cfg.kernel.optimize kernelConfigOptimizeDeadline;
+        structuredExtraConfig = realtimeConfig "4.11";
       };
 
       linux_4_13_rt = callPackage ../pkgs/os-specific/linux/kernel/linux-4.13-rt.nix {
@@ -154,7 +136,7 @@ in {
                           kernelPatches.modinst_arg_list_too_long
                           realtimePatches.realtimePatch_4_13
                         ];
-        extraConfig   = musnixRealtimeKernelExtraConfig + optionalString cfg.kernel.optimize kernelConfigOptimizeDeadline;
+        structuredExtraConfig = realtimeConfig "4.13";
       };
 
       linux_4_14_rt = callPackage ../pkgs/os-specific/linux/kernel/linux-4.14-rt.nix {
@@ -162,7 +144,7 @@ in {
                           kernelPatches.modinst_arg_list_too_long
                           realtimePatches.realtimePatch_4_14
                         ];
-        extraConfig   = musnixRealtimeKernelExtraConfig + optionalString cfg.kernel.optimize kernelConfigOptimizeDeadline;
+        structuredExtraConfig = realtimeConfig "4.14";
       };
 
       linux_4_16_rt = callPackage ../pkgs/os-specific/linux/kernel/linux-4.16-rt.nix {
@@ -170,34 +152,33 @@ in {
                           kernelPatches.modinst_arg_list_too_long
                           realtimePatches.realtimePatch_4_16
                         ];
-        extraConfig   = musnixRealtimeKernelExtraConfig + optionalString cfg.kernel.optimize kernelConfigOptimizeDeadline;
+        structuredExtraConfig = realtimeConfig "4.16";
       };
       linux_4_18_rt = callPackage ../pkgs/os-specific/linux/kernel/linux-4.18-rt.nix {
         kernelPatches = [ kernelPatches.bridge_stp_helper
                           kernelPatches.modinst_arg_list_too_long
                           realtimePatches.realtimePatch_4_18
                         ];
-        extraConfig   = musnixRealtimeKernelExtraConfig + optionalString cfg.kernel.optimize kernelConfigOptimizeDeadline;
+        structuredExtraConfig = realtimeConfig "4.18";
       };
       linux_4_19_rt = callPackage ../pkgs/os-specific/linux/kernel/linux-4.19-rt.nix {
         kernelPatches = [ kernelPatches.bridge_stp_helper
                           kernelPatches.modinst_arg_list_too_long
                           realtimePatches.realtimePatch_4_19
                         ];
-        extraConfig   = musnixRealtimeKernelExtraConfig + optionalString cfg.kernel.optimize kernelConfigOptimizeDeadline;
+        structuredExtraConfig = realtimeConfig "4.19";
       };
       linux_5_0_rt = callPackage ../pkgs/os-specific/linux/kernel/linux-5.0-rt.nix {
         kernelPatches = [ kernelPatches.bridge_stp_helper
                           kernelPatches.modinst_arg_list_too_long
                           realtimePatches.realtimePatch_5_0
                         ];
-        extraConfig   = musnixRealtimeKernelExtraConfig;
+        structuredExtraConfig = realtimeConfig "5.0";
       };
 
 
-
       linux_opt = linux.override {
-        extraConfig = musnixStandardKernelExtraConfig;
+        structuredExtraConfig = standardConfig linux.version;
       };
 
       linuxPackages_3_18_rt = recurseIntoAttrs (linuxPackagesFor linux_3_18_rt);
