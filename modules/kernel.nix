@@ -80,8 +80,9 @@ in {
         * pkgs.linuxPackages_4_19_rt
         * pkgs.linuxPackages_5_0_rt
         * pkgs.linuxPackages_5_4_rt
+        * pkgs.linuxPackages_5_6_rt
         or:
-        * pkgs.linuxPackages_latest_rt (currently pkgs.linuxPackages_5_0_rt)
+        * pkgs.linuxPackages_latest_rt (currently pkgs.linuxPackages_5_6_rt)
       '';
     };
   };
@@ -182,6 +183,12 @@ in {
                         ];
         structuredExtraConfig = realtimeConfig "5.4";
       };
+      linux_5_6_rt = callPackage ../pkgs/os-specific/linux/kernel/linux-5.6-rt.nix {
+        kernelPatches = [ kernelPatches.bridge_stp_helper
+                          realtimePatches.realtimePatch_5_6
+                        ];
+        structuredExtraConfig = realtimeConfig "5.6";
+      };
 
 
 
@@ -201,9 +208,10 @@ in {
       linuxPackages_4_19_rt = recurseIntoAttrs (linuxPackagesFor linux_4_19_rt);
       linuxPackages_5_0_rt  = recurseIntoAttrs (linuxPackagesFor linux_5_0_rt);
       linuxPackages_5_4_rt  = recurseIntoAttrs (linuxPackagesFor linux_5_4_rt);
+      linuxPackages_5_6_rt  = recurseIntoAttrs (linuxPackagesFor linux_5_6_rt);
       linuxPackages_opt     = recurseIntoAttrs (linuxPackagesFor linux_opt);
 
-      linuxPackages_latest_rt = linuxPackages_5_0_rt;
+      linuxPackages_latest_rt = linuxPackages_5_6_rt;
 
       realtimePatches = callPackage ../pkgs/os-specific/linux/kernel/patches.nix { };
     };
