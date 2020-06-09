@@ -76,23 +76,23 @@ in rec {
   realtimePatch_4_18 = realtimePatch
     { branch = "4.18";
       kversion = "4.18.16";
-    pversion = "rt9";
-    sha256 = "04zzm1mlm9km1776w9bgblyr6c36wc10wmyvkf4pimwdd7ch50mb";
-  };
+      pversion = "rt9";
+      sha256 = "04zzm1mlm9km1776w9bgblyr6c36wc10wmyvkf4pimwdd7ch50mb";
+    };
 
   realtimePatch_4_19 = realtimePatch
     { branch = "4.19";
-      kversion = "4.19.31";
-    pversion = "rt18";
-    sha256 = "0mir7k8iz5qhk3irj6sryvppsr76by734lis6zhqg5hl88am9d6f";
-  };
+      kversion = "4.19.124";
+      pversion = "rt53";
+      sha256 = "06l65z626y9gh437n3b8cxafgbqlclagwpwixzr7zdn8lrby0yiw";
+    };
 
   realtimePatch_5_0 = realtimePatch
     { branch = "5.0";
       kversion = "5.0.19";
-    pversion = "rt11";
-    sha256 = "005krk67w8742nqv63b8mnjkssw6db3k19x1jdfr26rgdcq9azbi";
-  };
+      pversion = "rt11";
+      sha256 = "005krk67w8742nqv63b8mnjkssw6db3k19x1jdfr26rgdcq9azbi";
+    };
 
   realtimePatch_5_4 = realtimePatch
     { branch = "5.4";
