@@ -150,7 +150,7 @@ sudo -i nix-channel --update musnix
 `musnix.kernel.packages`
 * **Description:** This option allows you to select the real-time kernel used by musnix.
 * **Type:** `package`
-* **Default value:** `pkgs.linuxPackages_5_0_rt`
+* **Default value:** `pkgs.linuxPackages_5_4_rt, which is the major version that NixPkgs unstable currently uses.
 * Available packages:
   * `pkgs.linuxPackages_3_18_rt`
   * `pkgs.linuxPackages_4_1_rt`
@@ -163,9 +163,11 @@ sudo -i nix-channel --update musnix
   * `pkgs.linuxPackages_4_18_rt`
   * `pkgs.linuxPackages_4_19_rt`
   * `pkgs.linuxPackages_5_0_rt`
+  * `pkgs.linuxPackages_5_4_rt`
+  * `pkgs.linuxPackages_5_6_rt`
 
   or:
-  * `pkgs.linuxPackages_latest_rt` (currently `pkgs.linuxPackages_5_0_rt`)
+  * `pkgs.linuxPackages_latest_rt` (currently `pkgs.linuxPackages_5_6_rt`)
 
 `musnix.kernel.latencytop`
 * **NOTE:** Enabling this option will rebuild your kernel.
