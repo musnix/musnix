@@ -1,4 +1,4 @@
-import <nixpkgs/nixos/tests/make-test.nix> {
+import <nixpkgs/nixos/tests/make-test-python.nix> {
   machine =
     { config, pkgs, ... }:
     { imports = [ ../default.nix ];
@@ -13,8 +13,10 @@ import <nixpkgs/nixos/tests/make-test.nix> {
     };
 
   testScript = ''
-    $machine->start;
-    $machine->waitForUnit("default.target");
-    $machine->succeed("uname") =~ /Linux/;
+    machine.start()
+    machine.wait_for_unit("default.target")
+    print(machine.succeed("uname -v"))
+    if not "PREEMPT" in machine.succeed("uname -v"):
+        raise Exception("Wrong OS")
   '';
 }
