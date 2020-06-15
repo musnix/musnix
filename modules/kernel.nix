@@ -20,10 +20,14 @@ let
       DEFAULT_IOSCHED = whenOlder "5" (freeform "deadline");
     };
 
-  realtimeConfig = version:
+  realtimeConfig = version: with (lib.kernel.whenHelpers version);
     (standardConfig version) // {
-      PREEMPT = yes;
-      PREEMPT_RT_FULL = yes;
+      PREEMPT = whenOlder "5.4" yes; # PREEMPT_RT deselects it.
+      PREEMPT_RT_FULL = whenOlder "5.4" yes; # Renamed to PREEMPT_RT when merged into the mainline.
+      EXPERT = whenAtLeast "5.4" yes; # PREEMPT_RT depends on it (in kernel/Kconfig.preempt).
+      PREEMPT_RT = whenAtLeast "5.4" yes;
+      PREEMPT_VOLUNTARY = lib.mkForce no; # PREEMPT_RT deselects it.
+      RT_GROUP_SCHED = lib.mkForce (option no); # Removed by sched-disable-rt-group-sched-on-rt.patch.
     };
 
 in {
