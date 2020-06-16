@@ -15,8 +15,10 @@ import <nixpkgs/nixos/tests/make-test-python.nix> {
   testScript = ''
     machine.start()
     machine.wait_for_unit("default.target")
-    print(machine.succeed("uname -v"))
-    if not "PREEMPT" in machine.succeed("uname -v"):
+    result = machine.succeed("uname -v")
+    print(result)
+    if not "PREEMPT RT" or not "PREEMPT_RT" in result:
         raise Exception("Wrong OS")
+    print("PASSED")
   '';
 }
