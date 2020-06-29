@@ -1,6 +1,6 @@
-{ stdenv, fetchurl, hostPlatform, buildPackages, perl, buildLinux, ... } @ args:
+{ fetchurl, buildLinuxRT, ... } @ args:
 
-buildLinux (args // rec {
+buildLinuxRT (args // rec {
   kversion = "4.13.7";
   pversion = "rt1";
   version = "${kversion}-${pversion}";

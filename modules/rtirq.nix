@@ -6,8 +6,6 @@ let
 
   cfg = config.musnix.rtirq;
 
-  rtirq = pkgs.callPackage ../pkgs/os-specific/linux/rtirq/default.nix { };
-
   rtirqConf = pkgs.writeText "rtirq.conf" ''
     # This is a generated file.  Do not edit!
     RTIRQ_NAME_LIST="${cfg.nameList}"
@@ -81,7 +79,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = [ rtirq ];
+    environment.systemPackages = [ pkgs.rtirq ];
     environment.etc."rtirq.conf".source = rtirqConf;
     systemd.services.rtirq = {
       description = "IRQ thread tuning for realtime kernels";
@@ -96,8 +94,8 @@ in {
       serviceConfig = {
         User = "root";
         Type = "oneshot";
-        ExecStart = "${rtirq}/bin/rtirq start";
-        ExecStop = "${rtirq}/bin/rtirq stop";
+        ExecStart = "${pkgs.rtirq}/bin/rtirq start";
+        ExecStop = "${pkgs.rtirq}/bin/rtirq stop";
         RemainAfterExit = true;
       };
     };
