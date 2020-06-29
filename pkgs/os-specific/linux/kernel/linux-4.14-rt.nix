@@ -1,10 +1,11 @@
 { fetchurl, buildLinuxRT, ... } @ args:
-
+let
+  metadata = (import ./metadata.nix).kernels."4.14";
+in
 buildLinuxRT (args // rec {
-  kversion = "4.14.103";
-  pversion = "rt55";
+  inherit (metadata) kversion pversion;
   version = "${kversion}-${pversion}";
-  extraMeta.branch = "4.14";
+  extraMeta.branch = metadata.branch;
 
   src = fetchurl {
     url = "mirror://kernel/linux/kernel/v4.x/linux-${kversion}.tar.xz";
