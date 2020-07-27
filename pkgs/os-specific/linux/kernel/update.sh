@@ -1,6 +1,9 @@
 #! /usr/bin/env nix-shell
 #! nix-shell -i bash -p nixfmt
 
+set -o errexit
+set -o pipefail
+
 BRANCHES=(
   "3.18"
   "4.1" "4.4" "4.9" "4.11" "4.14" "4.16" "4.18" "4.19"
