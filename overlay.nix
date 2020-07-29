@@ -55,20 +55,6 @@ with lib;
     };
   } // (args.argsOverride or {}));
 
-  linux_3_18_rt = callPackage ./pkgs/os-specific/linux/kernel/linux-3.18-rt.nix {
-    kernelPatches = [
-      super.kernelPatches.bridge_stp_helper
-      self.realtimePatches.realtimePatch_3_18
-    ];
-  };
-
-  linux_4_1_rt = callPackage ./pkgs/os-specific/linux/kernel/linux-4.1-rt.nix {
-    kernelPatches = [
-      super.kernelPatches.bridge_stp_helper
-      self.realtimePatches.realtimePatch_4_1
-    ];
-  };
-
   linux_4_4_rt = callPackage ./pkgs/os-specific/linux/kernel/linux-4.4-rt.nix {
     kernelPatches = [
       super.kernelPatches.bridge_stp_helper
@@ -84,35 +70,11 @@ with lib;
     ];
   };
 
-  linux_4_11_rt = callPackage ./pkgs/os-specific/linux/kernel/linux-4.11-rt.nix {
-    kernelPatches = [
-      super.kernelPatches.bridge_stp_helper
-      super.kernelPatches.modinst_arg_list_too_long
-      self.realtimePatches.realtimePatch_4_11
-    ];
-  };
-
-  linux_4_13_rt = callPackage ./pkgs/os-specific/linux/kernel/linux-4.13-rt.nix {
-    kernelPatches = [
-      super.kernelPatches.bridge_stp_helper
-      super.kernelPatches.modinst_arg_list_too_long
-      self.realtimePatches.realtimePatch_4_13
-    ];
-  };
-
   linux_4_14_rt = callPackage ./pkgs/os-specific/linux/kernel/linux-4.14-rt.nix {
     kernelPatches = [
       super.kernelPatches.bridge_stp_helper
       super.kernelPatches.modinst_arg_list_too_long
       self.realtimePatches.realtimePatch_4_14
-    ];
-  };
-
-  linux_4_16_rt = callPackage ./pkgs/os-specific/linux/kernel/linux-4.16-rt.nix {
-    kernelPatches = [
-      super.kernelPatches.bridge_stp_helper
-      super.kernelPatches.modinst_arg_list_too_long
-      self.realtimePatches.realtimePatch_4_16
     ];
   };
 
@@ -158,14 +120,9 @@ with lib;
     structuredExtraConfig = standardConfig { inherit (super.linux) version; };
   };
 
-  linuxPackages_3_18_rt = recurseIntoAttrs (linuxPackagesFor self.linux_3_18_rt);
-  linuxPackages_4_1_rt  = recurseIntoAttrs (linuxPackagesFor self.linux_4_1_rt);
   linuxPackages_4_4_rt  = recurseIntoAttrs (linuxPackagesFor self.linux_4_4_rt);
   linuxPackages_4_9_rt  = recurseIntoAttrs (linuxPackagesFor self.linux_4_9_rt);
-  linuxPackages_4_11_rt = recurseIntoAttrs (linuxPackagesFor self.linux_4_11_rt);
-  linuxPackages_4_13_rt = recurseIntoAttrs (linuxPackagesFor self.linux_4_13_rt);
   linuxPackages_4_14_rt = recurseIntoAttrs (linuxPackagesFor self.linux_4_14_rt);
-  linuxPackages_4_16_rt = recurseIntoAttrs (linuxPackagesFor self.linux_4_16_rt);
   linuxPackages_4_18_rt = recurseIntoAttrs (linuxPackagesFor self.linux_4_18_rt);
   linuxPackages_4_19_rt = recurseIntoAttrs (linuxPackagesFor self.linux_4_19_rt);
   linuxPackages_5_0_rt  = recurseIntoAttrs (linuxPackagesFor self.linux_5_0_rt);
