@@ -26,19 +26,6 @@ To update musnix, run `git pull`.
 
 Later sections of this document contain information about the various configuration options.
 
-### A note about NixOS versions
-
-Users who are on NixOS 17.09 or earlier should use the [`pre-18.03`](https://github.com/musnix/musnix/tree/pre-18.03) branch.
-
-Users who are on NixOS 16.09 or earlier should use the [`pre-17.03`](https://github.com/musnix/musnix/tree/pre-17.03) branch.  See [#42](https://github.com/musnix/musnix/pull/42) for more information about this change.
-
-You can check your NixOS version with the `nixos-version` command.
-
-You can clone the `pre-18.03` branch directly with the following command:
-```
-git clone --branch=pre-18.03 https://github.com/musnix/musnix.git
-```
-
 ### Using musnix as a channel
 As an alternative to the above approach, you can instead add musnix as a channel:
 
