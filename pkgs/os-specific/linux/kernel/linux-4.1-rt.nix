@@ -8,7 +8,7 @@ buildLinuxRT (args // rec {
   extraMeta.branch = metadata.branch;
 
   src = fetchurl {
+    inherit (metadata) sha256;
     url = "mirror://kernel/linux/kernel/v4.x/linux-${kversion}.tar.xz";
-    sha256 = "1w7pf12grzn2bcnx2q25rsdmanwya1dgqica5pi6yw5pl2l0mnz6";
   };
 } // (args.argsOverride or {}))
