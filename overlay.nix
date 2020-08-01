@@ -2,7 +2,23 @@ self: super:
 
 let
 
-  inherit (super) lib callPackage linuxPackagesFor;
+  inherit (super) lib callPackage linuxPackagesFor recurseIntoAttrs;
+
+  # Since 20.09 this is a part of lib.kernel
+  option = x:
+      x // { optional = true; };
+
+  yes      = { tristate    = "y"; optional = false; };
+  no       = { tristate    = "n"; optional = false; };
+  module   = { tristate    = "m"; optional = false; };
+  freeform = x: { freeform = x; optional = false; };
+
+  whenHelpers = version: with lib; {
+    whenAtLeast = ver: mkIf (versionAtLeast version ver);
+    whenOlder   = ver: mkIf (versionOlder version ver);
+    # range is (inclusive, exclusive)
+    whenBetween = verLow: verHigh: mkIf (versionAtLeast version verLow && versionOlder version verHigh);
+  };
 
   cfg = super.config.musnix or {
     kernel.latencytop = false;
@@ -14,8 +30,8 @@ let
     enableLatencytop ? cfg.kernel.latencytop,
     enableOptimization ? cfg.kernel.optimize
   }:
-    with (lib.kernel);
-    with (lib.kernel.whenHelpers version);
+
+    with (whenHelpers version);
     lib.optionalAttrs enableLatencytop {
       LATENCYTOP = yes;
       SCHEDSTATS = yes;
@@ -29,8 +45,7 @@ let
     };
 
   realtimeConfig = { version, enableLatencytop, enableOptimization }:
-    with (lib.kernel);
-    with (lib.kernel.whenHelpers version);
+    with (whenHelpers version);
     (standardConfig { inherit version enableLatencytop enableOptimization; }) // {
       PREEMPT = whenOlder "5.4" yes; # PREEMPT_RT deselects it.
       PREEMPT_RT_FULL = whenOlder "5.4" yes; # Renamed to PREEMPT_RT when merged into the mainline.
