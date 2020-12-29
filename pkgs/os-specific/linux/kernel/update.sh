@@ -6,7 +6,7 @@ set -o pipefail
 
 BRANCHES=(
   "4.4" "4.9" "4.14" "4.18" "4.19"
-  "5.0" "5.4" "5.6"
+  "5.0" "5.4" "5.6" "5.9"
 )
 
 OUTPUT=metadata.nix

@@ -94,5 +94,16 @@
     kversion = "5.6.19";
     pversion = "rt11";
     sha256 = "10awja7py09mjxyyvd0g6vcl1bjv3bc53jhnadbl6sp53si02vd6";
+  kernels."5.9" = {
+    branch = "5.9";
+    kversion = "5.9.1";
+    pversion = "rt20";
+    sha256 = "0dn0xz81pphca5dkg6zh8c78p05f63rrr5ihqqsmhc4n73li2jms";
+  };
+  patches."5.9" = {
+    branch = "5.9";
+    kversion = "5.9.1";
+    pversion = "rt20";
+    sha256 = "0ma3mv475qgg0dri4928gi6z00d7s59pdwj0d6dh0mfzs2xddnyv";
   };
 }
