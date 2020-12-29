@@ -1,39 +1,39 @@
 {
   kernels."4.4" = {
     branch = "4.4";
-    kversion = "4.4.231";
-    pversion = "rt202";
-    sha256 = "1c6p5hv18isa328pvpa3qmmsg4qsssf2mwsx3hzn489rb8ycdxp7";
+    kversion = "4.4.245";
+    pversion = "rt211";
+    sha256 = "0g1cnis8496kp1ln922gxa7skfr096mdvv89la6676yw7dd4lhyi";
   };
   patches."4.4" = {
     branch = "4.4";
-    kversion = "4.4.231";
-    pversion = "rt202";
-    sha256 = "154d5fridw6ab8j24hk07q8zjrr55103y6dp4rwyk0fr9lgs5jjq";
+    kversion = "4.4.245";
+    pversion = "rt211";
+    sha256 = "0aaqc2rcrdi1ipqc279hz8hsb04m19447d2wcr0ni7qzc9fxinc1";
   };
   kernels."4.9" = {
     branch = "4.9";
-    kversion = "4.9.231";
-    pversion = "rt149";
-    sha256 = "1sz8xk767yy4lxqvy4229yrgkwnm43hdrbr54aa1flns5yh3p12g";
+    kversion = "4.9.247";
+    pversion = "rt162";
+    sha256 = "1mngdbsq8pdzd0x9hif4715cc7wzc3ahgp1yrknnqk598q0fnfpp";
   };
   patches."4.9" = {
     branch = "4.9";
-    kversion = "4.9.231";
-    pversion = "rt149";
-    sha256 = "0y2gb4fxk2vkdsxa1sbs819inkb2v4q9i7iqg0h1z77r17j5mp17";
+    kversion = "4.9.247";
+    pversion = "rt162";
+    sha256 = "00gcnr9qpin5psy6lysplz45b76g5gcbwiz1x27yzvnb84i3z8yc";
   };
   kernels."4.14" = {
     branch = "4.14";
-    kversion = "4.14.189";
-    pversion = "rt88";
-    sha256 = "1qgr6hb714xi7rav4za4vk4l7c0ma3ndf0f2ca3q8ly5gd2j3rd7";
+    kversion = "4.14.212";
+    pversion = "rt102";
+    sha256 = "0y8ck8pfxm8862wi4cz8qp9x9b18yl448i8m7bpbphs290nc66qf";
   };
   patches."4.14" = {
     branch = "4.14";
-    kversion = "4.14.189";
-    pversion = "rt88";
-    sha256 = "0ck9v5a7za3m1185cibmw8db65vqk4j0xnhg4n5b2n0q4yk1q2nm";
+    kversion = "4.14.212";
+    pversion = "rt102";
+    sha256 = "1z1s7q3950100fcr9cyahg8xl91wdsrr67af1xdrdkqzqcm42k5i";
   };
   kernels."4.18" = {
     branch = "4.18";
@@ -49,15 +49,15 @@
   };
   kernels."4.19" = {
     branch = "4.19";
-    kversion = "4.19.132";
-    pversion = "rt59";
-    sha256 = "0i3xka0n26iqslvc8xzxlcig3gjwfprzgdwd1q3wrr1cjsafxmyp";
+    kversion = "4.19.160";
+    pversion = "rt69";
+    sha256 = "118maapizgqgrgawnw7xmbcz26c61g5d012jzbd8l7n6z4354d0q";
   };
   patches."4.19" = {
     branch = "4.19";
-    kversion = "4.19.132";
-    pversion = "rt59";
-    sha256 = "0z7ph9kh95nw05rg47dlgl0isgxg4grh9w6zz5w0kk0v9dyh6fjv";
+    kversion = "4.19.160";
+    pversion = "rt69";
+    sha256 = "0qbb7ikdzf1imrwacarp3r4hjvb04vx8y8pvldys9az83c0v4bpm";
   };
   kernels."5.0" = {
     branch = "5.0";
@@ -73,27 +73,28 @@
   };
   kernels."5.4" = {
     branch = "5.4";
-    kversion = "5.4.52";
-    pversion = "rt31";
-    sha256 = "0fjxx8xpp0v0wwfw6zd5nc21i2r82wzcsy2yyl7w5c90259zlzh3";
+    kversion = "5.4.84";
+    pversion = "rt47";
+    sha256 = "058mhczv6whjwxn7jjh1c6n5zrqjdnvbl2mp7jkfrg6frpvgr189";
   };
   patches."5.4" = {
     branch = "5.4";
-    kversion = "5.4.52";
-    pversion = "rt31";
-    sha256 = "0gbsnmlb2wh8rj3vxxcjs02bxqp7qns5wv0l63nikvpzv0pz99qv";
+    kversion = "5.4.84";
+    pversion = "rt47";
+    sha256 = "0nccxf9l9ycvb782f48zrbl59vi674qq7yjyaks97440pgyd1jg0";
   };
   kernels."5.6" = {
     branch = "5.6";
     kversion = "5.6.19";
-    pversion = "rt11";
+    pversion = "rt12";
     sha256 = "1s0yc1138sglbm4vyizl4r7hnc1l7nykdjp4063ad67yayr2ylv2";
   };
   patches."5.6" = {
     branch = "5.6";
     kversion = "5.6.19";
-    pversion = "rt11";
-    sha256 = "10awja7py09mjxyyvd0g6vcl1bjv3bc53jhnadbl6sp53si02vd6";
+    pversion = "rt12";
+    sha256 = "0ia8rx0615x0z2s4ppw1244crg7c5ak07c9n3wbnz7y8bk8hyxws";
+  };
   kernels."5.9" = {
     branch = "5.9";
     kversion = "5.9.1";
