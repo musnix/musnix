@@ -2,7 +2,7 @@
 
 stdenv.mkDerivation rec {
   name = "rtirq";
-  version = "20191121";
+  version = "20210113";
 
   src = fetchurl {
     url = "http://www.rncbc.org/archive/${name}-${version}.tar.gz";
