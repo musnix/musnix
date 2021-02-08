@@ -2,11 +2,11 @@
 
 stdenv.mkDerivation rec {
   name = "rtirq";
-  version = "20191121";
+  version = "20210113";
 
   src = fetchurl {
     url = "http://www.rncbc.org/archive/${name}-${version}.tar.gz";
-    sha256 = "0yb1d640z93kspwxihqsra26fyhazp24grcdy3fdkbnffprl5nx1";
+    sha256 = "1z55pljw7mz3smyljxlg7144rn305sran6x3d3y26fb9hsa6gxfq";
   };
 
   phases = [ "unpackPhase" "patchPhase" "installPhase" ];
