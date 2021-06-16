@@ -1,4 +1,4 @@
-{ stdenv, fetchurl, utillinux }:
+{ stdenv, fetchurl, utillinux, lib }:
 
 stdenv.mkDerivation rec {
   name = "rtirq";
@@ -22,7 +22,7 @@ stdenv.mkDerivation rec {
     cp rtirq.sh $out/bin/rtirq
   '';
 
-  meta = with stdenv.lib; {
+  meta = with lib; {
     description = "IRQ thread tuning for realtime kernels";
     homepage = http://www.rncbc.org/jack/;
     license = licenses.gpl2;
