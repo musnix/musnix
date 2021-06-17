@@ -6,7 +6,7 @@
             "x86_64-linux"
             "aarch64-linux"
         ];
-        forAllSystems = import ./default.nix { pkgs = final; };
+        forAllSystems = f: nixpkgs.lib.genAttrs systems (system: f system);
     in {
         nixosModules.rtirq = forAllSystems (system: import ./default.nix {
             inherit system;
