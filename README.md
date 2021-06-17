@@ -75,9 +75,9 @@ As an alternative to nix-channels or cloning the project you can instead use it 
       };
   }
 ```
-The above code snipped properly adds the repo's git repo to your config and `inputs.musnix.nixosModules.musnix` automatically adds a musnix modules.
+The above code snippet is a full user-side flake.nix, and it properly adds the repo's git repo to your config and `inputs.musnix.nixosModules.musnix` automatically adds a musnix modules.
 
-The flake.nix automatically gets "imported" (not an actual import but close enough in function for non-flake users) and it adds musnix packages and modules via adding `inputs.musnix.nixosModules.musnix` to the `modules`section.
+The flake.nix, from the repo, automatically gets "imported" (not an actual import but close enough in function for non-flake users) and it adds musnix packages and modules via adding `inputs.musnix.nixosModules.musnix` to the `modules`section.
 
 ## Base Options
 
