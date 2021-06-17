@@ -11,6 +11,7 @@
         nixosModules.rtirq = forAllSystems (system: import ./default.nix {
             inherit system;
         });
+        nixosModules.musnix = import ./default.nix;
         nixosModule = self.nixosModules.musnix;
     };
 }
