@@ -52,6 +52,31 @@ To update musnix, run:
 sudo -i nix-channel --update musnix
 ```
 
+### Using musnix in flakes without a `flake.nix` (in repo)
+```
+{
+  inputs = {
+    ### Other inputs will be here
+    musnix = { url = "github:musnix/musnix"; flake = false; };
+    ...
+  }
+
+  outputs = inputs: rec {
+    nixosConfigurations = {
+      example-config = inputs.nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ## Other modules will also be here
+          "${inputs.musnix}/default.nix"
+          ...
+        ];
+        specialArgs = { inherit inputs; };
+       };
+      };
+    }
+```
+          
+
 ## Base Options
 
 `musnix.enable`
