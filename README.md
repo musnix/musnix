@@ -52,6 +52,32 @@ To update musnix, run:
 sudo -i nix-channel --update musnix
 ```
 
+### Using musnix as a flake
+As an alternative to nix-channels or cloning the project you can instead use it as a flake in a pure system.
+
+```nix
+{
+  inputs = {
+    nixpkgs = { url = "github:NixOS/nixpkgs/nixos-unstable"; };
+    musnix = { url = "github:musnix/musnix"; };
+  };
+  outputs = inputs: rec {
+    nixosConfigurations = {
+      example-config = inputs.nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ## Other modules will also be here
+          inputs.musnix.nixosModules.musnix
+          ./configuration.nix ## Configuration file from regular /etc/nixos config
+        ];
+        specialArgs = { inherit inputs; }; ## Inherit inputs to configuration.nix so you can call inputs.inputname
+       };
+      };
+  }
+```
+
+after applying this config all musnix.* configuration options will be available the same way that a nix-channel or a clone would be available
+
 ## Base Options
 
 `musnix.enable`
