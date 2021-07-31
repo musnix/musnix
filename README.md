@@ -112,14 +112,16 @@ The flake.nix, from the repo, automatically gets "imported" (not an actual impor
 
   * Set the following environment variables to default install locations in NixOS:
     * `VST_PATH`
-    * `LVST_PATH`
+    * `VST3_PATH`
+    * `LXVST_PATH`
     * `LADSPA_PATH`
     * `LV2_PATH`
     * `DSSI_PATH`
 
   * Allow users to install plugins in the following directories:
     * `~/.vst`
-    * `~/.lvst`
+    * `~/.vst3`
+    * `~/.lxvst`
     * `~/.ladspa`
     * `~/.lv2`
     * `~/.dssi`
