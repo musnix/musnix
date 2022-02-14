@@ -107,4 +107,16 @@
     pversion = "rt20";
     sha256 = "0ma3mv475qgg0dri4928gi6z00d7s59pdwj0d6dh0mfzs2xddnyv";
   };
+  kernels."5.15" = {
+    branch = "5.15";
+    kversion = "5.15.18";
+    pversion = "rt28";
+    sha256 = "Id1w6E13ajQDg21DW8UjBZpD9bznLHVyiYESbdl4bF4=";
+  };
+  patches."5.15" = {
+    branch = "5.15";
+    kversion = "5.15.18";
+    pversion = "rt28";
+    sha256 = "sov0G2l761JrZxxUa5Hp5fDcP/yIpmDm6R48iQgtxxc=";
+  };
 }
