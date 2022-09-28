@@ -1,4 +1,4 @@
-{ stdenv, fetchurl, utillinux, lib }:
+{ stdenv, fetchurl, util-linux, lib }:
 
 stdenv.mkDerivation rec {
   name = "rtirq";
@@ -14,7 +14,7 @@ stdenv.mkDerivation rec {
   patchPhase = ''
     patchShebangs rtirq.sh
     substituteInPlace rtirq.sh \
-      --replace "/sbin /usr/sbin /bin /usr/bin /usr/local/bin" "${utillinux}/bin"
+      --replace "/sbin /usr/sbin /bin /usr/bin /usr/local/bin" "${util-linux}/bin"
   '';
 
   installPhase = ''
