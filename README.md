@@ -98,10 +98,6 @@ The flake.nix, from the repo, automatically gets "imported" (not an actual impor
     KERNEL=="hpet", GROUP="audio"
     ```
 
-  * Set the `max_user_freq` of `/sys/class/rtc/rtc0` to 2048.
-
-  * Set the `max-user-freq` of `/proc/sys/dev/hpet` to 2048.
-
   * Set the following PAM limits:
     ```
     @audio  -       memlock unlimited
