@@ -107,4 +107,17 @@
     pversion = "rt20";
     sha256 = "0ma3mv475qgg0dri4928gi6z00d7s59pdwj0d6dh0mfzs2xddnyv";
   };
+  kernels."5.19" = {
+    branch = "5.19";
+    kversion = "5.19.0";
+    pversion = "rt10";
+    sha256 = "sha256-/yQMV5ue4a/8MYkX3gc5T8HDu0nawl7BKHNwwuFQBag=";
+  };
+  patches."5.19" = {
+    branch = "5.19";
+    kversion = "5.19.0";
+    pversion = "rt10";
+    url = "https://cdn.kernel.org/pub/linux/kernel/projects/rt/5.19/patch-5.19-rt10.patch.gz";
+    sha256 = "sha256-OTYmKTWSEUdEZPxWTUbAws/akQ6LlPWCKatq9KKPJaI=";
+  };
 }
