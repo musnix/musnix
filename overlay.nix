@@ -138,6 +138,13 @@ with lib;
     ];
   };
 
+  linux_5_16_rt = callPackage ./pkgs/os-specific/linux/kernel/linux-5.16-rt.nix {
+    kernelPatches = [
+      super.kernelPatches.bridge_stp_helper
+      self.realtimePatches.realtimePatch_5_16
+    ];
+  };
+
   linux_5_17_rt = callPackage ./pkgs/os-specific/linux/kernel/linux-5.17-rt.nix {
     kernelPatches = [
       super.kernelPatches.bridge_stp_helper
@@ -165,6 +172,7 @@ with lib;
   linuxPackages_5_4_rt  = recurseIntoAttrs (linuxPackagesFor self.linux_5_4_rt);
   linuxPackages_5_6_rt  = recurseIntoAttrs (linuxPackagesFor self.linux_5_6_rt);
   linuxPackages_5_9_rt  = recurseIntoAttrs (linuxPackagesFor self.linux_5_9_rt);
+  linuxPackages_5_16_rt  = recurseIntoAttrs (linuxPackagesFor self.linux_5_16_rt);
   linuxPackages_5_17_rt  = recurseIntoAttrs (linuxPackagesFor self.linux_5_17_rt);
   linuxPackages_5_19_rt  = recurseIntoAttrs (linuxPackagesFor self.linux_5_19_rt);
   linuxPackages_opt     = recurseIntoAttrs (linuxPackagesFor self.linux_opt);
