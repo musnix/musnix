@@ -48,19 +48,17 @@ in {
         This option allows you to select the real-time kernel used by musnix.
 
         Available packages:
-        * pkgs.linuxPackages_3_18_rt
-        * pkgs.linuxPackages_4_1_rt
         * pkgs.linuxPackages_4_4_rt
         * pkgs.linuxPackages_4_9_rt
-        * pkgs.linuxPackages_4_11_rt
-        * pkgs.linuxPackages_4_13_rt
         * pkgs.linuxPackages_4_14_rt
-        * pkgs.linuxPackages_4_16_rt
         * pkgs.linuxPackages_4_18_rt
         * pkgs.linuxPackages_4_19_rt
         * pkgs.linuxPackages_5_0_rt
         * pkgs.linuxPackages_5_4_rt
         * pkgs.linuxPackages_5_6_rt
+        * pkgs.linuxPackages_5_9_rt
+        * pkgs.linuxPackages_5_16_rt
+        * pkgs.linuxPackages_5_17_rt
         * pkgs.linuxPackages_5_19_rt
         or:
         * pkgs.linuxPackages_latest_rt (currently pkgs.linuxPackages_5_19_rt)

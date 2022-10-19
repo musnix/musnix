@@ -164,22 +164,19 @@ The flake.nix, from the repo, automatically gets "imported" (not an actual impor
 * **Type:** `package`
 * **Default value:** `pkgs.linuxPackages_5_4_rt, which is the major version that NixPkgs unstable currently uses.
 * Available packages:
-  * `pkgs.linuxPackages_3_18_rt`
-  * `pkgs.linuxPackages_4_1_rt`
   * `pkgs.linuxPackages_4_4_rt`
   * `pkgs.linuxPackages_4_9_rt`
-  * `pkgs.linuxPackages_4_11_rt`
-  * `pkgs.linuxPackages_4_13_rt`
   * `pkgs.linuxPackages_4_14_rt`
-  * `pkgs.linuxPackages_4_16_rt`
   * `pkgs.linuxPackages_4_18_rt`
   * `pkgs.linuxPackages_4_19_rt`
   * `pkgs.linuxPackages_5_0_rt`
   * `pkgs.linuxPackages_5_4_rt`
   * `pkgs.linuxPackages_5_6_rt`
-
+  * `pkgs.linuxPackages_5_16_rt`
+  * `pkgs.linuxPackages_5_17_rt`
+  * `pkgs.linuxPackages_5_19_rt`
   or:
-  * `pkgs.linuxPackages_latest_rt` (currently `pkgs.linuxPackages_5_6_rt`)
+  * `pkgs.linuxPackages_latest_rt` (currently `pkgs.linuxPackages_5_19_rt`)
 
 `musnix.kernel.latencytop`
 * **NOTE:** Enabling this option will rebuild your kernel.
@@ -213,7 +210,7 @@ To see a description of one of the listed options (in this case `enable`):
 
 ## Communication
 
-* **IRC:** `#musnix` on [freenode](http://freenode.net/)
+* **IRC:** `#musnix` on [libera.chat](https://libera.chat/)
 
 ## More Information
 * http://wiki.linuxaudio.org/wiki/system_configuration
