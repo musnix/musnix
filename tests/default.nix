@@ -1,5 +1,13 @@
+#
+# To run:
+#
+#    nix-build tests/default.nix
+#
+
 import <nixpkgs/nixos/tests/make-test-python.nix> {
-  machine =
+  name = "musnix-boot";
+
+  nodes.machine =
     { config, pkgs, ... }:
     { imports = [ ../default.nix ];
 
