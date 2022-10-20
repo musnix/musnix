@@ -23,12 +23,14 @@ let
   cfg = super.config.musnix or {
     kernel.latencytop = false;
     kernel.optimize = false;
+    kernel.timerlat = false;
   };
 
   standardConfig = {
     version,
     enableLatencytop ? cfg.kernel.latencytop,
-    enableOptimization ? cfg.kernel.optimize
+    enableOptimization ? cfg.kernel.optimize,
+    enableTimerlat ? cfg.kernel.timerlat
   }:
 
     with (whenHelpers version);
@@ -42,11 +44,14 @@ let
       IOSCHED_DEADLINE = whenOlder "5" yes;
       DEFAULT_DEADLINE = whenOlder "5" yes;
       DEFAULT_IOSCHED = whenOlder "5" (freeform "deadline");
+    } //
+    lib.optionalAttrs enableTimerlat {
+      TIMERLAT_TRACER = whenAtLeast "5" yes;
     };
 
-  realtimeConfig = { version, enableLatencytop, enableOptimization }:
+  realtimeConfig = { version, enableLatencytop, enableOptimization, enableTimerlat }:
     with (whenHelpers version);
-    (standardConfig { inherit version enableLatencytop enableOptimization; }) // {
+    (standardConfig { inherit version enableLatencytop enableOptimization enableTimerlat; }) // {
       PREEMPT = whenOlder "5.4" yes; # PREEMPT_RT deselects it.
       PREEMPT_RT_FULL = whenOlder "5.4" yes; # Renamed to PREEMPT_RT when merged into the mainline.
       EXPERT = whenAtLeast "5.4" yes; # PREEMPT_RT depends on it (in kernel/Kconfig.preempt).
@@ -62,10 +67,11 @@ with lib;
   buildLinuxRT = {
     enableLatencytop ? cfg.kernel.latencytop,
     enableOptimization ? cfg.kernel.optimize,
+    enableTimerlat ? cfg.kernel.timerlat,
     ...
   }@args: super.buildLinux (args // {
     structuredExtraConfig = realtimeConfig {
-      inherit enableLatencytop enableOptimization;
+      inherit enableLatencytop enableOptimization enableTimerlat;
       version = args.extraMeta.branch;
     };
   } // (args.argsOverride or {}));

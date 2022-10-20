@@ -42,6 +42,16 @@ in {
         patch to the kernel.
       '';
     };
+    kernel.timerlat = mkOption {
+      type = types.bool;
+      default = false;
+      description = ''
+        NOTE: Enabling this option will rebuild your kernel.
+
+        If enabled, this option will enable the 
+        CONFIG_TIMERLAT_TRACER option in the kernel.
+      '';
+    };
     kernel.packages = mkOption {
       default = pkgs.linuxPackages_5_4_rt;
       description = ''
@@ -66,7 +76,7 @@ in {
     };
   };
 
-  config = mkIf (cfg.kernel.latencytop || cfg.kernel.optimize || cfg.kernel.realtime) {
+  config = mkIf (cfg.kernel.latencytop || cfg.kernel.optimize || cfg.kernel.realtime || cfg.kernel.timerlat) {
 
     boot.kernelPackages =
       if cfg.kernel.realtime
