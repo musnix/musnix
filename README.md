@@ -162,7 +162,7 @@ The flake.nix, from the repo, automatically gets "imported" (not an actual impor
 `musnix.kernel.packages`
 * **Description:** This option allows you to select the real-time kernel used by musnix.
 * **Type:** `package`
-* **Default value:** `pkgs.linuxPackages_5_4_rt, which is the major version that NixPkgs unstable currently uses.
+* **Default value:** `pkgs.linuxPackages_5_4_rt`
 * Available packages:
   * `pkgs.linuxPackages_4_4_rt`
   * `pkgs.linuxPackages_4_9_rt`
