@@ -38,19 +38,13 @@ let
     } //
     lib.optionalAttrs enableOptimization {
       PREEMPT = yes;
-      # DEADLINE was renamed to MT_DEADLINE and enabled by default.
-      IOSCHED_DEADLINE = whenOlder "5" yes;
-      DEFAULT_DEADLINE = whenOlder "5" yes;
-      DEFAULT_IOSCHED = whenOlder "5" (freeform "deadline");
     };
 
   realtimeConfig = { version, enableLatencytop, enableOptimization }:
     with (whenHelpers version);
     (standardConfig { inherit version enableLatencytop enableOptimization; }) // {
-      PREEMPT = whenOlder "5.4" yes; # PREEMPT_RT deselects it.
-      PREEMPT_RT_FULL = whenOlder "5.4" yes; # Renamed to PREEMPT_RT when merged into the mainline.
-      EXPERT = whenAtLeast "5.4" yes; # PREEMPT_RT depends on it (in kernel/Kconfig.preempt).
-      PREEMPT_RT = whenAtLeast "5.4" yes;
+      EXPERT = yes; # PREEMPT_RT depends on it (in kernel/Kconfig.preempt).
+      PREEMPT_RT = yes;
       PREEMPT_VOLUNTARY = lib.mkForce no; # PREEMPT_RT deselects it.
       RT_GROUP_SCHED = lib.mkForce (option no); # Removed by sched-disable-rt-group-sched-on-rt.patch.
     };
@@ -69,53 +63,6 @@ with lib;
       version = args.extraMeta.branch;
     };
   } // (args.argsOverride or {}));
-
-  linux_4_4_rt = callPackage ./pkgs/os-specific/linux/kernel/linux-4.4-rt.nix {
-    kernelPatches = [
-      super.kernelPatches.bridge_stp_helper
-      self.realtimePatches.realtimePatch_4_4
-    ];
-  };
-
-  linux_4_9_rt = callPackage ./pkgs/os-specific/linux/kernel/linux-4.9-rt.nix {
-    kernelPatches = [
-      super.kernelPatches.bridge_stp_helper
-      super.kernelPatches.modinst_arg_list_too_long
-      self.realtimePatches.realtimePatch_4_9
-    ];
-  };
-
-  linux_4_14_rt = callPackage ./pkgs/os-specific/linux/kernel/linux-4.14-rt.nix {
-    kernelPatches = [
-      super.kernelPatches.bridge_stp_helper
-      super.kernelPatches.modinst_arg_list_too_long
-      self.realtimePatches.realtimePatch_4_14
-    ];
-  };
-
-  linux_4_18_rt = callPackage ./pkgs/os-specific/linux/kernel/linux-4.18-rt.nix {
-    kernelPatches = [
-      super.kernelPatches.bridge_stp_helper
-      super.kernelPatches.modinst_arg_list_too_long
-      self.realtimePatches.realtimePatch_4_18
-    ];
-  };
-
-  linux_4_19_rt = callPackage ./pkgs/os-specific/linux/kernel/linux-4.19-rt.nix {
-    kernelPatches = [
-      super.kernelPatches.bridge_stp_helper
-      super.kernelPatches.modinst_arg_list_too_long
-      self.realtimePatches.realtimePatch_4_19
-    ];
-  };
-
-  linux_5_0_rt = callPackage ./pkgs/os-specific/linux/kernel/linux-5.0-rt.nix {
-    kernelPatches = [
-      super.kernelPatches.bridge_stp_helper
-      super.kernelPatches.modinst_arg_list_too_long
-      self.realtimePatches.realtimePatch_5_0
-    ];
-  };
 
   linux_5_4_rt = callPackage ./pkgs/os-specific/linux/kernel/linux-5.4-rt.nix {
     kernelPatches = [
@@ -163,12 +110,6 @@ with lib;
     structuredExtraConfig = standardConfig { inherit (super.linux) version; };
   };
 
-  linuxPackages_4_4_rt  = recurseIntoAttrs (linuxPackagesFor self.linux_4_4_rt);
-  linuxPackages_4_9_rt  = recurseIntoAttrs (linuxPackagesFor self.linux_4_9_rt);
-  linuxPackages_4_14_rt = recurseIntoAttrs (linuxPackagesFor self.linux_4_14_rt);
-  linuxPackages_4_18_rt = recurseIntoAttrs (linuxPackagesFor self.linux_4_18_rt);
-  linuxPackages_4_19_rt = recurseIntoAttrs (linuxPackagesFor self.linux_4_19_rt);
-  linuxPackages_5_0_rt  = recurseIntoAttrs (linuxPackagesFor self.linux_5_0_rt);
   linuxPackages_5_4_rt  = recurseIntoAttrs (linuxPackagesFor self.linux_5_4_rt);
   linuxPackages_5_6_rt  = recurseIntoAttrs (linuxPackagesFor self.linux_5_6_rt);
   linuxPackages_5_9_rt  = recurseIntoAttrs (linuxPackagesFor self.linux_5_9_rt);

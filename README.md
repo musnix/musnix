@@ -164,12 +164,6 @@ The flake.nix, from the repo, automatically gets "imported" (not an actual impor
 * **Type:** `package`
 * **Default value:** `pkgs.linuxPackages_5_4_rt, which is the major version that NixPkgs unstable currently uses.
 * Available packages:
-  * `pkgs.linuxPackages_4_4_rt`
-  * `pkgs.linuxPackages_4_9_rt`
-  * `pkgs.linuxPackages_4_14_rt`
-  * `pkgs.linuxPackages_4_18_rt`
-  * `pkgs.linuxPackages_4_19_rt`
-  * `pkgs.linuxPackages_5_0_rt`
   * `pkgs.linuxPackages_5_4_rt`
   * `pkgs.linuxPackages_5_6_rt`
   * `pkgs.linuxPackages_5_16_rt`
