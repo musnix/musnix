@@ -34,7 +34,7 @@ let
     with (whenHelpers version);
     lib.optionalAttrs enableLatencytop {
       LATENCYTOP = yes;
-      SCHEDSTATS = yes;
+      SCHEDSTATS = lib.mkForce yes;
     } //
     lib.optionalAttrs enableOptimization {
       PREEMPT = yes;
