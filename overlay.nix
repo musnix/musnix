@@ -121,7 +121,7 @@ with lib;
   linuxPackages_rt = self.linuxPackages_5_4_rt;
   linux_rt = self.linuxPackages_rt.kernel;
 
-  linuxPackages_latest_rt = self.linuxPackages_5_9_rt;
+  linuxPackages_latest_rt = self.linuxPackages_5_19_rt;
   linux_latest_rt = self.linuxPackages_latest_rt.kernel;
 
   realtimePatches = callPackage ./pkgs/os-specific/linux/kernel/patches.nix {};
