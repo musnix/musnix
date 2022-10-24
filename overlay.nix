@@ -20,7 +20,7 @@ let
     whenBetween = verLow: verHigh: mkIf (versionAtLeast version verLow && versionOlder version verHigh);
   };
 
-  cfg = super.config.musnix or {
+  cfg = (import <nixpkgs/nixos> { }).config.musnix or {
     kernel.latencytop = false;
     kernel.optimize = false;
   };
