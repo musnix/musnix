@@ -43,7 +43,7 @@ in {
       '';
     };
     kernel.packages = mkOption {
-      default = pkgs.linuxPackages_5_4_rt;
+      default = pkgs.linuxPackages_rt;
       description = ''
         This option allows you to select the real-time kernel used by musnix.
 
@@ -51,10 +51,12 @@ in {
         * pkgs.linuxPackages_5_4_rt
         * pkgs.linuxPackages_5_6_rt
         * pkgs.linuxPackages_5_9_rt
+        * pkgs.linuxPackages_5_15_rt
         * pkgs.linuxPackages_5_16_rt
         * pkgs.linuxPackages_5_17_rt
         * pkgs.linuxPackages_5_19_rt
         or:
+        * pkgs.linuxPackages_rt (currently pkgs.linuxPackages_5_15_rt)
         * pkgs.linuxPackages_latest_rt (currently pkgs.linuxPackages_5_19_rt)
       '';
     };
