@@ -49,12 +49,7 @@ in {
 
         Available packages:
         * pkgs.linuxPackages_5_4_rt
-        * pkgs.linuxPackages_5_6_rt
-        * pkgs.linuxPackages_5_9_rt
         * pkgs.linuxPackages_5_15_rt
-        * pkgs.linuxPackages_5_16_rt
-        * pkgs.linuxPackages_5_17_rt
-        * pkgs.linuxPackages_5_19_rt
         * pkgs.linuxPackages_6_0_rt
         or:
         * pkgs.linuxPackages_rt (currently pkgs.linuxPackages_5_15_rt)

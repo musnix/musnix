@@ -165,11 +165,7 @@ The flake.nix, from the repo, automatically gets "imported" (not an actual impor
 * **Default value:** `pkgs.linuxPackages_rt`
 * Available packages:
   * `pkgs.linuxPackages_5_4_rt`
-  * `pkgs.linuxPackages_5_6_rt`
   * `pkgs.linuxPackages_5_15_rt`
-  * `pkgs.linuxPackages_5_16_rt`
-  * `pkgs.linuxPackages_5_17_rt`
-  * `pkgs.linuxPackages_5_19_rt`
   * `pkgs.linuxPackages_6_0_rt`
   or:
   * `pkgs.linuxPackages_rt` (currently `pkgs.linuxPackages_5_15_rt`)
