@@ -20,29 +20,9 @@ let
     whenBetween = verLow: verHigh: mkIf (versionAtLeast version verLow && versionOlder version verHigh);
   };
 
-  cfg = super.config.musnix or {
-    kernel.latencytop = false;
-    kernel.optimize = false;
-  };
-
-  standardConfig = {
-    version,
-    enableLatencytop ? cfg.kernel.latencytop,
-    enableOptimization ? cfg.kernel.optimize
-  }:
-
+  realtimeConfig = { version }:
     with (whenHelpers version);
-    lib.optionalAttrs enableLatencytop {
-      LATENCYTOP = yes;
-      SCHEDSTATS = yes;
-    } //
-    lib.optionalAttrs enableOptimization {
-      PREEMPT = yes;
-    };
-
-  realtimeConfig = { version, enableLatencytop, enableOptimization }:
-    with (whenHelpers version);
-    (standardConfig { inherit version enableLatencytop enableOptimization; }) // {
+    {
       EXPERT = yes; # PREEMPT_RT depends on it (in kernel/Kconfig.preempt).
       PREEMPT_RT = yes;
       PREEMPT_VOLUNTARY = lib.mkForce no; # PREEMPT_RT deselects it.
@@ -53,16 +33,10 @@ in
 with lib;
 {
 
-  buildLinuxRT = {
-    enableLatencytop ? cfg.kernel.latencytop,
-    enableOptimization ? cfg.kernel.optimize,
-    ...
-  }@args: super.buildLinux (args // {
-    structuredExtraConfig = realtimeConfig {
-      inherit enableLatencytop enableOptimization;
-      version = args.extraMeta.branch;
-    };
-  } // (args.argsOverride or {}));
+  buildLinuxRT = { ... }@args:
+    super.buildLinux (args // {
+      structuredExtraConfig = realtimeConfig { version = args.extraMeta.branch; };
+    } // (args.argsOverride or {}));
 
   linux_5_4_rt = callPackage ./pkgs/os-specific/linux/kernel/linux-5.4-rt.nix {
     kernelPatches = [
@@ -85,14 +59,9 @@ with lib;
     ];
   };
 
-  linux_opt = super.linux.override {
-    structuredExtraConfig = standardConfig { inherit (super.linux) version; };
-  };
-
   linuxPackages_5_4_rt  = recurseIntoAttrs (linuxPackagesFor self.linux_5_4_rt);
   linuxPackages_5_15_rt = recurseIntoAttrs (linuxPackagesFor self.linux_5_15_rt);
   linuxPackages_6_0_rt  = recurseIntoAttrs (linuxPackagesFor self.linux_6_0_rt);
-  linuxPackages_opt     = recurseIntoAttrs (linuxPackagesFor self.linux_opt);
 
   linuxPackages_rt = self.linuxPackages_5_15_rt;
   linux_rt = self.linuxPackages_rt.kernel;

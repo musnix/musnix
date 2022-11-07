@@ -8,30 +8,6 @@ let
 
 in {
   options.musnix = {
-    kernel.latencytop = mkOption {
-      type = types.bool;
-      default = false;
-      description = ''
-        NOTE: Enabling this option will rebuild your kernel.
-
-        NOTE: This option is only intended to be used for diagnostic purposes,
-        and may cause other issues.
-
-        If enabled, this option will configure the kernel to use a
-        latency tracking infrastructure that is used by the
-        "latencytop" userspace tool.
-      '';
-    };
-    kernel.optimize = mkOption {
-      type = types.bool;
-      default = false;
-      description = ''
-        NOTE: Enabling this option will rebuild your kernel.
-
-        If enabled, this option will configure the kernel to be
-        preemptible and use the deadline I/O scheduler.
-      '';
-    };
     kernel.realtime = mkOption {
       type = types.bool;
       default = false;
@@ -58,12 +34,10 @@ in {
     };
   };
 
-  config = mkIf (cfg.kernel.latencytop || cfg.kernel.optimize || cfg.kernel.realtime) {
-
+  config = mkIf cfg.kernel.realtime {
     boot.kernelPackages =
       if cfg.kernel.realtime
         then cfg.kernel.packages
         else pkgs.linuxPackages_opt;
-
   };
 }

@@ -149,12 +149,6 @@ The flake.nix, from the repo, automatically gets "imported" (not an actual impor
 
 **NOTE**: The following kernel options can be used without setting `musnix.enable = true;`
 
-`musnix.kernel.optimize`
-* **NOTE:** Enabling this option will rebuild your kernel.
-* **Description:** If enabled, this option will configure the kernel to be preemptible, to use the deadline I/O scheduler, and to use the High Precision Event Timer (HPET).
-* **Type:** `boolean`
-* **Default value:** `false`
-
 `musnix.kernel.realtime`
 * **NOTE:** Enabling this option will rebuild your kernel.
 * **Description:** If enabled, this option will apply the [`CONFIG_PREEMPT_RT`](https://rt.wiki.kernel.org/index.php/Main_Page) patch to the kernel.
@@ -174,13 +168,6 @@ The flake.nix, from the repo, automatically gets "imported" (not an actual impor
   * `pkgs.linuxPackages_rt` (currently `pkgs.linuxPackages_5_15_rt`)
   * `pkgs.linuxPackages_latest_rt` (currently `pkgs.linuxPackages_6_0_rt`)
   
-`musnix.kernel.latencytop`
-* **NOTE:** Enabling this option will rebuild your kernel.
-* **NOTE:** This option is only intended to be used for diagnostic purposes, and may cause other issues.
-* **Description:** If enabled, this option will configure the kernel to use a latency tracking infrastructure that is used by the "latencytop" userspace tool.
-* **Type:** `boolean`
-* **Default value:** `false`
-
 ## rtirq Options
 
 **NOTES**:

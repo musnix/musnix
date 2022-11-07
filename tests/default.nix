@@ -12,7 +12,6 @@ import <nixpkgs/nixos/tests/make-test-python.nix> {
     { imports = [ ../default.nix ];
 
       musnix.enable = true;
-      musnix.kernel.optimize = true;
       musnix.kernel.realtime = true;
       musnix.rtirq.enable = true;
       musnix.rtirq.highList = "timer";
