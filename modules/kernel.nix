@@ -54,8 +54,9 @@ in {
         * pkgs.linuxPackages_5_16_rt
         * pkgs.linuxPackages_5_17_rt
         * pkgs.linuxPackages_5_19_rt
+        * pkgs.linuxPackages_6_0_rt
         or:
-        * pkgs.linuxPackages_latest_rt (currently pkgs.linuxPackages_5_19_rt)
+        * pkgs.linuxPackages_latest_rt (currently pkgs.linuxPackages_6_0_rt)
       '';
     };
   };

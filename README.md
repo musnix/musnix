@@ -169,8 +169,9 @@ The flake.nix, from the repo, automatically gets "imported" (not an actual impor
   * `pkgs.linuxPackages_5_16_rt`
   * `pkgs.linuxPackages_5_17_rt`
   * `pkgs.linuxPackages_5_19_rt`
+  * `pkgs.linuxPackages_6_0_rt`
   or:
-  * `pkgs.linuxPackages_latest_rt` (currently `pkgs.linuxPackages_5_19_rt`)
+  * `pkgs.linuxPackages_latest_rt` (currently `pkgs.linuxPackages_6_0_rt`)
 
 `musnix.kernel.latencytop`
 * **NOTE:** Enabling this option will rebuild your kernel.
