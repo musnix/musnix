@@ -1,15 +1,15 @@
 {
   kernels."5.4" = {
     branch = "5.4";
-    kversion = "5.4.84";
-    pversion = "rt47";
-    sha256 = "058mhczv6whjwxn7jjh1c6n5zrqjdnvbl2mp7jkfrg6frpvgr189";
+    kversion = "5.4.221";
+    pversion = "rt79";
+    sha256 = "sha256-J7N/wf7XtNzd9aCjcw+r8lGXwLoTrOaESBqlREZJ3wo=";
   };
   patches."5.4" = {
     branch = "5.4";
-    kversion = "5.4.84";
-    pversion = "rt47";
-    sha256 = "0nccxf9l9ycvb782f48zrbl59vi674qq7yjyaks97440pgyd1jg0";
+    kversion = "5.4.221";
+    pversion = "rt79";
+    sha256 = "sha256-viuxek8lAYirHIYhe7KX5z1uUTLNVMbvQMaGGkiein0=";
   };
   kernels."5.6" = {
     branch = "5.6";
@@ -84,5 +84,17 @@
     pversion = "rt10";
     url = "https://cdn.kernel.org/pub/linux/kernel/projects/rt/5.19/patch-5.19-rt10.patch.gz";
     sha256 = "sha256-OTYmKTWSEUdEZPxWTUbAws/akQ6LlPWCKatq9KKPJaI=";
+  };
+  kernels."6.0" = {
+    branch = "6.0";
+    kversion = "6.0.5";
+    pversion = "rt14";
+    sha256 = "sha256-YTMu8itTxQwQ+qv7lliWp9GtTzOB8PiWQ8gg8opgQY4=";
+  };
+  patches."6.0" = {
+    branch = "6.0";
+    kversion = "6.0.5";
+    pversion = "rt14";
+    sha256 = "sha256-BkTq7aIWBfcd3Pmeq5cOPtoVVQYtQIQJSKlWvsmkcWc=";
   };
 }
