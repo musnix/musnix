@@ -56,24 +56,25 @@ sudo -i nix-channel --update musnix
 As an alternative to nix-channels or cloning the project you can instead use it as a flake in a pure system.
 
 ```nix
-inputs = {
-  nixpkgs = { url = "github:NixOS/nixpkgs/nixos-unstable"; };
-  musnix  = { url = "github:musnix/musnix"; };
-};
-outputs = inputs: rec {
-  nixosConfigurations = {
-    example-config = inputs.nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      modules = [
-        # ...
-        inputs.musnix.nixosModules.musnix
-        ./configuration.nix # Configuration file from regular /etc/nixos config
-
-      ];
-      specialArgs = { inherit inputs; }; # Inherit inputs to configuration.nix so you can call inputs.inputname
-    };
+{
+  inputs = {
+    nixpkgs = { url = "github:NixOS/nixpkgs/nixos-unstable"; };
+    musnix  = { url = "github:musnix/musnix"; };
   };
-}
+  outputs = inputs: rec {
+    nixosConfigurations = {
+      example-config = inputs.nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          # ...
+          inputs.musnix.nixosModules.musnix
+          ./configuration.nix # Configuration file from regular /etc/nixos config
+
+        ];
+        specialArgs = { inherit inputs; }; # Inherit inputs to configuration.nix so you can call inputs.inputname
+      };
+    };
+  }
 ```
 The above code snippet is a full user-side flake.nix, and it properly adds the repo's git repo to your config and `inputs.musnix.nixosModules.musnix` automatically adds a musnix modules.
 
