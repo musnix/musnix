@@ -162,17 +162,19 @@ The flake.nix, from the repo, automatically gets "imported" (not an actual impor
 `musnix.kernel.packages`
 * **Description:** This option allows you to select the real-time kernel used by musnix.
 * **Type:** `package`
-* **Default value:** `pkgs.linuxPackages_5_4_rt`
+* **Default value:** `pkgs.linuxPackages_rt`
 * Available packages:
   * `pkgs.linuxPackages_5_4_rt`
   * `pkgs.linuxPackages_5_6_rt`
+  * `pkgs.linuxPackages_5_15_rt`
   * `pkgs.linuxPackages_5_16_rt`
   * `pkgs.linuxPackages_5_17_rt`
   * `pkgs.linuxPackages_5_19_rt`
   * `pkgs.linuxPackages_6_0_rt`
   or:
+  * `pkgs.linuxPackages_rt` (currently `pkgs.linuxPackages_5_15_rt`)
   * `pkgs.linuxPackages_latest_rt` (currently `pkgs.linuxPackages_6_0_rt`)
-
+  
 `musnix.kernel.latencytop`
 * **NOTE:** Enabling this option will rebuild your kernel.
 * **NOTE:** This option is only intended to be used for diagnostic purposes, and may cause other issues.

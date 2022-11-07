@@ -6,9 +6,11 @@ let
     linux_5_4_rt  = pkgs.linux_5_4_rt;
     linux_5_6_rt  = pkgs.linux_5_6_rt;
     linux_5_9_rt  = pkgs.linux_5_9_rt;
+    linux_5_15_rt = pkgs.linux_5_15_rt;
     linux_5_16_rt = pkgs.linux_5_16_rt;
     linux_5_17_rt = pkgs.linux_5_17_rt;
     linux_5_19_rt = pkgs.linux_5_19_rt;
+    linux_rt      = pkgs.linux_rt;
     rtirq         = pkgs.rtirq;
   };
 in
