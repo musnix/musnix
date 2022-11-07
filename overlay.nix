@@ -106,6 +106,13 @@ with lib;
     ];
   };
 
+  linux_6_0_rt = callPackage ./pkgs/os-specific/linux/kernel/linux-6.0-rt.nix {
+    kernelPatches = [
+      super.kernelPatches.bridge_stp_helper
+      self.realtimePatches.realtimePatch_6_0
+    ];
+  };
+
   linux_opt = super.linux.override {
     structuredExtraConfig = standardConfig { inherit (super.linux) version; };
   };
@@ -116,12 +123,13 @@ with lib;
   linuxPackages_5_16_rt = recurseIntoAttrs (linuxPackagesFor self.linux_5_16_rt);
   linuxPackages_5_17_rt = recurseIntoAttrs (linuxPackagesFor self.linux_5_17_rt);
   linuxPackages_5_19_rt = recurseIntoAttrs (linuxPackagesFor self.linux_5_19_rt);
+  linuxPackages_6_0_rt  = recurseIntoAttrs (linuxPackagesFor self.linux_6_0_rt);
   linuxPackages_opt     = recurseIntoAttrs (linuxPackagesFor self.linux_opt);
 
   linuxPackages_rt = self.linuxPackages_5_4_rt;
   linux_rt = self.linuxPackages_rt.kernel;
 
-  linuxPackages_latest_rt = self.linuxPackages_5_19_rt;
+  linuxPackages_latest_rt = self.linuxPackages_6_0_rt;
   linux_latest_rt = self.linuxPackages_latest_rt.kernel;
 
   realtimePatches = callPackage ./pkgs/os-specific/linux/kernel/patches.nix {};

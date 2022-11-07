@@ -72,4 +72,16 @@
     url = "https://cdn.kernel.org/pub/linux/kernel/projects/rt/5.19/patch-5.19-rt10.patch.gz";
     sha256 = "sha256-OTYmKTWSEUdEZPxWTUbAws/akQ6LlPWCKatq9KKPJaI=";
   };
+  kernels."6.0" = {
+    branch = "6.0";
+    kversion = "6.0.5";
+    pversion = "rt14";
+    sha256 = "sha256-YTMu8itTxQwQ+qv7lliWp9GtTzOB8PiWQ8gg8opgQY4=";
+  };
+  patches."6.0" = {
+    branch = "6.0";
+    kversion = "6.0.5";
+    pversion = "rt14";
+    sha256 = "sha256-BkTq7aIWBfcd3Pmeq5cOPtoVVQYtQIQJSKlWvsmkcWc=";
+  };
 }
