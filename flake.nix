@@ -3,6 +3,6 @@
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
   outputs = { self, nixpkgs }: {
     nixosModules.musnix = import ./default.nix;
-    nixosModule = self.nixosModules.musnix;
+    nixosModules.default = self.nixosModules.musnix;
   };
 }
