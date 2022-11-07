@@ -59,20 +59,21 @@ As an alternative to nix-channels or cloning the project you can instead use it 
 {
   inputs = {
     nixpkgs = { url = "github:NixOS/nixpkgs/nixos-unstable"; };
-    musnix = { url = "github:musnix/musnix"; };
+    musnix  = { url = "github:musnix/musnix"; };
   };
   outputs = inputs: rec {
     nixosConfigurations = {
       example-config = inputs.nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ## Other modules will also be here
+          # ...
           inputs.musnix.nixosModules.musnix
-          ./configuration.nix ## Configuration file from regular /etc/nixos config
+          ./configuration.nix # Configuration file from regular /etc/nixos config
+
         ];
-        specialArgs = { inherit inputs; }; ## Inherit inputs to configuration.nix so you can call inputs.inputname
-       };
+        specialArgs = { inherit inputs; }; # Inherit inputs to configuration.nix so you can call inputs.inputname
       };
+    };
   }
 ```
 The above code snippet is a full user-side flake.nix, and it properly adds the repo's git repo to your config and `inputs.musnix.nixosModules.musnix` automatically adds a musnix modules.
@@ -167,6 +168,7 @@ The flake.nix, from the repo, automatically gets "imported" (not an actual impor
   * `pkgs.linuxPackages_5_4_rt`
   * `pkgs.linuxPackages_5_15_rt`
   * `pkgs.linuxPackages_6_0_rt`
+
   or:
   * `pkgs.linuxPackages_rt` (currently `pkgs.linuxPackages_5_15_rt`)
   * `pkgs.linuxPackages_latest_rt` (currently `pkgs.linuxPackages_6_0_rt`)
