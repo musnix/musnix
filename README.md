@@ -55,7 +55,7 @@ sudo -i nix-channel --update musnix
 ```
 
 ### Using musnix as a flake
-As an alternative to nix-channels or cloning the project you can instead use it as a flake in a pure system.
+As an alternative to the above approaches, you can also add musnix as a flake:
 
 ```nix
 {
@@ -67,21 +67,17 @@ As an alternative to nix-channels or cloning the project you can instead use it 
     nixosConfigurations = {
       example-config = inputs.nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        modules = [
-          # ...
-          inputs.musnix.nixosModules.musnix
-          ./configuration.nix # Configuration file from regular /etc/nixos config
-
-        ];
-        specialArgs = { inherit inputs; }; # Inherit inputs to configuration.nix so you can call inputs.inputname
+        modules =
+          [ # ...
+            inputs.musnix.nixosModules.musnix
+            ./configuration.nix
+          ];
+        specialArgs = { inherit inputs; };
       };
     };
-  }
+  };
 # ...
 ```
-The above code snippet is a full user-side flake.nix, and it properly adds the repo's git repo to your config and `inputs.musnix.nixosModules.musnix` automatically adds a musnix modules.
-
-The flake.nix, from the repo, automatically gets "imported" (not an actual import but close enough in function for non-flake users) and it adds musnix packages and modules via adding `inputs.musnix.nixosModules.musnix` to the `modules`section.
 
 ## Base Options
 
