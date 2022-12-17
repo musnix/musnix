@@ -41,7 +41,6 @@ with lib;
   linux_5_4_rt = callPackage ./pkgs/os-specific/linux/kernel/linux-5.4-rt.nix {
     kernelPatches = [
       super.kernelPatches.bridge_stp_helper
-      super.kernelPatches.export-rt-sched-migrate
       self.realtimePatches.realtimePatch_5_4
     ];
   };
