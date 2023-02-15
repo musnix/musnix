@@ -1,15 +1,15 @@
 {
   kernels."5.4" = {
     branch = "5.4";
-    kversion = "5.4.221";
-    pversion = "rt79";
-    sha256 = "sha256-J7N/wf7XtNzd9aCjcw+r8lGXwLoTrOaESBqlREZJ3wo=";
+    kversion = "5.4.230";
+    pversion = "rt80";
+    sha256 = "sha256-p0/TLMwQJbcvO6cYMgh2H3xhkPuW6PSE9tVDpaGD5i8=";
   };
   patches."5.4" = {
     branch = "5.4";
-    kversion = "5.4.221";
-    pversion = "rt79";
-    sha256 = "sha256-viuxek8lAYirHIYhe7KX5z1uUTLNVMbvQMaGGkiein0=";
+    kversion = "5.4.230";
+    pversion = "rt80";
+    sha256 = "sha256-P/M89UpY3uo3ieLrYzLR0RwxDvLTlJnHMyZucx5VbKc=";
   };
   kernels."5.15" = {
     branch = "5.15";
