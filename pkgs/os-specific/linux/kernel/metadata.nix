@@ -13,15 +13,15 @@
   };
   kernels."5.15" = {
     branch = "5.15";
-    kversion = "5.15.93";
-    pversion = "rt58";
-    sha256 = "sha256-5+0k8mkL8OERWMz6jdxcDopIFtg8QFXSBSGIU9qcXa0=";
+    kversion = "5.15.94";
+    pversion = "rt59";
+    sha256 = "sha256-2pJw2+ZN3x2xPHBHCVf/Z5brmW2Ge7Su19FKcOHGWnI=";
   };
   patches."5.15" = {
     branch = "5.15";
-    kversion = "5.15.93";
-    pversion = "rt58";
-    sha256 = "sha256-f6H7VgQX/k+UiJTG5jJGI3nPZGHaQD+EGPBa4zA4vYM=";
+    kversion = "5.15.94";
+    pversion = "rt59";
+    sha256 = "sha256-sVshb9ubOBgTDWe/TGeRQZKkqDLH84VAWtRTyz0Lm4o=";
   };
   kernels."6.0" = {
     branch = "6.0";
