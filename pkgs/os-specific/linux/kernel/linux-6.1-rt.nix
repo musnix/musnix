@@ -1,6 +1,6 @@
 { fetchurl, buildLinuxRT, ... } @ args:
 let
-  metadata = (import ./metadata.nix).kernels."5.4";
+  metadata = (import ./metadata.nix).kernels."6.1";
 in
 buildLinuxRT (args // rec {
   inherit (metadata) kversion pversion;
@@ -9,6 +9,6 @@ buildLinuxRT (args // rec {
 
   src = fetchurl {
     inherit (metadata) sha256;
-    url = "mirror://kernel/linux/kernel/v5.x/linux-${kversion}.tar.xz";
+    url = "mirror://kernel/linux/kernel/v6.x/linux-${kversion}.tar.xz";
   };
 } // (args.argsOverride or {}))
