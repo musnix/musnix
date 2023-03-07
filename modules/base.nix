@@ -101,7 +101,5 @@ in {
         KERNEL=="hpet", GROUP="audio"
       '';
     };
-
-    users.extraGroups = { audio = {}; };
   };
 }
