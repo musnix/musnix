@@ -94,7 +94,7 @@ in {
     services.udev = {
       packages =
         if cfg.ffado.enable
-          then [ pkgs.ffadoFull ]
+          then [ pkgs.ffado ]
           else [];
       extraRules = ''
         KERNEL=="rtc0", GROUP="audio"
