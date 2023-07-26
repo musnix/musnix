@@ -62,7 +62,7 @@ in {
 
     environment.systemPackages =
       if cfg.ffado.enable
-        then [ pkgs.ffadoFull ]
+        then [ pkgs.ffado ]
         else [];
 
     environment.variables = let
