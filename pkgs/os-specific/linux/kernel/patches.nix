@@ -20,5 +20,5 @@ let
 in {
   realtimePatch_5_15 = realtimePatch metadata."5.15";
   realtimePatch_6_1  = realtimePatch metadata."6.1";
-  realtimePatch_6_2  = realtimePatch metadata."6.2";
+  realtimePatch_6_4  = realtimePatch metadata."6.4";
 }

@@ -1,6 +1,6 @@
 { fetchurl, buildLinuxRT, ... } @ args:
 let
-  metadata = (import ./metadata.nix).kernels."6.2";
+  metadata = (import ./metadata.nix).kernels."6.4";
 in
 buildLinuxRT (args // rec {
   inherit (metadata) kversion pversion;

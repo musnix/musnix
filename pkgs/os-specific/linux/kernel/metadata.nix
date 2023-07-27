@@ -23,16 +23,16 @@
     pversion = "rt8";
     sha256 = "sha256-4T3VFJGbXUMt5VobR1PtcTHwfrmWXt13csNp/fLpo9k=";
   };
-  kernels."6.2" = {
-    branch = "6.2";
-    kversion = "6.2";
-    pversion = "rt3";
-    sha256 = "sha256-dIYvqKtA7a6FuzOFwLcf4QMoi85RhSbWMZeACzy97LE=";
+  kernels."6.4" = {
+    branch = "6.4";
+    kversion = "6.4.6";
+    pversion = "rt7";
+    sha256 = "sha256-4ezElu/Eiq8lpmB6S45S1XTW9norCqFmQIfTAdNRXqQ=";
   };
-  patches."6.2" = {
-    branch = "6.2";
-    kversion = "6.2";
-    pversion = "rt3";
-    sha256 = "sha256-mQm/3UwnhpiOC28/RYnav2R0OY7VvsDFNxIeHFfsKIE=";
+  patches."6.4" = {
+    branch = "6.4";
+    kversion = "6.4.6";
+    pversion = "rt7";
+    sha256 = "sha256-yOB5QBpObS0Pp4cVMu4zHHMCHidiN2s3TYY46Dl9WsU=";
   };
 }
