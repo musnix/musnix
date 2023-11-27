@@ -53,7 +53,7 @@ in {
                  "snd-rawmidi"
                ]
           else [];
-      kernelParams = [ "threadirq" ];
+      kernelParams = [ "threadirqs" ];
       postBootCommands = optionalString (cfg.soundcardPciId != "") ''
         ${pkgs.pciutils}/bin/setpci -v -d *:* latency_timer=b0
         ${pkgs.pciutils}/bin/setpci -v -s ${cfg.soundcardPciId} latency_timer=ff
