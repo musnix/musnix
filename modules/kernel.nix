@@ -26,10 +26,10 @@ in {
         Available packages:
         * pkgs.linuxPackages_5_15_rt
         * pkgs.linuxPackages_6_1_rt
-        * pkgs.linuxPackages_6_4_rt
+        * pkgs.linuxPackages_6_6_rt
         or:
         * pkgs.linuxPackages_rt (currently pkgs.linuxPackages_6_1_rt)
-        * pkgs.linuxPackages_latest_rt (currently pkgs.linuxPackages_6_4_rt)
+        * pkgs.linuxPackages_latest_rt (currently pkgs.linuxPackages_6_6_rt)
       '';
     };
   };
