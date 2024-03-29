@@ -74,12 +74,12 @@ in {
         ])
         + ":$HOME/.${format}";
     in {
-      DSSI_PATH   = makePluginPath "dssi";
-      LADSPA_PATH = makePluginPath "ladspa";
-      LV2_PATH    = makePluginPath "lv2";
-      LXVST_PATH  = makePluginPath "lxvst";
-      VST_PATH    = makePluginPath "vst";
-      VST3_PATH   = makePluginPath "vst3";
+      DSSI_PATH   = lib.mkDefault (makePluginPath "dssi");
+      LADSPA_PATH = lib.mkDefault (makePluginPath "ladspa");
+      LV2_PATH    = lib.mkDefault (makePluginPath "lv2");
+      LXVST_PATH  = lib.mkDefault (makePluginPath "lxvst");
+      VST_PATH    = lib.mkDefault (makePluginPath "vst");
+      VST3_PATH   = lib.mkDefault (makePluginPath "vst3");
     };
 
     powerManagement.cpuFreqGovernor = "performance";
