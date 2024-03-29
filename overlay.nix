@@ -38,14 +38,6 @@ with lib;
       structuredExtraConfig = realtimeConfig { version = args.extraMeta.branch; };
     } // (args.argsOverride or {}));
 
-  linux_5_15_rt = callPackage ./pkgs/os-specific/linux/kernel/linux-5.15-rt.nix {
-    kernelPatches = [
-      super.kernelPatches.bridge_stp_helper
-      super.kernelPatches.export-rt-sched-migrate
-      self.realtimePatches.realtimePatch_5_15
-    ];
-  };
-
   linux_6_1_rt = callPackage ./pkgs/os-specific/linux/kernel/linux-6.1-rt.nix {
     kernelPatches = [
       super.kernelPatches.bridge_stp_helper
@@ -62,14 +54,22 @@ with lib;
     ];
   };
 
-  linuxPackages_5_15_rt = recurseIntoAttrs (linuxPackagesFor self.linux_5_15_rt);
+  linux_6_8_rt = callPackage ./pkgs/os-specific/linux/kernel/linux-6.8-rt.nix {
+    kernelPatches = [
+      super.kernelPatches.bridge_stp_helper
+      super.kernelPatches.export-rt-sched-migrate
+      self.realtimePatches.realtimePatch_6_8
+    ];
+  };
+
   linuxPackages_6_1_rt  = recurseIntoAttrs (linuxPackagesFor self.linux_6_1_rt);
   linuxPackages_6_6_rt  = recurseIntoAttrs (linuxPackagesFor self.linux_6_6_rt);
+  linuxPackages_6_8_rt  = recurseIntoAttrs (linuxPackagesFor self.linux_6_8_rt);
 
-  linuxPackages_rt = self.linuxPackages_6_1_rt;
+  linuxPackages_rt = self.linuxPackages_6_6_rt;
   linux_rt = self.linuxPackages_rt.kernel;
 
-  linuxPackages_latest_rt = self.linuxPackages_6_6_rt;
+  linuxPackages_latest_rt = self.linuxPackages_6_8_rt;
   linux_latest_rt = self.linuxPackages_latest_rt.kernel;
 
   realtimePatches = callPackage ./pkgs/os-specific/linux/kernel/patches.nix {};

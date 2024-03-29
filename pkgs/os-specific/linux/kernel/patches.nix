@@ -18,7 +18,7 @@ let
   metadata = (import ./metadata.nix).patches;
 
 in {
-  realtimePatch_5_15 = realtimePatch metadata."5.15";
   realtimePatch_6_1  = realtimePatch metadata."6.1";
   realtimePatch_6_6  = realtimePatch metadata."6.6";
+  realtimePatch_6_8  = realtimePatch metadata."6.8";
 }
