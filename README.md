@@ -96,6 +96,7 @@ As an alternative to the above approaches, you can also add musnix as a flake:
     ```
     KERNEL=="rtc0", GROUP="audio"
     KERNEL=="hpet", GROUP="audio"
+    DEVPATH=="/devices/virtual/misc/cpu_dma_latency", OWNER="root", GROUP="audio", MODE="0660"
     ```
 
   * Set the following PAM limits:
