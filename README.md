@@ -132,6 +132,11 @@ As an alternative to the above approaches, you can also add musnix as a flake:
 * **Type:** `boolean`
 * **Default value:** `false`
 
+`musnix.rtcqs.enable`
+* **Description:** If enabled, install the [rtcqs command-line utulity](https://wiki.linuxaudio.org/wiki/system_configuration#rtcqs), which analyzes the system and makes suggestions about what to change to make it more audio-friendly.
+* **Type:** `boolean`
+* **Default value:** `false`
+
 `musnix.soundcardPciId`
 * **Description:** The PCI ID of the primary soundcard. Used to set the PCI latency timer.
 
