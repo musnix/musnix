@@ -35,7 +35,7 @@ with subtest("rtcqs"):
         if not line in result:
             missed.append(line)
     if missed:
-        raise ValueError(missed)
+        raise Exception(missed)
 
 with subtest("rtirq"):
     result = machine.succeed("systemctl status rtirq")
