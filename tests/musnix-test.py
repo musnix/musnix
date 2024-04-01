@@ -37,4 +37,10 @@ with subtest("rtcqs"):
     if missed:
         raise ValueError(missed)
 
+with subtest("rtirq"):
+    result = machine.succeed("systemctl status rtirq")
+    print(result)
+    if not "Setting IRQ high-priorities: start [timer]" in result:
+        raise Exception("rtirq service set high priority to timer unsuccessful")
+
 print("PASSED")
