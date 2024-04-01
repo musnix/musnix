@@ -13,8 +13,7 @@ rtcs_required = [
     "is using a tickless kernel",
     "is using threaded IRQs",
     "Realtime priorities can be set",
-# enable if https://github.com/musnix/musnix/pull/174 is merged
-#    "Power management can be controlled from user space",
+    "Power management can be controlled from user space",
 ]
 
 machine.start()
