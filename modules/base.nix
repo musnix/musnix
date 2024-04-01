@@ -74,12 +74,13 @@ in {
         ])
         + ":$HOME/.${format}";
     in {
+      CLAP_PATH   = lib.mkDefault (makePluginPath "clap");
       DSSI_PATH   = lib.mkDefault (makePluginPath "dssi");
       LADSPA_PATH = lib.mkDefault (makePluginPath "ladspa");
       LV2_PATH    = lib.mkDefault (makePluginPath "lv2");
       LXVST_PATH  = lib.mkDefault (makePluginPath "lxvst");
-      VST_PATH    = lib.mkDefault (makePluginPath "vst");
       VST3_PATH   = lib.mkDefault (makePluginPath "vst3");
+      VST_PATH    = lib.mkDefault (makePluginPath "vst");
     };
 
     powerManagement.cpuFreqGovernor = "performance";
