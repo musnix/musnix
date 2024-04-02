@@ -4,6 +4,7 @@
 test:
 
 # These arguments are provided by `flake.nix` on import, see checkArgs
+# Use "nix flake check -L" instead of "nix-build test/default.nix if you see this in an error
 { pkgs, self}:
 
 let
