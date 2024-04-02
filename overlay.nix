@@ -75,6 +75,5 @@ with lib;
   realtimePatches = callPackage ./pkgs/os-specific/linux/kernel/patches.nix {};
 
   rtirq = callPackage ./pkgs/os-specific/linux/rtirq {};
-  rtcqs = callPackage ./pkgs/rtcqs.nix {};
 
 }

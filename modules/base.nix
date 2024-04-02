@@ -70,9 +70,11 @@ in {
       '';
     };
 
-    environment.systemPackages =
-      (if cfg.ffado.enable then [ pkgs.ffado ] else []) ++
-      (if cfg.rtcqs.enable then [ pkgs.rtcqs ] else []);
+    environment.systemPackages = let
+        rtcqs = pkgs.callPackage ../pkgs/rtcqs.nix {};
+      in
+        (if cfg.ffado.enable then [ pkgs.ffado ] else []) ++
+        (if cfg.rtcqs.enable then [ rtcqs ] else []);
 
     environment.variables = let
       makePluginPath = format:
