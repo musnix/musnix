@@ -6,9 +6,10 @@ jobs:
   evaluate:
     runs-on: ubuntu-latest
     steps:
+    - uses: jlumbroso/free-disk-space@main
     - uses: actions/checkout@v3
     - uses: cachix/install-nix-action@v18
       with:
         nix_path: nixpkgs=channel:nixos-unstable
     - run: nix-build --dry-run release.nix
-    - run: nix flake check
+    - run: nix flake check -L
