@@ -1,10 +1,10 @@
 #
 # To run:
 #
-#    nix-build tests/default.nix
+#    nix flake check -L
 #
 
-import <nixpkgs/nixos/tests/make-test-python.nix> {
+(import ./lib.nix) {
   name = "musnix-boot";
 
   nodes.machine =
