@@ -6,9 +6,14 @@ jobs:
   evaluate:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - uses: cachix/install-nix-action@v18
+    - uses: jlumbroso/free-disk-space@main
+    - uses: actions/checkout@v4
+    - uses: cachix/install-nix-action@v26
       with:
-        nix_path: nixpkgs=channel:nixos-unstable
-    - run: nix-build --dry-run release.nix
-    - run: nix flake check
+        nix_path: nixpkgs=channel:nixos-unstable      
+    - run: nix build --dry-run --file release.nix
+    - run: nix flake check -L
+
+# potential improvements:
+#   - populate a Cachix cache with realtime kernels (speed/disk space)
+#   - figure out the purpose of "nix build --dry-run --file release.nix"
