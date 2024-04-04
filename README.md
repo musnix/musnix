@@ -143,6 +143,7 @@ As an alternative to the above approaches, you can also add musnix as a flake:
 * **Type:** `string`
 * **Default value:** `""`
 * **Example value:** `"00:1b.0"`
+* **NOTE:** If you have a USB sound card, this option is not useful.
 
 ## Kernel Options
 
