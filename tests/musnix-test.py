@@ -22,7 +22,7 @@ machine.wait_for_unit("multi-user.target")
 with subtest("preemptive-kernel"):
     result = machine.succeed("uname -v")
     print(result)
-    if not "PREEMPT RT" or not "PREEMPT_RT" in result:
+    if not "PREEMPT_RT" in result:
         raise Exception("Wrong OS")
 
 with subtest("swappiness"):
