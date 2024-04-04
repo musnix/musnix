@@ -30,6 +30,16 @@ in {
         If enabled, use the Free FireWire Audio Drivers (FFADO).
       '';
     };
+    rtcqs.enable = mkOption {
+      type = types.bool;
+      default = false;
+      description = ''
+        If enabled, install the rtcqs command-line utility, which analyzes
+        the system and makes suggestions about what to change to make it more
+        audio-friendly.  See
+        https://wiki.linuxaudio.org/wiki/system_configuration#rtcqs
+      '';
+    };
     soundcardPciId = mkOption {
       type = types.str;
       default = "";
@@ -60,10 +70,11 @@ in {
       '';
     };
 
-    environment.systemPackages =
-      if cfg.ffado.enable
-        then [ pkgs.ffado ]
-        else [];
+    environment.systemPackages = let
+        rtcqs = pkgs.callPackage ../pkgs/rtcqs.nix {};
+      in
+        (if cfg.ffado.enable then [ pkgs.ffado ] else []) ++
+        (if cfg.rtcqs.enable then [ rtcqs ] else []);
 
     environment.variables = let
       makePluginPath = format:

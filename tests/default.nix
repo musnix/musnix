@@ -16,15 +16,9 @@
       musnix.rtirq.enable = true;
       musnix.rtirq.highList = "timer";
       musnix.soundcardPciId = "00:05.0";
+      musnix.rtcqs.enable = true;
+      musnix.alsaSeq.enable = true;
     };
 
-  testScript = ''
-    machine.start()
-    machine.wait_for_unit("default.target")
-    result = machine.succeed("uname -v")
-    print(result)
-    if not "PREEMPT RT" or not "PREEMPT_RT" in result:
-        raise Exception("Wrong OS")
-    print("PASSED")
-  '';
+  testScript = builtins.readFile ./musnix-test.py;
 }
