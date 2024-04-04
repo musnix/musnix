@@ -25,6 +25,41 @@ with subtest("preemptive-kernel"):
     if not "PREEMPT RT" or not "PREEMPT_RT" in result:
         raise Exception("Wrong OS")
 
+with subtest("swappiness"):
+    result = machine.succeed("cat /proc/sys/vm/swappiness")
+    print(result)
+    if not result.strip() == "10":
+        raise Exception("Swappiness not set to 10")
+
+with subtest("envvars"):
+    for v, p in (
+            ("CLAP_PATH", "clap"),
+            ("DSSI_PATH", "dssi"),
+            ("LADSPA_PATH", "ladspa"),
+            ("LV2_PATH", "lv2"),
+            ("LXVST_PATH", "lxvst"),
+            ("VST3_PATH", "vst3"),
+            ("VST_PATH", "vst"),
+    ):
+        print(machine.succeed(f"echo {v}"))
+        result = machine.succeed(f'bash -c "echo ${v}"')
+        print(result)
+        expecteds = (
+            f"/root/.nix-profile/lib/{p}",
+            f"/run/current-system/sw/lib/{p}",
+            f"/etc/profiles/per-user/root/lib/{p}",
+            f"/root/.{p}"
+        )
+        for expected in expecteds:
+            if not expected in result:
+                raise Exception(f"{v} does not contain {expected}")
+
+with subtest("alsa-seq"):
+    result = machine.succeed("lsmod")
+    print(result)
+    if not "rawmidi" in result:
+        raise Exception("Alsa rawmidi kernel module not loaded")
+
 with subtest("rtcqs"):
     machine.succeed("useradd -m musnix")
     machine.succeed("usermod -a -G audio musnix")

@@ -17,6 +17,7 @@
       musnix.rtirq.highList = "timer";
       musnix.soundcardPciId = "00:05.0";
       musnix.rtcqs.enable = true;
+      musnix.alsaSeq.enable = true;
     };
 
   testScript = builtins.readFile ./musnix-test.py;
