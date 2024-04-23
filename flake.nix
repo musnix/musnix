@@ -14,5 +14,8 @@
       in {
         default = import ./tests/default.nix checkArgs;
       });
+      packages = forAllSystems (platform: {
+        rtcqs = nixpkgs.legacyPackages.${platform}.callPackage ./pkgs/rtcqs.nix {};
+      });
   };
 }
