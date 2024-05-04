@@ -1,9 +1,9 @@
-name: "Evaluation"
+name: Check
 on:
   pull_request:
   push:
 jobs:
-  evaluate:
+  check:
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -15,6 +15,3 @@ jobs:
     - uses: DeterminateSystems/magic-nix-cache-action@main
     - run: nix build --dry-run --file release.nix
     - run: nix flake check -L
-
-# potential improvements:
-#   - populate a Cachix cache with realtime kernels (speed/disk space)

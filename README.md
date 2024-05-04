@@ -1,6 +1,6 @@
 # musnix
 
-[![Evaluation](https://github.com/musnix/musnix/actions/workflows/eval.yml/badge.svg)](https://github.com/musnix/musnix/actions/workflows/eval.yml)
+[![Check](https://github.com/musnix/musnix/actions/workflows/check.yml/badge.svg)](https://github.com/musnix/musnix/actions/workflows/check.yml)
 
 Real-time audio in NixOS
 
