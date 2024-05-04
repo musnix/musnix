@@ -18,4 +18,3 @@ jobs:
 
 # potential improvements:
 #   - populate a Cachix cache with realtime kernels (speed/disk space)
-#   - figure out the purpose of "nix build --dry-run --file release.nix"
