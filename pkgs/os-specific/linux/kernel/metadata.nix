@@ -35,4 +35,16 @@
     pversion = "rt11";
     sha256 = "0rchqyzxmvf1zpp5rndx9vxj7wbz424d4pvp5kfm1bw8aypkq1mh";
   };
+  kernels."6.9" = {
+    branch = "6.9";
+    kversion = "6.9";
+    pversion = "rt5";
+    sha256 = "0jc14s7z2581qgd82lww25p7c4w72scpf49z8ll3wylwk3xh3yi4";
+  };
+  patches."6.9" = {
+    branch = "6.9";
+    kversion = "6.9";
+    pversion = "rt5";
+    sha256 = "0sh5ajj8zm44l4dicyxy99g2fjp661i9jxilb94684cf8l39lwg1";
+  };
 }
