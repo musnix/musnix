@@ -5,7 +5,7 @@ set -o errexit
 set -o pipefail
 
 BRANCHES=(
-  "6.1" "6.6" "6.8"
+  "6.1" "6.6" "6.8" "6.9"
 )
 
 OUTPUT=metadata.nix
