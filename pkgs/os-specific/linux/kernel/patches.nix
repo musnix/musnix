@@ -21,4 +21,5 @@ in {
   realtimePatch_6_1  = realtimePatch metadata."6.1";
   realtimePatch_6_6  = realtimePatch metadata."6.6";
   realtimePatch_6_8  = realtimePatch metadata."6.8";
+  realtimePatch_6_9  = realtimePatch metadata."6.9";
 }
