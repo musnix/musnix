@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 with lib;
 
@@ -6,7 +11,8 @@ let
 
   cfg = config.musnix;
 
-in {
+in
+{
   options.musnix = {
     kernel.realtime = mkOption {
       type = types.bool;
@@ -36,9 +42,6 @@ in {
   };
 
   config = mkIf cfg.kernel.realtime {
-    boot.kernelPackages =
-      if cfg.kernel.realtime
-        then cfg.kernel.packages
-        else pkgs.linuxPackages_opt;
+    boot.kernelPackages = if cfg.kernel.realtime then cfg.kernel.packages else pkgs.linuxPackages_opt;
   };
 }

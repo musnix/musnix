@@ -9,7 +9,8 @@
 
   nodes.machine =
     { config, pkgs, ... }:
-    { imports = [ ../default.nix ];
+    {
+      imports = [ ../default.nix ];
 
       musnix.enable = true;
       musnix.kernel.realtime = true;

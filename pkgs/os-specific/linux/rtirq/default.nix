@@ -1,4 +1,9 @@
-{ stdenv, fetchurl, util-linux, lib }:
+{
+  stdenv,
+  fetchurl,
+  util-linux,
+  lib,
+}:
 
 stdenv.mkDerivation rec {
   pname = "rtirq";

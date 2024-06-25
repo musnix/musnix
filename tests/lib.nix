@@ -5,13 +5,13 @@ test:
 
 # These arguments are provided by `flake.nix` on import, see checkArgs
 # Use "nix flake check -L" instead of "nix-build test/default.nix if you see this in an error
-{ pkgs, self}:
+{ pkgs, self }:
 
 let
   inherit (pkgs) lib;
 
   # this imports the nixos library that contains our testing framework
-  nixos-lib = import (pkgs.path + "/nixos/lib") {};
+  nixos-lib = import (pkgs.path + "/nixos/lib") { };
 in
 (nixos-lib.runTest {
   hostPkgs = pkgs;
@@ -23,8 +23,9 @@ in
   # This makes `self` available in the NixOS configuration of our virtual
   # machines. This is useful for referencing modules or packages from your own
   # flake as well as importing from other flakes.
-  node.specialArgs = { inherit self; };
+  node.specialArgs = {
+    inherit self;
+  };
 
   imports = [ test ];
 }).config.result
-

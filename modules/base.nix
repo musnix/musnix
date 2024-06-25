@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 with lib;
 
@@ -6,7 +11,8 @@ let
 
   cfg = config.musnix;
 
-in {
+in
+{
   options.musnix = {
     enable = mkOption {
       type = types.bool;
@@ -56,13 +62,17 @@ in {
 
   config = mkIf cfg.enable {
     boot = {
-      kernel.sysctl = { "vm.swappiness" = 10; };
+      kernel.sysctl = {
+        "vm.swappiness" = 10;
+      };
       kernelModules =
-        if cfg.alsaSeq.enable
-          then [ "snd-seq"
-                 "snd-rawmidi"
-               ]
-          else [];
+        if cfg.alsaSeq.enable then
+          [
+            "snd-seq"
+            "snd-rawmidi"
+          ]
+        else
+          [ ];
       kernelParams = [ "threadirqs" ];
       postBootCommands = optionalString (cfg.soundcardPciId != "") ''
         ${pkgs.pciutils}/bin/setpci -v -d *:* latency_timer=b0
@@ -70,44 +80,64 @@ in {
       '';
     };
 
-    environment.systemPackages = let
-        rtcqs = pkgs.callPackage ../pkgs/rtcqs.nix {};
+    environment.systemPackages =
+      let
+        rtcqs = pkgs.callPackage ../pkgs/rtcqs.nix { };
       in
-        (if cfg.ffado.enable then [ pkgs.ffado ] else []) ++
-        (if cfg.rtcqs.enable then [ rtcqs ] else []);
+      (if cfg.ffado.enable then [ pkgs.ffado ] else [ ]) ++ (if cfg.rtcqs.enable then [ rtcqs ] else [ ]);
 
-    environment.variables = let
-      makePluginPath = format:
-        (makeSearchPath format [
-          "$HOME/.nix-profile/lib"
-          "/run/current-system/sw/lib"
-          "/etc/profiles/per-user/$USER/lib"
-        ])
-        + ":$HOME/.${format}";
-    in {
-      CLAP_PATH   = lib.mkDefault (makePluginPath "clap");
-      DSSI_PATH   = lib.mkDefault (makePluginPath "dssi");
-      LADSPA_PATH = lib.mkDefault (makePluginPath "ladspa");
-      LV2_PATH    = lib.mkDefault (makePluginPath "lv2");
-      LXVST_PATH  = lib.mkDefault (makePluginPath "lxvst");
-      VST3_PATH   = lib.mkDefault (makePluginPath "vst3");
-      VST_PATH    = lib.mkDefault (makePluginPath "vst");
-    };
+    environment.variables =
+      let
+        makePluginPath =
+          format:
+          (makeSearchPath format [
+            "$HOME/.nix-profile/lib"
+            "/run/current-system/sw/lib"
+            "/etc/profiles/per-user/$USER/lib"
+          ])
+          + ":$HOME/.${format}";
+      in
+      {
+        CLAP_PATH = lib.mkDefault (makePluginPath "clap");
+        DSSI_PATH = lib.mkDefault (makePluginPath "dssi");
+        LADSPA_PATH = lib.mkDefault (makePluginPath "ladspa");
+        LV2_PATH = lib.mkDefault (makePluginPath "lv2");
+        LXVST_PATH = lib.mkDefault (makePluginPath "lxvst");
+        VST3_PATH = lib.mkDefault (makePluginPath "vst3");
+        VST_PATH = lib.mkDefault (makePluginPath "vst");
+      };
 
     powerManagement.cpuFreqGovernor = "performance";
 
     security.pam.loginLimits = [
-      { domain = "@audio"; item = "memlock"; type = "-"   ; value = "unlimited"; }
-      { domain = "@audio"; item = "rtprio" ; type = "-"   ; value = "99"       ; }
-      { domain = "@audio"; item = "nofile" ; type = "soft"; value = "99999"    ; }
-      { domain = "@audio"; item = "nofile" ; type = "hard"; value = "99999"    ; }
+      {
+        domain = "@audio";
+        item = "memlock";
+        type = "-";
+        value = "unlimited";
+      }
+      {
+        domain = "@audio";
+        item = "rtprio";
+        type = "-";
+        value = "99";
+      }
+      {
+        domain = "@audio";
+        item = "nofile";
+        type = "soft";
+        value = "99999";
+      }
+      {
+        domain = "@audio";
+        item = "nofile";
+        type = "hard";
+        value = "99999";
+      }
     ];
 
     services.udev = {
-      packages =
-        if cfg.ffado.enable
-          then [ pkgs.ffado ]
-          else [];
+      packages = if cfg.ffado.enable then [ pkgs.ffado ] else [ ];
       extraRules = ''
         KERNEL=="rtc0", GROUP="audio"
         KERNEL=="hpet", GROUP="audio"

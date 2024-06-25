@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 with lib;
 
@@ -17,7 +22,8 @@ let
     ${optionalString (cfg.highList != "") ''RTIRQ_HIGH_LIST="${cfg.highList}"''}
   '';
 
-in {
+in
+{
   options.musnix.rtirq = {
     enable = mkOption {
       type = types.bool;
@@ -83,7 +89,10 @@ in {
     environment.etc."rtirq.conf".source = rtirqConf;
     systemd.services.rtirq = {
       description = "IRQ thread tuning for realtime kernels";
-      after = [ "multi-user.target" "sound.target" ];
+      after = [
+        "multi-user.target"
+        "sound.target"
+      ];
       wantedBy = [ "multi-user.target" ];
       path = with pkgs; [
         gawk
