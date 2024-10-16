@@ -86,7 +86,7 @@ in
       in
       (if cfg.ffado.enable then [ pkgs.ffado ] else [ ]) ++ (if cfg.rtcqs.enable then [ rtcqs ] else [ ]);
 
-    environment.variables =
+    environment.sessionVariables =
       let
         makePluginPath =
           format:
