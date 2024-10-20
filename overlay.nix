@@ -93,15 +93,24 @@ with lib;
     ];
   };
 
-  linuxPackages_6_1_rt = recurseIntoAttrs (linuxPackagesFor self.linux_6_1_rt);
-  linuxPackages_6_6_rt = recurseIntoAttrs (linuxPackagesFor self.linux_6_6_rt);
-  linuxPackages_6_8_rt = recurseIntoAttrs (linuxPackagesFor self.linux_6_8_rt);
-  linuxPackages_6_9_rt = recurseIntoAttrs (linuxPackagesFor self.linux_6_9_rt);
+  linux_6_11_rt = callPackage ./pkgs/os-specific/linux/kernel/linux-6.11-rt.nix {
+    kernelPatches = [
+      super.kernelPatches.bridge_stp_helper
+      super.kernelPatches.export-rt-sched-migrate
+      self.realtimePatches.realtimePatch_6_11
+    ];
+  };
+
+  linuxPackages_6_1_rt  = recurseIntoAttrs (linuxPackagesFor self.linux_6_1_rt);
+  linuxPackages_6_6_rt  = recurseIntoAttrs (linuxPackagesFor self.linux_6_6_rt);
+  linuxPackages_6_8_rt  = recurseIntoAttrs (linuxPackagesFor self.linux_6_8_rt);
+  linuxPackages_6_9_rt  = recurseIntoAttrs (linuxPackagesFor self.linux_6_9_rt);
+  linuxPackages_6_11_rt = recurseIntoAttrs (linuxPackagesFor self.linux_6_11_rt);
 
   linuxPackages_rt = self.linuxPackages_6_6_rt;
   linux_rt = self.linuxPackages_rt.kernel;
 
-  linuxPackages_latest_rt = self.linuxPackages_6_8_rt;
+  linuxPackages_latest_rt = self.linuxPackages_6_11_rt;
   linux_latest_rt = self.linuxPackages_latest_rt.kernel;
 
   realtimePatches = callPackage ./pkgs/os-specific/linux/kernel/patches.nix { };
