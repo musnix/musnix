@@ -168,10 +168,12 @@ As an alternative to the above approaches, you can also add musnix as a flake:
   * `pkgs.linuxPackages_6_1_rt`
   * `pkgs.linuxPackages_6_6_rt`
   * `pkgs.linuxPackages_6_8_rt`
+  * `pkgs.linuxPackages_6_9_rt`
+  * `pkgs.linuxPackages_6_11_rt`
 
   or:
   * `pkgs.linuxPackages_rt` (currently `pkgs.linuxPackages_6_6_rt`)
-  * `pkgs.linuxPackages_latest_rt` (currently `pkgs.linuxPackages_6_8_rt`)
+  * `pkgs.linuxPackages_latest_rt` (currently `pkgs.linuxPackages_6_11_rt`)
   
 ## rtirq Options
 
