@@ -12,6 +12,5 @@ jobs:
     - uses: jlumbroso/free-disk-space@main
     - uses: actions/checkout@v4
     - uses: DeterminateSystems/nix-installer-action@main
-    - uses: DeterminateSystems/magic-nix-cache-action@main
     - run: nix build --dry-run --file release.nix
     - run: nix flake check -L
