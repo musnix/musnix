@@ -6,8 +6,10 @@ let
     lib
     callPackage
     linuxPackagesFor
-    recurseIntoAttrs
     ;
+
+  # recurseIntoAttrs moved to lib in newer nixpkgs, fallback to top-level for older versions
+  recurseIntoAttrs = super.lib.recurseIntoAttrs or super.recurseIntoAttrs;
 
   # Since 20.09 this is a part of lib.kernel
   option = x: x // { optional = true; };
