@@ -6,8 +6,9 @@ let
     lib
     callPackage
     linuxPackagesFor
-    recurseIntoAttrs
     ;
+
+  recurseIntoAttrs = super.lib.recurseIntoAttrs;
 
   # Since 20.09 this is a part of lib.kernel
   option = x: x // { optional = true; };
