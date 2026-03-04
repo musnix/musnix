@@ -156,24 +156,41 @@ As an alternative to the above approaches, you can also add musnix as a flake:
 
 `musnix.kernel.realtime`
 * **NOTE:** Enabling this option will rebuild your kernel.
-* **Description:** If enabled, this option will apply the [`CONFIG_PREEMPT_RT`](https://archive.kernel.org/oldwiki/rt.wiki.kernel.org/index.php/CONFIG_PREEMPT_RT_Patch.html) patch to the kernel.
+* **Description:** If enabled, this option will enable [`CONFIG_PREEMPT_RT`](https://wiki.linuxfoundation.org/realtime/preempt_rt_versions) on the kernel.
+  * For kernels **6.12 and later**, `PREEMPT_RT` is available natively in the mainline kernel — no external patch is required. Set `musnix.kernel.packages` to any mainline kernel >= 6.12 and musnix will automatically apply the required configuration.
+  * For kernels **older than 6.12**, set `musnix.kernel.packages` to one of the RT-patched packages provided by the musnix overlay (see below).
 * **Type:** `boolean`
 * **Default value:** `false`
 
 `musnix.kernel.packages`
-* **Description:** This option allows you to select the real-time kernel used by musnix.
+* **Description:** This option allows you to select the kernel used by musnix.
 * **Type:** `package`
 * **Default value:** `pkgs.linuxPackages_rt`
-* Available packages:
+
+  **Mainline kernels 6.12+ (recommended)** — musnix will automatically enable
+  `PREEMPT_RT` via kernel configuration overrides; no patched package is needed:
+  ```nix
+  musnix.kernel.packages = pkgs.linuxPackages;        # default NixOS kernel (if >= 6.12)
+  musnix.kernel.packages = pkgs.linuxPackages_6_12;   # specific LTS version
+  musnix.kernel.packages = pkgs.linuxPackages_latest; # latest mainline
+  ```
+
+  **Pre-6.12 kernels** — use an RT-patched package from the musnix overlay:
   * `pkgs.linuxPackages_6_1_rt`
   * `pkgs.linuxPackages_6_6_rt`
   * `pkgs.linuxPackages_6_8_rt`
   * `pkgs.linuxPackages_6_9_rt`
   * `pkgs.linuxPackages_6_11_rt`
 
-  or:
+  or the convenience aliases:
   * `pkgs.linuxPackages_rt` (currently `pkgs.linuxPackages_6_6_rt`)
   * `pkgs.linuxPackages_latest_rt` (currently `pkgs.linuxPackages_6_11_rt`)
+
+  > **Note:** When a mainline kernel >= 6.12 is selected, musnix overrides it
+  > with `EXPERT=y`, `PREEMPT_RT=y`, and unsets options that are mutually
+  > exclusive with RT (`PREEMPT_VOLUNTARY`, `PREEMPT_FULL`, `RT_GROUP_SCHED`).
+  > `ignoreConfigErrors = true` is set so that version-specific disappearing
+  > symbols (e.g. i915 GVT, Rust assertions) do not break the build.
   
 ## rtirq Options
 
