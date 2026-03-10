@@ -165,7 +165,7 @@ As an alternative to the above approaches, you can also add musnix as a flake:
 `musnix.kernel.packages`
 * **Description:** This option allows you to select the kernel used by musnix.
 * **Type:** `package`
-* **Default value:** `pkgs.linuxPackages_rt`
+* **Default value:** `pkgs.linuxPackages`
 
   **Mainline kernels 6.12+ (recommended)** — musnix will automatically enable
   `PREEMPT_RT` via kernel configuration overrides; no patched package is needed:

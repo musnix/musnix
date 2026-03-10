@@ -33,7 +33,7 @@ in
       '';
     };
     kernel.packages = mkOption {
-      default = pkgs.linuxPackages_rt;
+      default = pkgs.linuxPackages;
       description = ''
         This option allows you to select the kernel used by musnix.
 
