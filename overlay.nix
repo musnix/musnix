@@ -66,7 +66,7 @@ with lib;
   linux_6_1_rt = callPackage ./pkgs/os-specific/linux/kernel/linux-6.1-rt.nix {
     kernelPatches = [
       super.kernelPatches.bridge_stp_helper
-      super.kernelPatches.export-rt-sched-migrate
+      self.realtimePatches.export-rt-sched-migrate
       self.realtimePatches.realtimePatch_6_1
     ];
   };
@@ -74,7 +74,7 @@ with lib;
   linux_6_6_rt = callPackage ./pkgs/os-specific/linux/kernel/linux-6.6-rt.nix {
     kernelPatches = [
       super.kernelPatches.bridge_stp_helper
-      super.kernelPatches.export-rt-sched-migrate
+      self.realtimePatches.export-rt-sched-migrate
       self.realtimePatches.realtimePatch_6_6
     ];
   };
@@ -82,7 +82,7 @@ with lib;
   linux_6_8_rt = callPackage ./pkgs/os-specific/linux/kernel/linux-6.8-rt.nix {
     kernelPatches = [
       super.kernelPatches.bridge_stp_helper
-      super.kernelPatches.export-rt-sched-migrate
+      self.realtimePatches.export-rt-sched-migrate
       self.realtimePatches.realtimePatch_6_8
     ];
   };
@@ -90,7 +90,7 @@ with lib;
   linux_6_9_rt = callPackage ./pkgs/os-specific/linux/kernel/linux-6.9-rt.nix {
     kernelPatches = [
       super.kernelPatches.bridge_stp_helper
-      super.kernelPatches.export-rt-sched-migrate
+      self.realtimePatches.export-rt-sched-migrate
       self.realtimePatches.realtimePatch_6_9
     ];
   };
@@ -98,7 +98,7 @@ with lib;
   linux_6_11_rt = callPackage ./pkgs/os-specific/linux/kernel/linux-6.11-rt.nix {
     kernelPatches = [
       super.kernelPatches.bridge_stp_helper
-      super.kernelPatches.export-rt-sched-migrate
+      self.realtimePatches.export-rt-sched-migrate
       self.realtimePatches.realtimePatch_6_11
     ];
   };
