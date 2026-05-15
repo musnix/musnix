@@ -75,7 +75,7 @@ with subtest("rtcqs"):
 with subtest("rtirq"):
     result = machine.succeed("systemctl status rtirq")
     print(result)
-    if not "Setting IRQ high-priorities: start [timer]" in result:
-        raise Exception("rtirq service set high priority to timer unsuccessful")
+    if not "Finished IRQ thread tuning for realtime kernels" in result:
+        raise Exception("Failed to finish IRQ thread tuning")
 
 print("PASSED")
