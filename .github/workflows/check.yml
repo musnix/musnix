@@ -24,3 +24,6 @@ jobs:
       - run: echo "NIX_PATH=nixpkgs=https://github.com/NixOS/nixpkgs/archive/$(jq -r .nodes.nixpkgs.locked.rev flake.lock).tar.gz" >> "$GITHUB_ENV"
       - run: nix build --dry-run --file release.nix
       - run: nix flake check -L
+      - name: Pin check closure in Cachix
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+        run: scripts/cachix-pin.sh musnix
