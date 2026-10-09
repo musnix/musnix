@@ -16,6 +16,11 @@ jobs:
     steps:
       - uses: jlumbroso/free-disk-space@main
       - uses: actions/checkout@v4
-      - uses: DeterminateSystems/nix-installer-action@main
+      - uses: cachix/install-nix-action@v31
+      - uses: cachix/cachix-action@v17
+        with:
+          name: musnix
+          authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
+      - run: echo "NIX_PATH=nixpkgs=https://github.com/NixOS/nixpkgs/archive/$(jq -r .nodes.nixpkgs.locked.rev flake.lock).tar.gz" >> "$GITHUB_ENV"
       - run: nix build --dry-run --file release.nix
       - run: nix flake check -L
