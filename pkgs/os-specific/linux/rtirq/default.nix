@@ -7,14 +7,14 @@
 
 stdenv.mkDerivation rec {
   pname = "rtirq";
-  version = "20210309";
+  version = "20240905";
 
   src = fetchurl {
     urls = [
       "http://www.rncbc.org/archive/rtirq-${version}.tar.gz"
       "https://www.rncbc.org/archive/old/rtirq-${version}.tar.gz"
     ];
-    sha256 = "1z7nfak52g5zgahsdj2iz97q9pxjk2c3xhaa67c14xvzrnxvk0cq";
+    sha256 = "sha256-HUy0tpQupf3pzWKQNlvxobJk/1e1gGwJl6sTf0/F5PM=";
   };
 
   postPatch = ''
