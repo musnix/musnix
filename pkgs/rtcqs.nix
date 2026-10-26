@@ -2,7 +2,7 @@
 
 pkgs.python3.pkgs.buildPythonApplication rec {
   pname = "rtcqs";
-  version = "0.6.2";
+  version = "0.6.7";
   format = "pyproject";
 
   # Dont check that the gui portion of the rtcqs package (rtcqs_gui) can be
@@ -21,6 +21,6 @@ pkgs.python3.pkgs.buildPythonApplication rec {
 
   src = fetchPypi {
     inherit pname version;
-    hash = "sha256-DfeV9kGhdMf6hZ1iNJ0L3HUn7m8c1gRK5cjtJNUAvJI=";
+    hash = "sha256-hWGyekVJFWP7R+D80m+7oqXTJB/eElJpICytTJpoC84=";
   };
 }

@@ -1,7 +1,7 @@
 # this hair is here to appease my editor's pyflakes checks for undeclared names
 appease_pyflakes = vars()
 machine = appease_pyflakes['machine']
-subtest = appease_pyflakes['subtest']
+subtest = appease_pyflakes['subtest']  # noqa: F811
 # end hair
 
 rtcs_required = [
@@ -18,6 +18,10 @@ rtcs_required = [
 
 machine.start()
 machine.wait_for_unit("multi-user.target")
+# multi-user.target can be reached before udev has finished processing the
+# coldplug events, in which case udev rules (e.g. /dev/cpu_dma_latency
+# permissions) have not yet been applied.
+machine.succeed("udevadm settle")
 
 with subtest("preemptive-kernel"):
     result = machine.succeed("uname -v")
